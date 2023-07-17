@@ -1,21 +1,21 @@
 const { mongoose } = require("../db")
 
-const Messages = new mongoose.Schema(
+const Guild = new mongoose.Schema(
     {
-        user: {
+        name: {
             type: String,
             required: true
         },
-        guild: {
+        description: {
             type: String,
             required: true
         },
-        body: {
-            type: String,
+        addedUsers: {
+            type: Array,
             required: true
-        }
-    },
+        },
+    }, 
     {timestamps: true}
 )
 
-module.exports = mongoose.model("messages", Messages)
+module.exports = mongoose.model("guild", Guild)

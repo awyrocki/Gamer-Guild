@@ -23,7 +23,8 @@ const User = new mongoose.Schema(
             type: Boolean,
             required: false
         }
-    }
+    }, 
+    {timestamps: true}
 )
 
 module.exports = mongoose.model("User", User)
