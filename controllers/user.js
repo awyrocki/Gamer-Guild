@@ -8,12 +8,12 @@ const JWT_KEY = process.env.JWT_KEY;
 // ? REGISTER USER-------------------------------------------------//
 router.post("/register", async (req, res) => {
     try {
-        const { firstName, lastName, email, password } = req.body;
+        const { firstName, lastName, email, password, userName } = req.body;
 
-        if (!firstName || !lastName || !email || !password) {
+        if (!firstName || !lastName || !email || !password || !userName) {
             throw Error("All fields required");
         }
-
+        console.log(firstName)
         const newUser = new User({
             firstName,
             lastName,
