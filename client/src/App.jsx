@@ -3,6 +3,7 @@ import Nav from './components/Nav/Nav';
 import User from './components/User/User';
 import Guildlist from './components/Guildlist/Guildlist';
 import Feed from './components/Feed/Feed';
+import Discover from './components/Discover/Discover';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Guildlist />
         </div>
         <Feed />
+        <Discover />
       </div>
     </>
   );
