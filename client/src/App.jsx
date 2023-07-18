@@ -4,6 +4,7 @@ import User from './components/User/User';
 import Guildlist from './components/Guildlist/Guildlist';
 import Feed from './components/Feed/Feed';
 import Discover from './components/Discover/Discover';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Feed />
         <Discover />
       </div>
+      <Footer />
     </>
   );
 }
