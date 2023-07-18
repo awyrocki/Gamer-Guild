@@ -16,11 +16,11 @@ li {
 /* ! edit colors and hover later! */
 a {
     text-decoration: none;
-    color: #2f3542;
+    color: #404040;
 }
 
 a:hover {
-    color: #a4b0be;
+    color: #FFFFFF;
 }
 
 nav a::after {
@@ -28,7 +28,7 @@ nav a::after {
     display: block;
     height: 5px;
     width: 0;
-    background-color: #a4b0be;
+    background-color: #FFFFFF;
     position: absolute;
     transition: all ease-in-out 300ms;
 }
@@ -41,8 +41,9 @@ nav a:hover::after {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-bottom: 1em;
     align-items: center;
+    margin-bottom: 1em;
+    background-color: #121212;
 }
 /* ! Build for resizable later once the main page is built out */
 @media (max-width: 750px) {
