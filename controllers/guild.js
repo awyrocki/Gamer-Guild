@@ -1,11 +1,16 @@
-const express = require("express")
-const router = express.Router()
+const router = require("express").Router()
 const Guild = require("../models/Guild")
 
 router.post("/create", async (req, res) => {
     try {
-        const guild = await Guild.create(req.body)
-        res.status(201).json(guild)
+        const { name, description, addedUsers, createdBy } = req.body
+        if (!name || !description || !addedUsers || !createdBy) throw Error("Provide all criteria")
+        const newGuild = new Guild({ name, description, addedUsers })
+        await newGuild.save()
+        res.status(201).json({
+            message: `Guild created`,
+            newGuild
+        })
     } catch (err) {
         res.status(500).json(err)
     }
@@ -14,7 +19,7 @@ router.post("/create", async (req, res) => {
 router.get("/", async (req, res) => {
     try {
         const guild = await Guild.find()
-        res.json(guilds)
+        res.json(guild)
     } catch (err) {
         res.status(500).json(err) 
     }
@@ -55,4 +60,4 @@ router.get("/:user", async (req, res) => {
     }
 });
 
-module.export = router
+module.exports = router

@@ -13,6 +13,10 @@ const Messages = new mongoose.Schema(
         body: {
             type: String,
             required: true
+        },
+        flagged: {
+            type: Boolean,
+            required: false
         }
     },
     {timestamps: true}

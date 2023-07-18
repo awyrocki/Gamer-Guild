@@ -14,6 +14,10 @@ const Guild = new mongoose.Schema(
             type: Array,
             required: true
         },
+        createdBy: {
+            type: String,
+            required: true
+        }
     }, 
     {timestamps: true}
 )
