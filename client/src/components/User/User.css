@@ -1,0 +1,23 @@
+#profile-container {
+    background-color: #121212;
+    gap: 1em;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    padding-left: 0.5em;
+    width: 10em;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px 3px #14171b;
+}
+
+#placeholder {
+    color: #FFFFFF;
+}
+
+#steam-name {
+    color: #FFFFFF
+}
+
+#bio {
+    color: #B3B3B3;
+    text-align: center;
+}
