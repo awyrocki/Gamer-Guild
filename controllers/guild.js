@@ -46,6 +46,13 @@ router.delete("/delete/:id", async (req, res) => {
     }
 });
 
-router.get()
+router.get("/:user", async (req, res) => {
+    try {
+        const guilds = await Guild.find({ addedUsers: req.params.user });
+        res.json(guilds);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to retrieve Guilds for the user" });
+    }
+});
 
 module.export = router
