@@ -13,7 +13,7 @@ return (
         <input type="email" name="email" placeholder="Email" required="" />
         <input type="password" name="pswd" placeholder="Password" required="" />
         <button>Login</button>
-        <button className='forgot' href='./Forgot.jsx' >Forgot password</button>
+        <button className='forgot' href='http://localhost:3000/Recover' >Forgot password</button>
     </form>
     </div>
 

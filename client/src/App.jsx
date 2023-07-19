@@ -1,24 +1,19 @@
 import './App.css';
-import Nav from './components/Nav/Nav';
-import User from './components/User/User';
-import Guildlist from './components/Guildlist/Guildlist';
-import Feed from './components/Feed/Feed';
-import Discover from './components/Discover/Discover';
-import Footer from './components/Footer/Footer';
+import Dashboard from './components/Dashboard/Dashboard';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Login from "./components/Login/Login"
+import Forgot from "./components/Forgot/Forgot"
 
 function App() {
   return (
     <>
-      <Nav />
-      <div id='container'>
-        <div id='left-columns'>
-          <User />
-          <Guildlist />
-        </div>
-        <Feed />
-        <Discover />
-      </div>
-      <Footer />
+      <Router>
+        <Routes>
+          <Route path='/' element={ <Login /> } />
+          <Route path='/Recover' element={ <Forgot /> } />
+          <Route path='/Home' element={ <Dashboard /> } />
+        </Routes>
+      </Router>
     </>
   );
 }
