@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Discover.css"
+import Guild from '../Guild/Guild'
 
 function Discover() {
+
+  const [ guildName, setGuildName ] = useState("")
+
   return (
     <div id='discover-container'>
         <h3 id='guild-title'>Discover</h3>

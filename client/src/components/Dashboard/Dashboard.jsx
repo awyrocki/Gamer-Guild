@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Nav from '../Nav/Nav';
 import User from '../User/User';
 import Guildlist from '../Guildlist/Guildlist';
@@ -7,6 +7,9 @@ import Discover from '../Discover/Discover';
 import Footer from '../Footer/Footer';
 
 function Dashboard() {
+
+  const [ guildName, setGuildName ] = useState("")
+
   return (
     <>
       <Nav />
@@ -16,7 +19,7 @@ function Dashboard() {
           <Guildlist />
         </div>
         <Feed />
-        <Discover />
+        <Discover setGuildName={setGuildName}/>
       </div>
       <Footer />
     </>
