@@ -1,24 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Discover.css"
-import Guild from '../Guild/Guild'
 
-function Discover() {
+// add sessiontoken
+function Guild({ setGuildName }) {
 
-  const [ guildName, setGuildName ] = useState("")
+    const [ allGuild, setAllGuild ] = useState([])
+
+    const fetchGuild = () => {
+        const url = "http://127.0.0.1:4000/guild/"
+
+        fetch(url, {
+            method: "GET",
+            headers: new Headers({
+                "Content-Type": "application.json"
+                // Render all guilds regardless of authorization
+            })
+        })
+        .then(res => res.json())
+        .then(data => setAllGuild(data))
+        .catch(err => console.log(err))
+    }
+
+    // get initial list of guilds
+    useEffect(() => {
+        fetchGuild()
+    })
 
   return (
-    <div id='discover-container'>
-        <h3 id='guild-title'>Discover</h3>
-        <h4 id='game-title'>RuneScape</h4>
-        <span id='game-description'>Massive multiplayer MMORPG</span>
-        <h4 id='game-title'>Hades</h4>
-        <span id='game-description'>Rougelite adventure</span>
-        <h4 id='game-title'>Fall Guys</h4>
-        <span id='game-description'>Party game with friends</span>
-        <h4 id='game-title'>Slay the Spire</h4>
-        <span id='game-description'>Rougelite deck builder</span>
-    </div>
+    <>
+        <div id='discover-container'>
+            {allGuild.map((guild, i) => {
+                <div key={i} className='guild-list' >
+                    <h3 onClick={e => {
+                        e.preventDefault()
+                        setGuildName(guild.name)
+                    }}>{guild.name}</h3>
+                </div>
+            })}
+        </div>
+    </>
   )
 }
 
-export default Discover
+export default Guild
