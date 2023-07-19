@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-function Steam({ isLinked, setIsLinked }) {
-    const [ steamId, setSteamId ] = useState("");
+function Steam({ isLinked, setIsLinked, steamId, setSteamId, userId}) {
     const queryParameters = new URLSearchParams(window.location.search)
-    const userId = localStorage.getItem("id")
+
         
         // Initial check in the background that sees if user is linked 
         useEffect(() => {
@@ -58,7 +57,7 @@ function Steam({ isLinked, setIsLinked }) {
                 .then(res => res.json())
                 .then(data => {
                     if (data.message === "User updated") {
-                        setTimeout(window.location.replace("http://localhost:3000"), 4000)
+                        setTimeout(window.location.replace("http://localhost:3000/home"), 4000)
                     }
                 })
                 .catch(err => console.log(err))
@@ -67,8 +66,8 @@ function Steam({ isLinked, setIsLinked }) {
 
         function display() {
             return !isLinked
-            ? <a id='steam-login' href="http://localhost:4000/api/auth/steam" ><img src="https://community.cloudflare.steamstatic.com/public/shared/images/signinthroughsteam/sits_landing.png" alt="Steam Login"/></a>
-            : <h1>Steam is linked</h1>
+            ? <a id='steam-login' href="http://localhost:4000/api/auth/steam" ><img src="https://community.cloudflare.steamstatic.com/public/shared/images/signinthroughsteam/sits_landing.png" alt="Steam Login" width="50px" height="20px"/></a>
+            : <p>Steam is linked</p>
     }
 
 

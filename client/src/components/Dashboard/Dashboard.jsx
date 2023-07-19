@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from '../Nav/Nav';
 import User from '../User/User';
 import Guildlist from '../Guildlist/Guildlist';
@@ -7,6 +7,7 @@ import Discover from '../Discover/Discover';
 import Footer from '../Footer/Footer';
 
 function Dashboard() {
+
   return (
     <>
       <Nav />

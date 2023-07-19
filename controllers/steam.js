@@ -65,7 +65,7 @@ router.get('/',  async (req, res) => {
         })
         await userInfo.save();
         let ID = userInfo.steamId;
-        let url = `http://localhost:3000/?ID=${ID}`
+        let url = `http://localhost:3000/linking/?ID=${ID}`
 
         res.redirect(url)
         
