@@ -5,6 +5,7 @@ import Guildlist from '../Guildlist/Guildlist';
 import Feed from '../Feed/Feed';
 import Discover from '../Discover/Discover';
 import Footer from '../Footer/Footer';
+import AddDelete from '../Discover/AddDelete/AddDelete';
 
 function Dashboard() {
 
@@ -20,6 +21,7 @@ function Dashboard() {
         </div>
         <Feed />
         <Discover setGuildName={setGuildName}/>
+        <AddDelete setGuildName={setGuildName}/>
       </div>
       <Footer />
     </>
