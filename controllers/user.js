@@ -8,18 +8,23 @@ const JWT_KEY = process.env.JWT_KEY;
 // ? REGISTER USER-------------------------------------------------//
 router.post("/register", async (req, res) => {
     try {
-        const { firstName, lastName, email, password, userName } = req.body;
+        const { firstName, lastName, email, password, userName, steamId, isAdmin } = req.body;
 
         if (!firstName || !lastName || !email || !password || !userName) {
             throw Error("All fields required");
         }
+
         console.log(firstName)
         const newUser = new User({
             firstName,
             lastName,
             email,
-            password: bcrypt.hashSync(password, SALT)
+            password: bcrypt.hashSync(password, SALT),
+            userName,
+            steamId,
+            isAdmin
         });
+        console.log(newUser)
         // creating user token
         await newUser.save();
         const token = jwt.sign(
@@ -38,6 +43,7 @@ router.post("/register", async (req, res) => {
             newUser,
             token,
             name,
+            userName,
             id
         });
         
@@ -75,6 +81,7 @@ router.post("/login", async (req, res) => {
             message: "Login succesful",
             token,
             name,
+            userName,
             id
             
         });
@@ -105,8 +112,8 @@ router.put("/update/:id", async (req, res) => {
     try {
         const { id: _id } = req.params;
 
-        const newInfo = req.body;
-
+        const newInfo = await req.body
+        console.log(newInfo)
         const foundUser = await User.findOne({ _id });
 
         if(!foundUser) throw Error("User not Found");
