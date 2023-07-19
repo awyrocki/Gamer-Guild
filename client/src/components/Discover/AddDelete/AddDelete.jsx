@@ -53,7 +53,8 @@ function AddDelete({ setGuildName }) {
         const body = {
             "name": name,
             "description": description,
-            "addUsers": users
+            "addUsers": users,
+            "createdBy": "austin"
         }
 
         fetch(url, {
@@ -69,7 +70,11 @@ function AddDelete({ setGuildName }) {
     }
 
   return (
-    <div>AddDelete</div>
+    <>
+    <form action="" id='create-form'>
+        {handleCreate()}
+    </form>
+    </>
   )
 }
 
