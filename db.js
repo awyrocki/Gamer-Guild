@@ -5,10 +5,10 @@ const DB_URL = process.env.DB_URL
 const dbConnect = async () => {
     try {
         mongoose.connect(DB_URL, {
-            useNewUrlPaster: true,
+            useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        console.log(`[db] connected to ${DB_URL}`);
+        console.log(`[db] connected to Gamer Guild DB`);
     } catch (err) {
         console.log(`[db] error: ${err}`)
     }
