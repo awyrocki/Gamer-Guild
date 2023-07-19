@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken")
 const User = require("../models/User")
 const JWT_KEY = process.env.JWT_KEY
 
-
+// verifys token and also checks for isAdmin
 const adminValidation = async (req, res, next) => {
     try {
         if (req.method === "OPTIONS") next()

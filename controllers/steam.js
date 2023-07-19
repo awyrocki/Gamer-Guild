@@ -84,6 +84,8 @@ router.get('/api/auth/steam/return', passport.authenticate('steam', {failureRedi
     res.redirect('/')
 });
 
+
+// ? GET STEAM DATA FROM OUR DB with STEAMID ---------------------------------------//
 router.get("/steamUser/:steamId", sessionValidation, async (req, res) => {
     try {
         const { steamId } = req.params;

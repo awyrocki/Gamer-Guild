@@ -15,7 +15,7 @@ const sessionValidation = require("./middleware/token");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 app.use("/user", userController);
 app.use("/guild", guildController);
