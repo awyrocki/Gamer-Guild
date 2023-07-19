@@ -9,7 +9,7 @@ const HOST = process.env.HOST || "127.0.0.1";
 
 const userController = require("./controllers/user");
 const guildController = require("./controllers/guild");
-const messageController = require("./controllers/message");
+const messageController = require("./controllers/Messages");
 const sessionValidation = require("./middleware/token");
 
 app.use(cors());
