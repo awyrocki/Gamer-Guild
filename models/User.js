@@ -24,6 +24,10 @@ const User = new mongoose.Schema(
             required: true,
             unique: true
         },
+        steamId: {
+            type: String,
+            required: false
+        },
         admin: {
             type: Boolean,
             required: false

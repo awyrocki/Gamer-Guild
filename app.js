@@ -9,15 +9,18 @@ const HOST = process.env.HOST || "127.0.0.1";
 
 const userController = require("./controllers/user");
 const guildController = require("./controllers/guild");
-const messageController = require("./controllers/Messages");
+const messageController = require("./controllers/message");
+const steamController = require("./controllers/steam")
 const sessionValidation = require("./middleware/token");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.use("/user", userController);
 app.use("/guild", guildController);
 app.use("/message", messageController);
+app.use("/", steamController)
 
 app.listen(PORT, HOST, () => {
     dbConnect()

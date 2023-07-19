@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import './App.css';
+import Steam from './components/Steam/Steam';
 
 function App() {
 
-function test() {
-    
-  }
+const [isLinked, setIsLinked ] = useState(false)
+
   return (
     <>
-    <a id='steam-login' href="http://localhost:4000/api/auth/steam" onClick={test}><img src="https://community.cloudflare.steamstatic.com/public/shared/images/signinthroughsteam/sits_landing.png" alt="Steam Login"/></a>
+  <Steam  isLinked={isLinked} setIsLinked={setIsLinked}/>
     </>
   );
 }
