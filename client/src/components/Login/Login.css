@@ -1,9 +1,9 @@
-body{
+.my-body{
 	margin: 0;
 	padding: 0;
 	display: flex;
 	justify-content: center;
-	/* align-items: center; */
+	align-items: center;
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
     background: linear-gradient(-45deg, #121212, #181818, #404040);
@@ -26,7 +26,7 @@ body{
 	width:100%;
 	height: 100%;
 }
-label{
+.my-label{
 	color: #fff;
 	font-size: 2.3em;
 	justify-content: center;
@@ -36,7 +36,7 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+.my-input{
 	width: 60%;
 	height: 20px;
 	background: #e0dede;
@@ -48,7 +48,7 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
-button{
+.my-button{
 	width: 60%;
 	height: 40px;
 	margin: 10px auto;
@@ -65,7 +65,7 @@ button{
 	transition: .2s ease-in;
 	cursor: pointer;
 }
-button:hover{
+.my-button:hover{
 	background: #B3B3B3;
 }
 .signup{
@@ -75,7 +75,7 @@ button:hover{
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
 }
-.signup label{
+.signup .my-label{
 	color: #ffffff;
 	transform: scale(.6);
 }
@@ -83,10 +83,10 @@ button:hover{
 #chk:checked ~ .signup{
 	transform: translateY(-500px);
 }
-#chk:checked ~ .signup label{
+#chk:checked ~ .signup .my-label{
 	transform: scale(1);	
 }
-#chk:checked ~ .login label{
+#chk:checked ~ .login .my-label{
 	transform: scale(.6);
 }
 
