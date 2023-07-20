@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Guildlist.css"
 
-function Guildlist() {
+function Guildlist({ setGuildName }) {
 
   const [ joinedGuilds, setJoinedGuilds ] = useState([])
   // grabs the user id from the local storage
@@ -30,7 +30,10 @@ function Guildlist() {
     <div id='guildlist-container'>
       {joinedGuilds.map((guild, i) => (
         <div key={i} className='joined-guild-list'>
-          <h3>{guild.name}</h3>
+          <h3 onClick={e => {
+                e.preventDefault()
+                setGuildName(guild.name)
+            }}>{guild.name}</h3>
           <p>{guild.description}</p>
         </div>
       ))}

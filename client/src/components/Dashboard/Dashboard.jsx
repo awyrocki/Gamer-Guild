@@ -17,7 +17,7 @@ function Dashboard() {
       <div id='container'>
         <div id='left-columns'>
           <User />
-          <Guildlist />
+          <Guildlist setGuildName={setGuildName}/>
         </div>
         <Feed />
         <div id='discover-create'>
