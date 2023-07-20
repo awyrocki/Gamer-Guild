@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from "./components/Login/Login"
 import Forgot from "./components/Forgot/Forgot"
 import Nav from './components/Nav/Nav';
+import Settings from './components/Settings/Settings';
 
 function App() {
   let [token, setToken] = useState(undefined);
@@ -27,6 +28,7 @@ function App() {
           <Route path='/' element={ <Login updateLocalStorage={updateLocalStorage} /> } />
           <Route path='/Recover' element={ <Forgot /> } />
           <Route path={'/Home'} element={ <Dashboard /> } />
+          <Route path={'/Settings'} element={ <Settings /> } />
         </Routes>
       </Router>
     </>
