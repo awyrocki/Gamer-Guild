@@ -1,14 +1,35 @@
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px #14171b; 
+    -webkit-border-radius: 5px;
+    border-radius: 10px;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 5px;
+    background: #282828; 
+    -webkit-box-shadow: inset 0 0 8px #14171b; 
+}
+
+/* Center feed */
 #feed-container {
+    display: flex;
+    flex-direction: column;
     background-color: #121212;
     margin-left: 1em;
     width: 25em;
     border-radius: 5px;
     box-shadow: 0px 3px 10px 3px #14171b;
     text-align: center;
-    max-height: 50vh;
-    overflow-y: auto;
-    
+    height: 40em;
 }
+
 
 #feed-placeholder {
     color: #FFFFFF
@@ -18,8 +39,14 @@
     color: #b3b3b3;
 }
 
+/* Guild page */
 #guild-container {
+    display: flex;
+    flex-direction: column-reverse;
     color: #b3b3b3;
+    /* matches feed container to keep input at bottom */
+    height: 40em; 
+    overflow-y: auto;
 }
 
 .message-list {
@@ -30,9 +57,46 @@
     border-top: 1px solid #14171b;
     border-bottom: 1px solid #14171b;
     color: #b3b3b3;
+    
 }
 
 #guild-name {
+    font-size: 2em;
+    padding: 10px;
     color: #b3b3b3;
+    box-shadow: 0px 2px 10px 0px #14171b;
 }
 
+/* Message input*/
+
+#message-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+    background-color:#121212;
+}
+
+#message-input {
+    background-color: #525355;
+    height: 1em;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#send {
+    width: auto;
+    height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+#input-container {
+    width: 24em;
+    margin-left: 3px;
+    height: fit-content;
+    background-color: w14171b;
+}

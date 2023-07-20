@@ -5,7 +5,7 @@ function Steam({ userId }) {
     const ID = queryParameters.get("ID")
     const steamID = localStorage.getItem("steamID")
     const [ redirectHome, setRedirectHome ] = useState(false)
-    const [ steamId, setSteamId ] = useState("");
+    const [ steamId, setSteamId ] = useState("")
 
         //checks if there is a param
         useEffect(() => {
@@ -19,7 +19,7 @@ function Steam({ userId }) {
         useEffect(() => {
             if(steamId !== "") {
             console.log(steamId)
-                linkSteam();
+                linkSteam()
             }
         },[steamId])
 
