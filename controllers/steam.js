@@ -4,7 +4,9 @@ const passport = require("passport");
 const session = require("express-session");
 const passportSteam = require("passport-steam");
 const steamStrategy = passportSteam.Strategy;
+const axios = require("axios")
 const sessionValidation = require("../middleware/token");
+const { url } = require("inspector");
 
 
 const STEAM_KEY = process.env.STEAM_KEY;
@@ -65,7 +67,7 @@ router.get('/',  async (req, res) => {
         })
         await userInfo.save();
         let ID = userInfo.steamId;
-        let url = `http://localhost:3000/?ID=${ID}`
+        let url = `http://localhost:3000/home/?ID=${ID}`
 
         res.redirect(url)
         
@@ -86,7 +88,7 @@ router.get('/api/auth/steam/return', passport.authenticate('steam', {failureRedi
 
 
 // ? GET STEAM DATA FROM OUR DB with STEAMID ---------------------------------------//
-router.get("/steamUser/:steamId", sessionValidation, async (req, res) => {
+router.get("/steamUser/:steamId",  async (req, res) => {
     try {
         const { steamId } = req.params;
         const findSteamUser = await Steam.findOne({ steamId: steamId })
@@ -102,13 +104,24 @@ router.get("/steamUser/:steamId", sessionValidation, async (req, res) => {
                 userName,
                 avatar,
             })
-
+            
     } catch (err) {
         res.status(500).json({
             message: `${err}`
         })
         
     }
+})
+
+router.get("/onlineStatus/:steamId", async (req, res) => {
+        const { steamId } = req.params;
+        await axios({
+            url: ` http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${STEAM_KEY}&steamids=${steamId}`,
+            method: "get",
+        })
+        .then(response=> res.status(200).json( response.data ))
+        .catch((err) => res.status(500).json({ message: `no data: ${err}` }))
+
 })
 
 module.exports = router;
