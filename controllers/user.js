@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
         
         const name = foundUser.firstName;
         const id = foundUser._id;
-
+        const userName= foundUser.userName
         res.status(200).json({
             message: "Login succesful",
             token,
