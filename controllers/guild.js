@@ -4,7 +4,7 @@ const Guild = require("../models/Guild")
 router.post("/create", async (req, res) => {
     try {
         const { name, description, addedUsers, createdBy } = req.body
-        if (!name || !description || !addedUsers || !createdBy) throw Error("Provide all criteria")
+        if (!name || !description || !createdBy) throw Error("Provide all criteria")
         const newGuild = new Guild({ name, description, addedUsers, createdBy })
         await newGuild.save()
         res.status(201).json({
@@ -19,7 +19,7 @@ router.post("/create", async (req, res) => {
 router.get("/", async (req, res) => {
     try {
         const guild = await Guild.find()
-        res.json(guild)
+        res.status(200).json(guild)
     } catch (err) {
         res.status(500).json(err) 
     }
