@@ -1,64 +1,101 @@
 import React, { useEffect, useState } from 'react'
 import Steam from '../Steam/Steam';
+import profilePic from "./default-profile.jpg"
 import "./User.css"
 
 function User() {
-  const [ isLinked, setIsLinked ] = useState(false)
   const [ userProfile, setUserProfile ] = useState(null);
-  const [ steamId, setSteamId ] = useState("");
-  const [ render, setRender ] = useState(true)
+  const [ status, setStatus ] = useState("")
   const userId = localStorage.getItem("id")
+  const steamID = localStorage.getItem("steamID")
 
+
+  // Checks users online status pushes to db for site wide access
+  useEffect(() => {
+    if(steamID) {
+    const url = `http://localhost:4000/onlineStatus/${steamID}`
+
+    fetch(url, {
+        method: "GET",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        })
+    })
+    .then(res => res.json())
+    .then(data => setStatus(data.response.players[0].personastate))
+    }
+}, [])
+  
+  // if user isnt linked to steam gets their regular profile
   function fetchUser() {
-      const url = `http://127.0.0.1:4000/user/${userId}`
+      const url = `http://localhost:4000/user/${userId}`
 
       fetch(url, {
         method: "GET",
         headers: new Headers({
-          "Content-Type": "application.json"
+          "Content-Type": "application/json"
       })
     })
     .then(res => res.json())
     .then(data => setUserProfile(data))
-    // .catch(err = console.log(err))
   }
 
+  // if user is linked to steam grabs that profile
   function fetchSteamUser() {
-    const url = `http://127.0.0.1:4000/user/${steamId}`
+    const url = `http://localhost:4000/steamUser/${steamID}`
     fetch(url, {
       method: "GET",
       headers: new Headers({
-        "Content-Type": "application.json"
+        "Content-Type": "application/json"
     })
   })
   .then(res => res.json())
   .then(data => setUserProfile(data))
-  // .catch(err = console.log(err))
-      
   }
 
   useEffect(() => {
-    if(render) { 
-      if(!isLinked){
-      fetchUser()
+      if(steamID === null){
+        fetchUser()
       } else {
-      fetchSteamUser()
+        fetchSteamUser()
       }
-  }
   }, [])
 
-
+function whichPic() {
+  return steamID 
+  ? userProfile.avatar
+  : profilePic
+}
+// displays online status using steam
+// ! not sure how to implement this to other users
+function onlineStatus() {
+  if (!steamID) {
+    return <p></p>
+  } else {
+    return status === 0
+    ? <><p>Offline</p><span id='status-light-off'></span></>
+    : status === 1
+    ? <><p>Online</p><span id='status-light-on'></span></>
+    : <p></p>
+  }
+}
+function renderUser() {
+  return !userProfile
+    ? <h2>Loading User</h2>
+    : userProfile
+    ? <><h3 id='steam-name'>{userProfile.userName}</h3> 
+      <div id="profile-pic"><img src={whichPic()} alt="profile picture" width="75px" /> </div>
+      <div id='status'>{onlineStatus()}</div>
+      <span id='bio'>Add a bio and tell users a bit more about yourself (in settings)</span>
+      </>
+    : null
+}
   
   return (
     <>
-    {console.log(userProfile)}
     <div id='profile-container'>
-        <div id='placeholder'>
-            Place steam image here
-        </div>
-        <h2 id='steam-name'>Steam name</h2>
-        <span id='bio'>Hey all, my name is Austin, I like to play MMOs and MOBAs</span>
-        <Steam isLinked={isLinked} setIsLinked={setIsLinked} userId={userId} steamId={steamId} setSteamId={setSteamId}/>
+        {renderUser()}
+        <Steam userId={userId} />
     </div>
     
     </>

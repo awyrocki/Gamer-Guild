@@ -7,7 +7,6 @@ import Discover from '../Discover/Discover';
 import Footer from '../Footer/Footer';
 
 function Dashboard() {
-
   return (
     <>
       <Nav />

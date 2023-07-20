@@ -28,6 +28,10 @@ const User = new mongoose.Schema(
             type: String,
             required: false
         },
+        bio: {
+            type: String,
+            required: false
+        },
         admin: {
             type: Boolean,
             required: false

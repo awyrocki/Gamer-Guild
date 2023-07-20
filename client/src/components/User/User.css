@@ -1,4 +1,7 @@
 #profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #121212;
     gap: 1em;
     margin-left: 1em;
@@ -9,12 +12,42 @@
     box-shadow: 0px 3px 10px 3px #14171b;
 }
 
-#placeholder {
+#profile-pic {
+    margin-top: -1em;
+    box-shadow: 0px 3px 10px 3px #14171b;
+}
+#profile-pic img {
+    border-radius: 4px;
+}
+
+#status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    font-size: .75em;
     color: #FFFFFF;
+    margin: -1em;
+}
+
+#status-light-on {
+    background-color: rgb(0, 255, 0);
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 4px 2px rgba(0, 255, 0, 0.356);
+}
+
+#status-light-off {
+    background-color: rgba(255, 0, 0, 0.650);
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 4px 2px rgba(253, 0, 0, 0.500);
 }
 
 #steam-name {
-    color: #FFFFFF
+    color: #FFFFFF;
 }
 
 #bio {
