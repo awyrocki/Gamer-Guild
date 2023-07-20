@@ -20,8 +20,10 @@ function Dashboard() {
           <Guildlist />
         </div>
         <Feed />
-        <Discover setGuildName={setGuildName}/>
-        <AddDelete setGuildName={setGuildName}/>
+        <div id='discover-create'>
+          <Discover setGuildName={setGuildName}/>
+          <AddDelete setGuildName={setGuildName}/>
+        </div>
       </div>
       <Footer />
     </>

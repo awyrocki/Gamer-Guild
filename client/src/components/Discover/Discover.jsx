@@ -12,7 +12,7 @@ function Guild({ setGuildName }) {
         fetch(url, {
             method: "GET",
             headers: new Headers({
-                "Content-Type": "application.json"
+                "Content-Type": "application/json"
                 // Render all guilds regardless of authorization
             })
         })
@@ -24,19 +24,19 @@ function Guild({ setGuildName }) {
     // get initial list of guilds
     useEffect(() => {
         fetchGuild()
-    })
+    }, [])
 
   return (
     <>
         <div id='discover-container'>
-            {allGuild.map((guild, i) => {
+            {allGuild.map((guild, i) => (
                 <div key={i} className='guild-list' >
                     <h3 onClick={e => {
                         e.preventDefault()
                         setGuildName(guild.name)
-                    }}>{guild.name}</h3>
+                    }}>{guild.name}</h3><p>{guild.description}</p>
                 </div>
-            })}
+            ))}
         </div>
     </>
   )

@@ -7,9 +7,9 @@ function AddDelete({ setGuildName }) {
     const [ description, setDescription ] = useState("")
     const [ users, setUsers ] = useState([])
     const [ create, setCreate ] = useState(true) 
-
+    // function that presents input fields after clicking 'create new guild'
     const handleCreate = () => {
-        return create ? <div id='create' onClick={e => setCreate(!create)}>Create a new Guild</div>
+        return create ? <a id='create' onClick={e => setCreate(!create)}>Create a new Guild</a>
         : <>
         <input 
             type="text"
@@ -36,16 +36,17 @@ function AddDelete({ setGuildName }) {
                 setCreate(!create)
                 setGuildName(name)
             }}>Create</button>
-            <div id='cancel' onClick={e => {
+            <a id='cancel' onClick={e => {
                 e.preventDefault()
                 setName("")
                 setDescription("")
                 setCreate(!create)
-            }}>Cancel</div>
+            }}>Cancel</a>
             </span>
         </>
     }
-
+    // grabs the id of the user making the guild
+    const createdBy = localStorage.getItem("id")
     // handle the input creation form
     const createGuild = () => {
         const url = "http://127.0.0.1:4000/guild/create"
@@ -54,7 +55,7 @@ function AddDelete({ setGuildName }) {
             "name": name,
             "description": description,
             "addUsers": users,
-            "createdBy": "austin"
+            "createdBy": createdBy
         }
 
         fetch(url, {
