@@ -13,7 +13,6 @@ function Dashboard() {
 
   return (
     <>
-      <Nav />
       <div id='container'>
         <div id='left-columns'>
           <User />
