@@ -26,6 +26,11 @@ function Guild({ setGuildName }) {
         fetchGuild()
     }, [])
 
+    //sets param to guild name
+    function setGuildParam(guild) {
+        window.location.replace(`http://localhost:3000/home?GuildName=${guild}`)
+    }
+
   return (
     <>
         <div id='discover-container'>
@@ -33,7 +38,7 @@ function Guild({ setGuildName }) {
                 <div key={i} className='guild-list' >
                     <h3 onClick={e => {
                         e.preventDefault()
-                        setGuildName(guild.name)
+                        setGuildParam(guild.name)
                     }}>{guild.name}</h3><p>{guild.description}</p>
                 </div>
             ))}
