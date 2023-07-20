@@ -71,16 +71,19 @@ router.post("/login", async (req, res) => {
             JWT_KEY,
             { expiresIn: 60 * 60 * 24 }
         )
-        
+       
         const name = foundUser.firstName;
         const id = foundUser._id;
+
+        const userName= foundUser.userName
+
         const userName = foundUser.userName;
         if (foundUser.steamId !== "") {
             const steamID = foundUser.steamId
         } else {
             const steamID = ""
         }
-
+      
         res.status(200).json({
             message: "Login succesful",
             token,
