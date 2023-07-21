@@ -10,10 +10,10 @@ const Guild = new mongoose.Schema(
             type: String,
             required: true
         },
-        addedUsers: {
-            type: Array,
-            required: true
-        },
+        addedUsers: [{
+            type: String,
+            required: false
+        }],
         createdBy: {
             type: String,
             required: true

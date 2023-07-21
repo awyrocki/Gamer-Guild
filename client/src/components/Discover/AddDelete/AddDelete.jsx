@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import "./AddDelete.css"
 
-function AddDelete({ setGuildName }) {
+function AddDelete() {
 
     const [ name, setName ] = useState("")
     const [ description, setDescription ] = useState("")
-    const [ users, setUsers ] = useState([])
     const [ create, setCreate ] = useState(true) 
     // function that presents input fields after clicking 'create new guild'
     const handleCreate = () => {
@@ -34,7 +33,6 @@ function AddDelete({ setGuildName }) {
                 setName("")
                 setDescription("")
                 setCreate(!create)
-                setGuildName(name)
             }}>Create</button>
             <a id='cancel' onClick={e => {
                 e.preventDefault()
@@ -54,7 +52,7 @@ function AddDelete({ setGuildName }) {
         const body = {
             "name": name,
             "description": description,
-            "addUsers": users,
+            "addUsers": [],
             "createdBy": createdBy
         }
 
@@ -67,6 +65,10 @@ function AddDelete({ setGuildName }) {
             })
         })
         .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setTimeout(() => window.location = (`http://localhost:3000/home?GuildName=${name}`), 1000 )
+        })
         .catch(err => console.log(err))
     }
 

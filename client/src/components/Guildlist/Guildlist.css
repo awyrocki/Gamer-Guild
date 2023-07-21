@@ -16,6 +16,10 @@
     color: #FFFFFF;
 }
 
+#guild {
+    cursor: pointer;
+}
+
 #game-description {
     color: #b3b3b3;
 }

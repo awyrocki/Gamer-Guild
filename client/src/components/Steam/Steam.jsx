@@ -5,7 +5,7 @@ function Steam({ userId }) {
     const ID = queryParameters.get("ID")
     const steamID = localStorage.getItem("steamID")
     const [ redirectHome, setRedirectHome ] = useState(false)
-    const [ steamId, setSteamId ] = useState("");
+    const [ steamId, setSteamId ] = useState("")
 
         //checks if there is a param
         useEffect(() => {
@@ -19,7 +19,7 @@ function Steam({ userId }) {
         useEffect(() => {
             if(steamId !== "") {
             console.log(steamId)
-                linkSteam();
+                linkSteam()
             }
         },[steamId])
 
@@ -56,7 +56,7 @@ function Steam({ userId }) {
 
     useEffect(() => {
         if(redirectHome) {
-            window.location.replace("http://localhost:3000/home")
+            window.location = ("http://localhost:3000/home")
         }
     }, [redirectHome])
 
