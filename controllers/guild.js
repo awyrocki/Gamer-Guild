@@ -27,12 +27,20 @@ router.get("/", async (req, res) => {
 
 router.put("/update/:id", async (req, res) => {
     try {
-        const guild = await Guild.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        })
-        if (!guild) {
-            return res.status(404).json(err)
+        const { id } = req.params
+        // added the ability to add and remove users
+        const key = Object.keys(req.body)
+        const foundGuild = await Guild.findById(id)
+        
+        if (key.toString() === 'addedUsers') {
+            foundGuild.addedUsers.push(req.body.addedUsers)
+            foundGuild.save()
+        } else {
+            const guild = await Guild.findByIdAndUpdate(req.params.id, req.body, {
+                new: true,
+            })
         }
+        if (!guild) throw Error("guild not found")
         res.json(guild)
     } catch(err) {
         res.status(500).json(err)

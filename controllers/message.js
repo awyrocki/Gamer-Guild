@@ -28,7 +28,7 @@ router.post("/create", async (req, res) => {
 router.get("/guild/:guild", async (req, res) => {
     try {
         const { guild: guildName } = req.params
-        const findMessage = await Message.findOne({ guild: guildName })
+        const findMessage = await Message.find({ guild: guildName })
         if(!findMessage) throw Error("none found")
         res.status(200).json(findMessage)
     } catch (err) {
