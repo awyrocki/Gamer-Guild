@@ -60,6 +60,7 @@ function joinGuild() {
 function askJoin() {
     setJoin(
         <>
+        <div id='join-container'>
         <h3>{`Join? ${guild}`}</h3>
         <button onClick={e => {
             e.preventDefault()
@@ -71,6 +72,7 @@ function askJoin() {
             setGuild("")
             setGuildId("")
         }}>Cancel</button>
+        </div>
         </>
     )
 }

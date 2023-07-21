@@ -11,11 +11,11 @@ function Feed({ GuildName}) {
     } else {
       return <><h1 id='feed-placeholder'>Gamer Guild</h1>
       <span id='feed-content-placeholder'>Welcome to Gamer Guild
-      <p>Discover new games and friends to play with</p>
+      <p>Discover new games and friends to play with!</p>
       <p>Start by selecting a guild and joining</p>
       <p>Great! now you can get right into discussing your favorite games</p>
-      <p>Be kind</p>
-      <p>Be respectful</p>
+      <p>Be Kind</p>
+      <p>Be Respectful</p>
       <p>BE YOU</p>
       </span>
       </>

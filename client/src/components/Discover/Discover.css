@@ -17,3 +17,8 @@
 .guild {
     cursor: pointer;
 }
+
+#join-container {
+    display: flex;
+    flex-direction: column;
+}
