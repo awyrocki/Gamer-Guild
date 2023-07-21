@@ -37,3 +37,12 @@
     align-items: center;
     gap: 1em;
 }
+
+#settings-container {
+    display: flex;
+    justify-content: center;
+}
+
+#settings-sub-container {
+    width: 800px;
+}

@@ -14,8 +14,13 @@
     gap: 1em;
 }
 
-.guild {
+.guild, #guild {
     cursor: pointer;
+    color: #FFFFFF;
+}
+
+#guild-description {
+    color: #B3B3B3;
 }
 
 #join-container {

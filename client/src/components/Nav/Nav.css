@@ -40,11 +40,20 @@ nav a:hover::after {
 #main-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
     margin-bottom: 1em;
     background-color: #121212;
+    
 }
+
+#all-nav-components {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    min-width: 800px;
+}
+
 /* ! Build for resizable later once the main page is built out */
 @media (max-width: 750px) {
     #main-container {
@@ -53,7 +62,7 @@ nav a:hover::after {
 }
 
 #search-bar {
-    width: 20vw;
+    width: 200px;
     height: 2em;
 }
 
