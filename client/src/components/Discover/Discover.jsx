@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import "./Discover.css"
 
 // add sessiontoken
-function Guild({ setGuildName }) {
+function Guild() {
 
     const [ allGuild, setAllGuild ] = useState([])
+    const [ join, setJoin ] = useState(<></>)
+    const [ guild, setGuild ] = useState("")
+    const [ guildId, setGuildId ] = useState("") 
+    const userID = localStorage.getItem("id")
 
     const fetchGuild = () => {
         const url = "http://127.0.0.1:4000/guild/"
@@ -17,7 +21,11 @@ function Guild({ setGuildName }) {
             })
         })
         .then(res => res.json())
-        .then(data => setAllGuild(data))
+        .then(data => {
+            // filters already joined guilds
+            let notJoined = data.filter(guild => !guild.addedUsers.includes(userID))
+            setAllGuild(notJoined)
+        })
         .catch(err => console.log(err))
     }
 
@@ -26,10 +34,30 @@ function Guild({ setGuildName }) {
         fetchGuild()
     }, [])
 
-    //sets param to guild name
-    function setGuildParam(guild) {
-        window.location.replace(`http://localhost:3000/home?GuildName=${guild}`)
+function joinGuild() {
+    const url = "http://127.0.0.1:4000/guild/"
+}
+
+function askJoin() {
+    setJoin(
+        <>
+        <h3>{`Join? ${guild}`}</h3>
+        <button>join?</button>
+        <button onClick={e => {
+            e.preventDefault()
+            setJoin(<></>)
+            setGuild("")
+            setGuildId("")
+        }}>Cancel</button>
+        </>
+    )
+}
+
+useEffect(() => {
+    if(guild !== "") {
+        askJoin()
     }
+}, [guild])
 
   return (
     <>
@@ -37,12 +65,15 @@ function Guild({ setGuildName }) {
             {allGuild.map((guild, i) => (
                 <div key={i} className='guild-list' >
                     <h3 onClick={e => {
-                        e.preventDefault()
-                        setGuildParam(guild.name)
-                    }}>{guild.name}</h3><p>{guild.description}</p>
+                        // e.preventDefault()
+                        setGuild(e.target.innerHTML)
+                        setGuildId(e.target.id)
+                    }} id={guild._id} >{guild.name}</h3><p>{guild.description}</p>
                 </div>
             ))}
         </div>
+        {console.log(guildId)}
+        {join}
     </>
   )
 }
