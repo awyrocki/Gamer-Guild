@@ -28,65 +28,69 @@ function Settings() {
 
   return (
     <>
-    <hr />
-    <div id='add-bio'>
-    <span id='bio-span'>Tell us about yourself: </span>
-    <TextField
-        id="bio-textarea"
-        placeholder="Add bio"
-        multiline
-        variant="filled"
-        size='small'
-        color='secondary'
-    />
-    <Button
-        size='small'
-        variant='contained'
-        color={checkMark ? "secondary" : "success"}
-        onClick={() => checkMark ? setCheckMark(!checkMark) : null}
-        startIcon={checkMark ? null : <CheckIcon/>}
-    >{checkMark ? "Add" : "Bio updated"}</Button>
+    <div id='settings-container'>
+        <div id='settings-sub-container'>
+            <hr />
+            <div id='add-bio'>
+            <span id='bio-span'>Tell us about yourself: </span>
+            <TextField
+                id="bio-textarea"
+                placeholder="Add bio"
+                multiline
+                variant="filled"
+                size='small'
+                color='secondary'
+            />
+            <Button
+                size='small'
+                variant='contained'
+                color={checkMark ? "secondary" : "success"}
+                onClick={() => checkMark ? setCheckMark(!checkMark) : null}
+                startIcon={checkMark ? null : <CheckIcon/>}
+            >{checkMark ? "Add" : "Bio updated"}</Button>
+            </div>
+            <hr id='divider'/>
+            <div id='light-dark-mode'>
+            <span id='bio-span'>Light/Dark mode</span>
+            <Button
+                startIcon={lightDarkMode ? <LightModeIcon/> : <DarkModeIcon/>}
+                onClick={() => setLightDarkMode(!lightDarkMode)}
+                color='warning'
+                variant='outlined'
+            ></Button>
+            </div>
+            <hr id='divider'/>
+            <div id='change-password'>
+            <span id='bio-span'>Change password</span>
+            <TextField
+                id="password-input"
+                type="password"
+                autoComplete="current-password"
+                variant="standard"
+                required
+                />
+            <Button
+                size='small'
+                variant='contained'
+                color={passCheck ? "primary" : "success"}
+                onClick={() => passCheck ? setPassCheck(!passCheck) : null}
+                startIcon={passCheck ? null : <CheckIcon/>}
+            >{passCheck ? "Change password" : "Password changed" }</Button>
+            </div>
+            <hr id='divider'/>
+            <div id='disconnect-steam'>
+            <span id='bio-span'>Disconnect Steam account</span>
+            <Button
+                size="small"
+                variant='contained'
+                color={disSteam ? "error" : "success"}
+                onClick={() => disSteam ? setDisSteam(!disSteam) : null}
+                startIcon={disSteam ? <DisabledByDefaultIcon/> : <CheckIcon/>}
+            >{disSteam? "Disconnect steam" : "Steam Disconnected"}</Button>
+            </div>
+            <hr />
+        </div>
     </div>
-    <hr id='divider'/>
-    <div id='light-dark-mode'>
-    <span id='bio-span'>Light/Dark mode</span>
-    <Button
-        startIcon={lightDarkMode ? <LightModeIcon/> : <DarkModeIcon/>}
-        onClick={() => setLightDarkMode(!lightDarkMode)}
-        color='warning'
-        variant='outlined'
-    ></Button>
-    </div>
-    <hr id='divider'/>
-    <div id='change-password'>
-    <span id='bio-span'>Change password</span>
-    <TextField
-        id="password-input"
-        type="password"
-        autoComplete="current-password"
-        variant="standard"
-        required
-        />
-    <Button
-        size='small'
-        variant='contained'
-        color={passCheck ? "primary" : "success"}
-        onClick={() => passCheck ? setPassCheck(!passCheck) : null}
-        startIcon={passCheck ? null : <CheckIcon/>}
-    >{passCheck ? "Change password" : "Password changed" }</Button>
-    </div>
-    <hr id='divider'/>
-    <div id='disconnect-steam'>
-    <span id='bio-span'>Disconnect Steam account</span>
-    <Button
-        size="small"
-        variant='contained'
-        color={disSteam ? "error" : "success"}
-        onClick={() => disSteam ? setDisSteam(!disSteam) : null}
-        startIcon={disSteam ? <DisabledByDefaultIcon/> : <CheckIcon/>}
-    >{disSteam? "Disconnect steam" : "Steam Disconnected"}</Button>
-    </div>
-    <hr />
     </>
   )
 }

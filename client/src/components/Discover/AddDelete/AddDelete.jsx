@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./AddDelete.css"
+import { Button, TextField } from "@mui/material"
 
 function AddDelete() {
 
@@ -10,37 +11,52 @@ function AddDelete() {
     const handleCreate = () => {
         return create ? <a id='create' onClick={e => setCreate(!create)}>Create a new Guild</a>
         : <>
-        <input 
-            type="text"
-            className='input'
-            id='new-guild-name'
-            value={name}
-            onChange={e => setName(e.target.value)}
-            placeholder='Enter Guild name'
-        />
-        <input 
-            type="text" 
-            className='input'
-            id='new-guild-description'
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder='Describe the Guild'
-        />
-        <span id='create-cancel'>
-            <button id='create' onClick={e => {
-                e.preventDefault()
-                createGuild()
-                setName("")
-                setDescription("")
-                setCreate(!create)
-            }}>Create</button>
-            <a id='cancel' onClick={e => {
-                e.preventDefault()
-                setName("")
-                setDescription("")
-                setCreate(!create)
-            }}>Cancel</a>
-            </span>
+        <div id='create-guild-form'>
+            <TextField
+                placeholder='Enter Guild name'
+                id='new-guild-name'
+                value={name}
+                type='text'
+                variant='filled'
+                size='small'
+                color='primary'
+                onChange={e => setName(e.target.value)}
+            />
+            <TextField
+                placeholder='Guild description'
+                id='new-guild-description'
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                type='text'
+                variant='filled'
+                size='small'
+                color='primary'
+            />
+            <div id='create-cancel'>
+                <Button
+                    onClick={e => {
+                        e.preventDefault()
+                        createGuild()
+                        setName("")
+                        setDescription("")
+                        setCreate(!create)
+                    }}
+                    variant="outlined"
+                    size="small"
+                >Create</Button>
+                <Button
+                    onClick={e => {
+                        e.preventDefault()
+                        setName("")
+                        setDescription("")
+                        setCreate(!create)
+                    }}
+                    variant='outlined'
+                    size='small'
+                    color='error'
+                >Cancel</Button>
+            </div>
+        </div>
         </>
     }
     // grabs the id of the user making the guild
