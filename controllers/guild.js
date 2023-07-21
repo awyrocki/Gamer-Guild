@@ -4,9 +4,13 @@ const Guild = require("../models/Guild")
 router.post("/create", async (req, res) => {
     try {
         const { name, description, addedUsers, createdBy } = req.body
-        if (!name || !description || !createdBy) throw Error("Provide all criteria")
+        if (!name || !description ||  !createdBy) throw Error("Provide all criteria")
         const newGuild = new Guild({ name, description, addedUsers, createdBy })
         await newGuild.save()
+
+        const foundGuild = await Guild.findOne({ name: name})
+        foundGuild.addedUsers.push(createdBy)
+        foundGuild.save()
         res.status(201).json({
             message: `Guild created`,
             newGuild
@@ -31,7 +35,6 @@ router.put("/update/:id", async (req, res) => {
         // added the ability to add and remove users
         const key = Object.keys(req.body)
         const foundGuild = await Guild.findById(id)
-        
         if (key.toString() === 'addedUsers') {
             foundGuild.addedUsers.push(req.body.addedUsers)
             foundGuild.save()

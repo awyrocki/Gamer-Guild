@@ -56,6 +56,7 @@ function joinGuild() {
     
 }
 
+// renders buttons for join
 function askJoin() {
     setJoin(
         <>
