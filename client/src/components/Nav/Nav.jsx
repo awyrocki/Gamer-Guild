@@ -1,27 +1,84 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Nav.css"
 import icon from "./gg.png"
-import home from "./home.svg"
-import noti from "./noti.svg"
-import cog from "./cog.svg"
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+import HomeIcon from '@mui/icons-material/Home';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import SettingsIcon from '@mui/icons-material/Settings';
+import Badge from '@mui/material/Badge'
+import { AppBar, Box, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material"
+import InputBase from '@mui/material/InputBase';
+import Avatar from '@mui/material/Avatar'
+
+const StyledToolbar = styled(Toolbar)({
+  display: "flex",
+  justifyContent: "space-around",
+  alignItems:"center",
+  backgroundColor:"#121212"
+})
+
+const Search = styled("div")(({ theme }) => ({
+  backgroundColor: "White",
+  padding:"0 10px",
+  borderRadius: theme.shape.borderRadius,
+  width:"30%"
+}))
+
+const Icons = styled(Box)(({ theme }) => ({
+  display:"flex",
+  gap:"20px",
+  alignItems:"center"
+}))
 
 function Nav() {
+
+  const [ open, setOpen ] = useState(false)
+
   return (
     <>
-
-    <div id='main-container'>
-      <div id='all-nav-components'>
-      <img id='home-icon' src={icon} alt="Logo" />
-      <input id='search-bar' type="text" placeholder='Search' />
-      <nav>
-        <ul>
-          <li><img id='nav-icon' src={home} alt="" /><a href='http://localhost:3000/Home'>Home</a></li>
-          <li><img id='nav-icon' src={noti} alt="" /><a href='http://localhost:3000/Notifications'>Notifications</a></li>
-          <li><img id='nav-icon' src={cog} alt="" /><a href='http://localhost:3000/Settings'>Settings</a></li>
-        </ul>
-      </nav>
-      </div>
-    </div>
+      <AppBar position='sticky' id="nav-bar">
+        <StyledToolbar>
+          <Typography 
+          variant='h6'
+          sx={{display:{xs:"none", sm:"block"}}}
+          ><VideogameAssetIcon fontSize='small'/> GamerGuild
+          {/* Can remove the video game icon here */}
+          </Typography>
+          <Avatar
+          alt='Logo'
+          src={icon}
+          sx={{display:{xs:"block", sm:"none"}}}
+          />
+          <Search><InputBase placeholder='Search'/></Search>
+          <Icons>
+            <HomeIcon />
+            <Badge badgeContent={3} color='error'>
+              <NotificationsIcon />
+            </Badge>
+            <SettingsIcon
+            onClick={(e) => setOpen(true)}
+            />
+          </Icons>
+        </StyledToolbar>
+        <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        open={open}
+        onClose={(e) => setOpen(false)}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem>Profile</MenuItem>
+        <MenuItem>My Settings</MenuItem>
+        <MenuItem>Logout</MenuItem>
+      </Menu>
+      </AppBar>
     </>
   )
 }
