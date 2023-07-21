@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import "./UserList.css"
 
 function UserList({ GuildName }) {
     const [ guildUsers, setGuildUsers ] = useState([])
@@ -55,13 +56,13 @@ useEffect(() => {
     return (
         <>
         <div id='userlist-container'>
+        <h2 id='user-title'>Users</h2>
         {userProfiles.map((user, i) => (
             <div key={i} className='user-list'>
-                <h3>{user}</h3>
+                <h3 id='listed-users'>{user}</h3>
         </div>
         ))}
         </div>
-        {console.log(userProfiles)}
         </>
     )
 }
