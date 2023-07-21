@@ -4,9 +4,13 @@ const Guild = require("../models/Guild")
 router.post("/create", async (req, res) => {
     try {
         const { name, description, addedUsers, createdBy } = req.body
-        if (!name || !description || !createdBy) throw Error("Provide all criteria")
+        if (!name || !description ||  !createdBy) throw Error("Provide all criteria")
         const newGuild = new Guild({ name, description, addedUsers, createdBy })
         await newGuild.save()
+
+        const foundGuild = await Guild.findOne({ name: name})
+        foundGuild.addedUsers.push(createdBy)
+        foundGuild.save()
         res.status(201).json({
             message: `Guild created`,
             newGuild
@@ -25,14 +29,39 @@ router.get("/", async (req, res) => {
     }
 }) 
 
+// get by name of guild
+router.get("/guild/:GuildName", async (req, res) => {
+    try {
+        const { GuildName } = req.params;
+        const foundGuild = await Guild.findOne({name: GuildName})
+        if(!foundGuild) throw Error("guild not found")
+
+        res.status(200).json(foundGuild.addedUsers)
+        
+    } catch (err) {
+        res.status(500).json({
+            message: `${err}`
+        })
+        
+    }
+
+})
+
 router.put("/update/:id", async (req, res) => {
     try {
-        const guild = await Guild.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        })
-        if (!guild) {
-            return res.status(404).json(err)
+        const { id } = req.params
+        // added the ability to add and remove users
+        const key = Object.keys(req.body)
+        const foundGuild = await Guild.findById(id)
+        if (key.toString() === 'addedUsers') {
+            foundGuild.addedUsers.push(req.body.addedUsers)
+            foundGuild.save()
+        } else {
+            const guild = await Guild.findByIdAndUpdate(req.params.id, req.body, {
+                new: true,
+            })
         }
+        if (!guild) throw Error("guild not found")
         res.json(guild)
     } catch(err) {
         res.status(500).json(err)

@@ -8,6 +8,7 @@ function User() {
   const [ status, setStatus ] = useState("")
   const userId = localStorage.getItem("id")
   const steamID = localStorage.getItem("steamID")
+  const userName = localStorage.getItem("user-name")
 
 
   // Checks users online status pushes to db for site wide access
@@ -83,7 +84,7 @@ function renderUser() {
   return !userProfile
     ? <h2>Loading User</h2>
     : userProfile
-    ? <><h3 id='steam-name'>{userProfile.userName}</h3> 
+    ? <><h3 id='user-name'>{userName}</h3> 
       <div id="profile-pic"><img src={whichPic()} alt="profile picture" width="75px" /> </div>
       <div id='status'>{onlineStatus()}</div>
       <span id='bio'>Add a bio and tell users a bit more about yourself (in settings)</span>
