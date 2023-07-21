@@ -35,14 +35,35 @@ function Guild() {
     }, [])
 
 function joinGuild() {
-    const url = "http://127.0.0.1:4000/guild/"
+    const url = `http://127.0.0.1:4000/guild/update/${guildId}`
+    const body = {
+        "addedUsers": `${userID}` 
+    };
+            fetch(url, {
+                method: "PUT",
+                body: JSON.stringify(body),
+                headers: new Headers({
+                "Content-Type": "application/json",
+                authorization: ""
+                })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        setTimeout(() => window.location.replace(`http://localhost:3000/home?GuildName=${guild}`), 1000 )
+        })
+        .catch(err => console.log(err))
+    
 }
 
 function askJoin() {
     setJoin(
         <>
         <h3>{`Join? ${guild}`}</h3>
-        <button>join?</button>
+        <button onClick={e => {
+            e.preventDefault()
+            joinGuild()
+        }}>join?</button>
         <button onClick={e => {
             e.preventDefault()
             setJoin(<></>)
@@ -72,7 +93,6 @@ useEffect(() => {
                 </div>
             ))}
         </div>
-        {console.log(guildId)}
         {join}
     </>
   )
