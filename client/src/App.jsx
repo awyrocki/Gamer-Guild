@@ -8,39 +8,23 @@ import Nav from './components/Nav/Nav';
 import Settings from './components/Settings/Settings';
 
 function App() {
-  let [token, setToken] = useState(undefined);
+  let [sessionToken, setSessionToken] = useState(undefined);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      setToken(localStorage.getItem('token'));
+      setSessionToken(localStorage.getItem('token'));
     }
   }, []);
 
-  let updateLocalStorage = newToken => {
+  // adds userName, userId, token and steamId to local storage
+  function updateLocalStorage(newToken, newUserName, newUserId, newSteamId ) {
     localStorage.setItem('token', newToken);
-    setToken(newToken);
+    setSessionToken(newToken);
+    localStorage.setItem('userName', newUserName);
+    localStorage.setItem('id', newUserId);
+    localStorage.setItem('steamID', newSteamId);
+
   };
-
-  // const PrivateRoute = ({ element: Element, ...rest }) => (
-  //   <Route
-  //     {...rest}
-  //     element={
-  //       token ? (
-  //         <Element />
-  //       ) : (
-  //         <Login to="/Home" replace state={{ from: rest.location }} />
-  //       )
-  //     }
-  //   />
-  // );
-
-
-  useEffect(() => {
-    // if (token !== undefined ) {
-    //    window.location.replace("localhost3000/home")
-    // }
-  }, [] )
-
 
 
   return (

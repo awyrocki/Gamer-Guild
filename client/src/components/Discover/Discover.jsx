@@ -39,6 +39,8 @@ function joinGuild() {
     const body = {
         "addedUsers": `${userID}` 
     };
+
+    console.log(body)
             fetch(url, {
                 method: "PUT",
                 body: JSON.stringify(body),

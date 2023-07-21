@@ -8,12 +8,12 @@ function User() {
   const [ status, setStatus ] = useState("")
   const userId = localStorage.getItem("id")
   const steamID = localStorage.getItem("steamID")
-  const userName = localStorage.getItem("user-name")
+  const userName = localStorage.getItem("userName")
 
 
   // Checks users online status pushes to db for site wide access
   useEffect(() => {
-    if(steamID) {
+    if(steamID !== "undefined") {
     const url = `http://localhost:4000/onlineStatus/${steamID}`
 
     fetch(url, {
@@ -30,7 +30,6 @@ function User() {
   // if user isnt linked to steam gets their regular profile
   function fetchUser() {
       const url = `http://localhost:4000/user/${userId}`
-
       fetch(url, {
         method: "GET",
         headers: new Headers({
@@ -55,7 +54,7 @@ function User() {
   }
 
   useEffect(() => {
-      if(steamID === null){
+      if(steamID === "undefined"){
         fetchUser()
       } else {
         fetchSteamUser()
@@ -63,14 +62,14 @@ function User() {
   }, [])
 
 function whichPic() {
-  return steamID 
+  return steamID !== "undefined"
   ? userProfile.avatar
   : profilePic
 }
 // displays online status using steam
 // ! not sure how to implement this to other users
 function onlineStatus() {
-  if (!steamID) {
+  if (steamID === "undefined") {
     return <p></p>
   } else {
     return status === 0
@@ -98,7 +97,6 @@ function renderUser() {
         {renderUser()}
         <Steam userId={userId} />
     </div>
-    
     </>
   )
 }

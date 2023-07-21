@@ -25,7 +25,7 @@ function signUp1() {
             })
         })
         .then(res => res.json())
-        .then(data => updateLocalStorage(data.token))
+        .then(data => updateLocalStorage(data.token, data.userName, data.id, data.steamdID))
 
     }
 
@@ -43,7 +43,7 @@ function loginUser() {
         })
     })
     .then(res => res.json())
-    .then(data => updateLocalStorage(data.token))
+    .then(data => updateLocalStorage(data.token, data.userName, data.id, data.steamdID))
 
 }
 

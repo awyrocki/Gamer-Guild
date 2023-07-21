@@ -8,20 +8,25 @@ const JWT_KEY = process.env.JWT_KEY;
 // ? REGISTER USER-------------------------------------------------//
 router.post("/register", async (req, res) => {
     try {
-        const { firstName, lastName, email, password, userName, isAdmin } = req.body;
+        const { firstName, lastName, email, password, userName } = req.body;
 
         if (!firstName || !lastName || !email || !password || !userName) {
             throw Error("All fields required");
         }
+        // making empty values for not required
+        const steamId = "";
+        const bio = "";
+        const admin = false;
 
-        console.log(firstName)
         const newUser = new User({
             firstName,
             lastName,
             email,
             password: bcrypt.hashSync(password, SALT),
             userName,
-            isAdmin
+            steamId,
+            bio,
+            admin
         });
         // creating user token
         await newUser.save();
@@ -33,16 +38,16 @@ router.post("/register", async (req, res) => {
         
         // sending basic user to front end for local storage/ session storage
         let foundUser = await User.findOne({ email });
-        const name = foundUser.firstName;
         const id = foundUser._id;
+        const user = foundUser.userName;
+        const steamID = foundUser.steamId;
         
         res.status(201).json({
             message: "User created",
-            newUser,
             token,
-            name,
-            userName,
-            id
+            user,
+            id,
+            steamID
         });
         
     } catch (err) {
@@ -72,21 +77,14 @@ router.post("/login", async (req, res) => {
             { expiresIn: 60 * 60 * 24 }
         )
 
-        const name = foundUser.firstName;
         const id = foundUser._id;
-
         const userName = foundUser.userName;
-      
-        if (foundUser.steamId !== "") {
-            const steamID = foundUser.steamId
-        } else {
-            const steamID = ""
-        }
+        const steamID = foundUser.steamId;
+
 
         res.status(200).json({
             message: "Login succesful",
             token,
-            name,
             userName,
             id,
             steamID
