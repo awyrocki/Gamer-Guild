@@ -62,7 +62,7 @@ return (
             e.preventDefault()
             loginUser()
         }}>Login</button>
-        <button className='my-button' href='http://localhost:3000/Recover' >Forgot password</button>
+<a className='my-button' href='http://localhost:3000/Recover'>Forgot password</a>
     </form>
     </div>
 

@@ -75,8 +75,6 @@ router.post("/login", async (req, res) => {
         const name = foundUser.firstName;
         const id = foundUser._id;
 
-        const userName= foundUser.userName
-
         const userName = foundUser.userName;
         if (foundUser.steamId !== "") {
             const steamID = foundUser.steamId
