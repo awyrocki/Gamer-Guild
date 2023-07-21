@@ -3,9 +3,7 @@ import "./Feed.css"
 import GuildPage from './GuildPage'
 
 
-function Feed() { 
-  const queryParameters = new URLSearchParams(window.location.search)
-  const GuildName = queryParameters.get("GuildName")
+function Feed({ GuildName}) { 
 
   function display() {
     if(GuildName) {

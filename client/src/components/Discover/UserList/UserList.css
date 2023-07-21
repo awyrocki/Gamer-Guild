@@ -1,4 +1,4 @@
-#discover-container {
+#userlist-container {
     background-color: #121212;
     margin-left: 1em;
     padding-left: 0.5em;
@@ -11,8 +11,4 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.guild {
-    cursor: pointer;
 }

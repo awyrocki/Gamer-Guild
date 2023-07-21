@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Discover.css"
 
 // add sessiontoken
-function Guild() {
+function Discover() {
 
     const [ allGuild, setAllGuild ] = useState([])
     const [ join, setJoin ] = useState(<></>)
@@ -50,7 +50,7 @@ function joinGuild() {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-        setTimeout(() => window.location.replace(`http://localhost:3000/home?GuildName=${guild}`), 1000 )
+        setTimeout(() => window.location = (`http://localhost:3000/home?GuildName=${guild}`), 1000 )
         })
         .catch(err => console.log(err))
     
@@ -90,7 +90,7 @@ useEffect(() => {
                         // e.preventDefault()
                         setGuild(e.target.innerHTML)
                         setGuildId(e.target.id)
-                    }} id={guild._id} >{guild.name}</h3><p>{guild.description}</p>
+                    }} id={guild._id} className='guild' >{guild.name}</h3><p>{guild.description}</p>
                 </div>
             ))}
         </div>
@@ -99,4 +99,4 @@ useEffect(() => {
   )
 }
 
-export default Guild
+export default Discover

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./AddDelete.css"
 
-function AddDelete({ setGuildName }) {
+function AddDelete() {
 
     const [ name, setName ] = useState("")
     const [ description, setDescription ] = useState("")
@@ -33,7 +33,6 @@ function AddDelete({ setGuildName }) {
                 setName("")
                 setDescription("")
                 setCreate(!create)
-                setGuildName(name)
             }}>Create</button>
             <a id='cancel' onClick={e => {
                 e.preventDefault()
@@ -68,7 +67,7 @@ function AddDelete({ setGuildName }) {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            setTimeout(() => window.location.replace(`http://localhost:3000/home?GuildName=${name}`), 1000 )
+            setTimeout(() => window.location = (`http://localhost:3000/home?GuildName=${name}`), 1000 )
         })
         .catch(err => console.log(err))
     }

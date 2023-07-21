@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Guildlist.css"
 
-function Guildlist({ setGuildName }) {
+function Guildlist() {
 
   const [ joinedGuilds, setJoinedGuilds ] = useState([])
   // grabs the user id from the local storage
@@ -28,7 +28,7 @@ function Guildlist({ setGuildName }) {
 
   //sets param to guild name
   function setGuildParam(guild) {
-    window.location.replace(`http://localhost:3000/home?GuildName=${guild}`)
+    window.location = (`http://localhost:3000/home?GuildName=${guild}`)
   }
 
   return (
@@ -38,7 +38,7 @@ function Guildlist({ setGuildName }) {
           <h3 onClick={e => {
                 e.preventDefault()
                 setGuildParam(guild.name)
-            }}>{guild.name}</h3>
+            }} id='guild'>{guild.name}</h3>
           <p>{guild.description}</p>
         </div>
       ))}

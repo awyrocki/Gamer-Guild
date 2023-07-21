@@ -29,6 +29,24 @@ router.get("/", async (req, res) => {
     }
 }) 
 
+// get by name of guild
+router.get("/guild/:GuildName", async (req, res) => {
+    try {
+        const { GuildName } = req.params;
+        const foundGuild = await Guild.findOne({name: GuildName})
+        if(!foundGuild) throw Error("guild not found")
+
+        res.status(200).json(foundGuild.addedUsers)
+        
+    } catch (err) {
+        res.status(500).json({
+            message: `${err}`
+        })
+        
+    }
+
+})
+
 router.put("/update/:id", async (req, res) => {
     try {
         const { id } = req.params

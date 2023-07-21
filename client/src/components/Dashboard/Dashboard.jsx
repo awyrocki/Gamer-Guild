@@ -6,22 +6,33 @@ import Feed from '../Feed/Feed';
 import Discover from '../Discover/Discover';
 import Footer from '../Footer/Footer';
 import AddDelete from '../Discover/AddDelete/AddDelete';
+import UserList from '../Discover/UserList/UserList';
 
 function Dashboard() {
+  // grabs guild name from url params
+  const queryParameters = new URLSearchParams(window.location.search)
+  const GuildName = queryParameters.get("GuildName")
 
-  const [ guildName, setGuildName ] = useState("")
-
+  // adds/ removes user list
+  function renderUsers() {
+    if(!GuildName) {
+        return <></>
+    } else {
+        return <UserList GuildName={GuildName}/>
+    }
+  }
   return (
     <>
       <div id='container'>
         <div id='left-columns'>
           <User />
-          <Guildlist setGuildName={setGuildName}/>
+          <Guildlist />
         </div>
-        <Feed />
+        <Feed GuildName={GuildName}/>
         <div id='discover-create'>
-          <Discover setGuildName={setGuildName}/>
-          <AddDelete setGuildName={setGuildName}/>
+          {renderUsers()}
+          <Discover />
+          <AddDelete />
         </div>
       </div>
       <Footer />
