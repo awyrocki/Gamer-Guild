@@ -14,6 +14,7 @@ const sessionValidation = async (req, res, next) => {
         if (!payload) throw Error("Invalid token")
         const foundUser = await User.findOne({ _id: payload._id })
         if (!foundUser) throw Error(`User not found`)
+        req.user = foundUser
         next()
     } catch (err) {
         console.log(err)

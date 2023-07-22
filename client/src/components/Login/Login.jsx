@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import './Login.css'
 
-function Login( {updateLocalStorage} ) {
+function Login( {updateLocalStorage, setLoggedIn} ) {
     const [ first, setFirst ] = useState("")
     const [ last, setLast ] = useState("")
     const [ user, setUser ] = useState("")
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
+    // ! error message line 78 needs styling
+    const [ error, setError ] = useState("")
 
 function signUp1() {
         
@@ -25,10 +27,16 @@ function signUp1() {
             })
         })
         .then(res => res.json())
-        .then(data => updateLocalStorage(data.token, data.userName, data.id, data.steamdID))
-
+        .then(data => {
+            if (data.message === "User created") {
+                updateLocalStorage(data.token, data.userName, data.id, data.steamdID)
+                window.location = "http://localhost:3000/home"
+            } else {
+                setError(data.message)
+            }
+        })
     }
-
+    
 function loginUser() {
 
     let body ={
@@ -43,7 +51,19 @@ function loginUser() {
         })
     })
     .then(res => res.json())
-    .then(data => updateLocalStorage(data.token, data.userName, data.id, data.steamdID))
+    .then(data => {
+        if (data.message === "Login succesful") {
+            updateLocalStorage(data.token, data.userName, data.id, data.steamdID)
+            window.location = "http://localhost:3000/home"
+        } else {
+            setError(data.message)
+        }
+        
+    })
+    .catch(err => {
+        console.log(err)
+        setLoggedIn(false)
+    })
 
 }
 
@@ -55,6 +75,7 @@ return (
     <div className="login">
     <form method='post'>
         <label className='my-label' htmlFor="chk" aria-hidden="true">Gamer Guild</label>
+        <p>{error}</p> 
         <h1 className='enter'>Login</h1>
         <input className='my-input' type="email" onChange={(e)=> setEmail(e.target.value)} name="email" placeholder="Email" required="" />
         <input className='my-input' type="password" onChange={(e)=> setPassword(e.target.value)} name="pswd" placeholder="Password" required="" />
