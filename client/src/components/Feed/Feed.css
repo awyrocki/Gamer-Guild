@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,17 +36,17 @@
     flex-direction: column-reverse;
     color: #b3b3b3;
     /* matches feed container to keep input at bottom */
-    height: 40em; 
+    height: 40em;
     overflow-y: auto;
+    width: 26.5em;
 }
 
 .message-list {
     display: flex;
     flex-direction: column;
     align-items: baseline;
-    padding-left: 1em;
-    border-top: 1px solid #14171b;
-    border-bottom: 1px solid #14171b;
+    margin-top: 2px;
+    margin-bottom: 2px;
     color: #b3b3b3;
     
 }

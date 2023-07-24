@@ -37,7 +37,7 @@ function Feed({ GuildName}) {
         title="Welcome to Gamer Guild!"
         subheader="Mod Arcanine"
         subheaderTypographyProps={{color:"#B3B3B3"}}
-        sx={{color:"White", bgcolor:"#121212", fontSize:""}}
+        sx={{color:"White", bgcolor:"#121212"}}
       />
       <CardContent sx={{bgcolor:"#121212"}}>
         <Typography variant="body2" color="#B3B3B3" bgcolor={"#121212"}>
