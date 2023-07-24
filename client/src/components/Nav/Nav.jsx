@@ -45,7 +45,7 @@ function Nav() {
           <Typography 
           variant='h6'
           sx={{display:{xs:"none", sm:"block"}}}
-          ><VideogameAssetIcon fontSize='small'/> GamerGuild
+          ><VideogameAssetIcon fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/Home'>GamerGuild</a>
           </Typography>
           <Avatar
           alt='Logo'
