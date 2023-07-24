@@ -25,7 +25,7 @@ function App() {
 
   // checks for valid session 
 function loginRedirect() {
-  if(session === "false" || session === null || token === "undefined" || token === null) {
+  if(session === "false" || session === null) {
     return <Navigate replace to="/" />
   } 
 }
@@ -42,7 +42,7 @@ const logout = () => {
   }
 
 function renderNav() {
-  if (!session) {
+  if (session === "false" || session === null) {
     return <></>
   } else {
     return <Nav logout={logout}/>
@@ -58,7 +58,7 @@ function renderNav() {
         <Routes>
           <Route path='/' element={ <Login updateLocalStorage={updateLocalStorage} /> } />
           <Route path='/Recover' element={ <Forgot /> } />
-          <Route path={'/Home'} element={ <Dashboard /> } />
+          <Route path={'/Home'} element={ <Dashboard logout={logout}/> } />
           <Route path={'/Settings'} element={ <Settings /> } />
         </Routes>
       </Router>

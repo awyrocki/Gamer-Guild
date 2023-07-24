@@ -49,7 +49,7 @@ function Steam({ userId }) {
         function display() {
             return ID !== null ?
             <><p>Linking...</p></>
-            :  steamID !== "undefined"
+            :  steamID !== ""
             ? <><p>steam is Linked</p></> 
             : <a id='steam-login' href="http://localhost:4000/api/auth/steam" ><img src="https://community.cloudflare.steamstatic.com/public/shared/images/signinthroughsteam/sits_landing.png" alt="Steam Login" width="50px" height="20px"/></a>
     }

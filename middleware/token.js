@@ -17,9 +17,8 @@ const sessionValidation = async (req, res, next) => {
         req.user = foundUser
         next()
     } catch (err) {
-        console.log(err)
         res.status(500).json({
-            message: `${err}`
+            message: `${err.message}`
         })
     }
 }

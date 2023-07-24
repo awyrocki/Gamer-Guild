@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const SALT = Number(process.env.SALT);
 const JWT_KEY = process.env.JWT_KEY;
+const sessionValidation = require("../middleware/token")
 
 // ? REGISTER USER-------------------------------------------------//
 router.post("/register", async (req, res) => {
@@ -76,11 +77,10 @@ router.post("/login", async (req, res) => {
             JWT_KEY,
             { expiresIn: 60 * 60 * 24 }
         )
-
+        
         const id = foundUser._id;
         const userName = foundUser.userName;
         const steamID = foundUser.steamId;
-
 
         res.status(200).json({
             message: "Login succesful",
@@ -99,7 +99,7 @@ router.post("/login", async (req, res) => {
 })
 
 // ? GET USER BY ID ------------------------------------------//
-router.get("/:id", async (req, res) => {
+router.get("/:id", sessionValidation, async (req, res) => {
     try {
         const { id: _id } = req.params;
         const singleUser = await User.findOne({ _id });
@@ -118,7 +118,7 @@ router.put("/update/:id", async (req, res) => {
         const { id: _id } = req.params;
 
         const newInfo = await req.body
-        console.log(newInfo) // ! CONSOLE LOG FLAG
+
         const foundUser = await User.findOne({ _id });
 
         if(!foundUser) throw Error("User not Found");

@@ -52,8 +52,9 @@ function loginUser() {
     })
     .then(res => res.json())
     .then(data => {
+        console.log(data.steamdID)
         if (data.message === "Login succesful") {
-            updateLocalStorage(data.token, data.userName, data.id, data.steamdID)
+            updateLocalStorage(data.token, data.userName, data.id, data.steamID)
             window.location = "http://localhost:3000/home"
         } else {
             setError(data.message)

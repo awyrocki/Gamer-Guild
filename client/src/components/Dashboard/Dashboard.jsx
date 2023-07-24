@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import AddDelete from '../Discover/AddDelete/AddDelete';
 import UserList from '../Discover/UserList/UserList';
 
-function Dashboard() {
+function Dashboard({ logout }) {
   // grabs guild name from url params
   const queryParameters = new URLSearchParams(window.location.search)
   const GuildName = queryParameters.get("GuildName")
@@ -25,7 +25,7 @@ function Dashboard() {
     <>
       <div id='container'>
         <div id='left-columns'>
-          <User />
+          <User logout={logout}/>
           <Guildlist />
         </div>
         <Feed GuildName={GuildName}/>

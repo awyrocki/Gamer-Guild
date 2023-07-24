@@ -3,17 +3,18 @@ import Steam from '../Steam/Steam';
 import profilePic from "./default-profile.jpg"
 import "./User.css"
 
-function User() {
+function User({ logout }) {
   const [ userProfile, setUserProfile ] = useState(null);
   const [ status, setStatus ] = useState("")
   const userId = localStorage.getItem("id")
   const steamID = localStorage.getItem("steamID")
   const userName = localStorage.getItem("userName")
+  const token = localStorage.getItem("token")
 
 
   // Checks users online status pushes to db for site wide access
   useEffect(() => {
-    if(steamID !== "undefined") {
+    if(steamID !== "") {
     const url = `http://localhost:4000/onlineStatus/${steamID}`
 
     fetch(url, {
@@ -33,11 +34,18 @@ function User() {
       fetch(url, {
         method: "GET",
         headers: new Headers({
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "authorization": token
       })
     })
     .then(res => res.json())
-    .then(data => setUserProfile(data))
+    .then(data => {
+      if(data.message === "You are not authorized" || data.message === "invalid signature" || data.message === "jwt malformed" || data.message === "invalid token" ) {
+        logout()
+    } else {
+      setUserProfile(data)
+    }
+    })
   }
 
   // if user is linked to steam grabs that profile
@@ -54,7 +62,7 @@ function User() {
   }
 
   useEffect(() => {
-      if(steamID === "undefined"){
+      if(steamID === ""){
         fetchUser()
       } else {
         fetchSteamUser()
@@ -62,14 +70,14 @@ function User() {
   }, [])
 
 function whichPic() {
-  return steamID !== "undefined"
+  return steamID !== ""
   ? userProfile.avatar
   : profilePic
 }
 // displays online status using steam
 // ! not sure how to implement this to other users
 function onlineStatus() {
-  if (steamID === "undefined") {
+  if (steamID === "") {
     return <p></p>
   } else {
     return status === 0
