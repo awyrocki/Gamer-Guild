@@ -4,3 +4,16 @@
         justify-content: center;
     }
 }
+
+#nav-icon:hover {
+    cursor: pointer;
+}
+
+#nav-icon {
+    color: white;
+}
+
+#menu-options {
+    text-decoration: none;
+    color: black;
+}

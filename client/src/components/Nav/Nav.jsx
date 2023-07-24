@@ -32,6 +32,10 @@ const Icons = styled(Box)(({ theme }) => ({
 
 function Nav() {
 
+  const handleClick = e => {
+    console.log("Icon clicked")
+  }
+
   const [ open, setOpen ] = useState(false)
 
   return (
@@ -42,7 +46,6 @@ function Nav() {
           variant='h6'
           sx={{display:{xs:"none", sm:"block"}}}
           ><VideogameAssetIcon fontSize='small'/> GamerGuild
-          {/* Can remove the video game icon here */}
           </Typography>
           <Avatar
           alt='Logo'
@@ -51,12 +54,21 @@ function Nav() {
           />
           <Search><InputBase placeholder='Search'/></Search>
           <Icons>
-            <HomeIcon />
+            <a
+            onClick={handleClick}
+            href='http://localhost:3000/Home'
+            ><HomeIcon
+            id='nav-icon'
+            /></a>
             <Badge badgeContent={3} color='error'>
-              <NotificationsIcon />
+              <a
+              onClick={handleClick}
+              href='http://localhost:3000/Notifications'
+              ><NotificationsIcon id='nav-icon'/></a>
             </Badge>
             <SettingsIcon
             onClick={(e) => setOpen(true)}
+            id='nav-icon'
             />
           </Icons>
         </StyledToolbar>
@@ -74,9 +86,22 @@ function Nav() {
           horizontal: 'right',
         }}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My Settings</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <a
+        id='menu-options' 
+        onClick={handleClick} 
+        href='http://localhost:3000/Profile'
+        ><MenuItem>Profile</MenuItem></a>
+        <a
+        id='menu-options'
+        onClick={handleClick}
+        href='http://localhost:3000/Settings'
+        ><MenuItem>My Settings</MenuItem></a>
+        <a
+        /* Needs to logout the user! */
+        id='menu-options'
+        onClick={handleClick}
+        href='http://localhost:3000/'
+        ><MenuItem>Logout</MenuItem></a>
       </Menu>
       </AppBar>
     </>
