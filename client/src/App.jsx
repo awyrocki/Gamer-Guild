@@ -6,6 +6,7 @@ import Login from "./components/Login/Login"
 import Forgot from "./components/Forgot/Forgot"
 import Nav from './components/Nav/Nav';
 import Settings from './components/Settings/Settings';
+import About from './components/About/About';
 
 function App() {
 
@@ -60,6 +61,7 @@ function renderNav() {
           <Route path='/Recover' element={ <Forgot /> } />
           <Route path={'/Home'} element={ <Dashboard logout={logout}/> } />
           <Route path={'/Settings'} element={ <Settings /> } />
+          <Route path='/About' element={ <About /> } />
         </Routes>
       </Router>
     </>
