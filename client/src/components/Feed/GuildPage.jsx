@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ShareIcon from '@mui/icons-material/Share';
 import mod from "./user.jpg"
@@ -13,11 +13,14 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import MoreVert from '@mui/icons-material/MoreVert';
+import { Menu, MenuItem } from '@mui/material';
+import PushPinIcon from '@mui/icons-material/PushPin';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ListItemIcon from '@mui/material/ListItemIcon';
+
 
 function GuildPage({ GuildName }) {
-
-    
-
     const [messages, setMessages ] = useState([])
     // to trigger fetch
     const [ sent, setSent ] = useState("")
@@ -42,7 +45,18 @@ useEffect(() => {
     fetchMessages()
     }, [sent])
 
+    const [ anchorElement, setAnchorElement ] = useState(null)
+    const handleMenuClick = e => {
+        setAnchorElement(e.currentTarget)
+    }
+    const handleCloseMenu = () => {
+        setAnchorElement(null)
+    }
+
     function render() {
+
+    
+
         return <>
         <div id='guild-container'>
         <div>
@@ -53,12 +67,52 @@ useEffect(() => {
             titleTypographyProps={{variant:'h7'}}
             avatar={<Avatar src={mod} ></Avatar>}
                 // change the avatar to the avatar of the user?
-            action={<IconButton aria-label="settings"><MoreVert sx={{color:"#B3B3B3"}}/></IconButton>}
-            /* implement settings? (delete, edit posts) */
+            action={<IconButton 
+            aria-label="settings"
+            onClick={handleMenuClick}
+            aria-haspopup="true"
+            aria-controls='demo-positioned-menu'
+            ><MoreVert id='morevert' sx={{color:"#B3B3B3"}}/>
+            </IconButton>}
             title={message.user}
             // Could add a user nickname
             sx={{color:"White", bgcolor:"#121212", fontSize:"20px"}}
             />
+            <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorElement}
+        open={Boolean(anchorElement)}
+        onClose={handleCloseMenu}
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+        }}
+        transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+        }}
+        >
+            {/* functionality for the menu items goes here */}
+        <MenuItem>
+            <ListItemIcon>
+                <PushPinIcon fontSize='small' sx={{color:"black"}}/>
+            </ListItemIcon>
+            Pin
+        </MenuItem>
+        <MenuItem>
+            <ListItemIcon>
+                <EditIcon fontSize='small' sx={{color:"black"}}/>
+            </ListItemIcon>
+            Edit
+        </MenuItem>
+        <MenuItem>
+            <ListItemIcon>
+                <DeleteIcon fontSize='small' sx={{color:"black"}}/>
+            </ListItemIcon>
+            Delete
+        </MenuItem>
+        </Menu>
             <CardContent sx={{bgcolor:"#121212"}}>
                 <Typography sx={{wordBreak:"break-word"}} variant="h8" color="#B3B3B3" bgcolor={"#121212"}>
                 {message.body}
