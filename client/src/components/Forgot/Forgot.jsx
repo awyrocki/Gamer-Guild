@@ -11,28 +11,7 @@ function Forgot() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch('/api/forgot-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (response.ok) {
-        // Password reset email sent successfully
-        // You can display a success message or redirect the user to a confirmation page
-      } else {
-        // Handle error - email not found, server error, etc.
-        // You can display an error message to the user
-      }
-    } catch (error) {
-      // Handle fetch error
-    }
-  };
-
+  }
   return (
     <div className='my-body'>
       <div className='main'>
