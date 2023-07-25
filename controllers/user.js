@@ -98,6 +98,33 @@ router.post("/login", async (req, res) => {
     }
 })
 
+// ? GET USER BY NAME --------------------------------------------//
+router.get("/username/:name", sessionValidation,  async (req, res) => {
+    try {
+        const { name } = req.params;
+        const singleUser = await User.find({ "userName": name });
+        if(!singleUser) throw Error("User not Found");
+
+        // data to send back
+        const id = singleUser[0]._id
+        const userName = singleUser[0].userName;
+        const steamID = singleUser[0].steamId;
+        const bio = singleUser[0].bio;
+
+        res.status(200).json({
+            message: "user found",
+            id,
+            userName,
+            steamID,
+            bio
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: `${err}`
+        })
+    }
+})
+
 // ? GET USER BY ID ------------------------------------------//
 router.get("/:id", sessionValidation, async (req, res) => {
     try {

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link, redirect, Navigate, useNa
 import Login from "./components/Login/Login"
 import Forgot from "./components/Forgot/Forgot"
 import Nav from './components/Nav/Nav';
+import UserProfile from './components/UserProfile/UserProfile';
 import Settings from './components/Settings/Settings';
 import About from './components/About/About';
 
@@ -60,6 +61,7 @@ function renderNav() {
           <Route path='/' element={ <Login updateLocalStorage={updateLocalStorage} /> } />
           <Route path='/Recover' element={ <Forgot /> } />
           <Route path={'/Home'} element={ <Dashboard logout={logout}/> } />
+          <Route path={'/User'} element={ <UserProfile /> } />
           <Route path={'/Settings'} element={ <Settings /> } />
           <Route path='/About' element={ <About /> } />
         </Routes>

@@ -91,7 +91,7 @@ function renderUser() {
   return !userProfile
     ? <h2>Loading User</h2>
     : userProfile
-    ? <><h3 id='user-name'>{userName}</h3> 
+    ? <><a href={`http://localhost:3000/user?User=${userName}`} id='user-name'>{userName}</a> 
       <div id="profile-pic"><img src={whichPic()} alt="profile picture" width="75px" /> </div>
       <div id='status'>{onlineStatus()}</div>
       <span id='bio'>Add a bio and tell users a bit more about yourself (in settings)</span>
