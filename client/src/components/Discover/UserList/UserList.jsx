@@ -11,6 +11,7 @@ function UserList({ GuildName }) {
     const [ guildUsers, setGuildUsers ] = useState([])
     const [ userProfiles, setUserProfiles ] = useState ([])
     const [ go, setGo ] = useState(false);
+    const token = localStorage.getItem("token")
 
 function fetchUsers() {
     const url = `http://127.0.0.1:4000/guild/guild/${GuildName}`
@@ -36,8 +37,8 @@ function getUserProfile() {
         fetch(url, {
             method: "GET",
             headers: new Headers({
-                "Content-Type": "application/json"
-                // ! token
+                "Content-Type": "application/json",
+                "authorization": token
             })
         })
         .then(res => res.json())

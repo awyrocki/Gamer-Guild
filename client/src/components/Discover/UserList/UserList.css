@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-#listed-users {
+.listed-users {
     color: #FFFFFF;
     border-bottom: 1px solid #14171b;
 }

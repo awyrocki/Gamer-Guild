@@ -5,7 +5,7 @@ function MessageInput({ GuildName, setSent }) {
     
     function createMessage() {
         
-        const user = localStorage.getItem("user-name")
+        const user = localStorage.getItem("userName")
 
         const url = "http://127.0.0.1:4000/message/create"
 

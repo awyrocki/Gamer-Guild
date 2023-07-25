@@ -30,7 +30,7 @@ const Icons = styled(Box)(({ theme }) => ({
   alignItems:"center"
 }))
 
-function Nav() {
+function Nav({ logout }) {
 
   const handleClick = e => {
     console.log("Icon clicked")
@@ -99,7 +99,7 @@ function Nav() {
         <a
         /* Needs to logout the user! */
         id='menu-options'
-        onClick={handleClick}
+        onClick={logout}
         href='http://localhost:3000/'
         ><MenuItem>Logout</MenuItem></a>
       </Menu>
