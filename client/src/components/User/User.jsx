@@ -5,6 +5,7 @@ import "./User.css"
 
 function User({ logout }) {
   const [ userProfile, setUserProfile ] = useState(null);
+  const [ steamUser, setSteamUser ] = useState(null)
   const [ status, setStatus ] = useState("")
   const userId = localStorage.getItem("id")
   const steamID = localStorage.getItem("steamID")
@@ -58,20 +59,19 @@ function User({ logout }) {
     })
   })
   .then(res => res.json())
-  .then(data => setUserProfile(data))
+  .then(data => setSteamUser(data))
   }
 
   useEffect(() => {
-      if(steamID === ""){
         fetchUser()
-      } else {
+      if (steamID !== ""){
         fetchSteamUser()
       }
   }, [])
 
 function whichPic() {
   return steamID !== ""
-  ? userProfile.avatar
+  ? `${steamUser.avatar}`
   : profilePic
 }
 // displays online status using steam
