@@ -60,7 +60,7 @@ useEffect(() => {
             sx={{color:"White", bgcolor:"#121212", fontSize:"20px"}}
             />
             <CardContent sx={{bgcolor:"#121212"}}>
-                <Typography variant="h8" color="#B3B3B3" bgcolor={"#121212"}>
+                <Typography sx={{wordBreak:"break-word"}} variant="h8" color="#B3B3B3" bgcolor={"#121212"}>
                 {message.body}
                 </Typography>
             </CardContent>

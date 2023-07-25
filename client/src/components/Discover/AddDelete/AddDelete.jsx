@@ -19,7 +19,7 @@ function AddDelete() {
                 type='text'
                 variant='filled'
                 size='small'
-                color='primary'
+                sx={{color:"black"}}
                 onChange={e => setName(e.target.value)}
             />
             <TextField
