@@ -22,6 +22,7 @@ app.use("/guild", guildController);
 app.use("/message", messageController);
 app.use("/", steamController)
 
+
 app.listen(PORT, HOST, () => {
     dbConnect()
     console.log(`[server] listening on ${HOST}:${PORT}`)

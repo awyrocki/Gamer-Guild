@@ -11,16 +11,16 @@ function App() {
   let [token, setToken] = useState(undefined);
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setToken(localStorage.getItem('token'));
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
     }
   }, []);
-
+  
   let updateLocalStorage = newToken => {
-    localStorage.setItem('token', newToken);
+    localStorage.setItem("token", newToken);
     setToken(newToken);
   };
-
+  
   // const PrivateRoute = ({ element: Element, ...rest }) => (
   //   <Route
   //     {...rest}
@@ -35,12 +35,11 @@ function App() {
   // );
 
 
-  useEffect(() => {
-    // if (token !== undefined ) {
-    //    window.location.replace("localhost3000/home")
-    // }
-  }, [] )
-
+  // useEffect(() => {
+  //   if (token !== undefined ) {
+  //      window.location.replace("localhost3000/home")
+  //   }
+  // }, [] )
 
 
   return (
