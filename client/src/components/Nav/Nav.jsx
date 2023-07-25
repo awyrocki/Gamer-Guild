@@ -5,7 +5,7 @@ import home from "./home.svg"
 import noti from "./noti.svg"
 import cog from "./cog.svg"
 
-function Nav() {
+function Nav({ logout }) {
   return (
     <>
 
@@ -18,6 +18,7 @@ function Nav() {
           <li><img id='nav-icon' src={home} alt="" /><a href='http://localhost:3000/Home'>Home</a></li>
           <li><img id='nav-icon' src={noti} alt="" /><a href='http://localhost:3000/Notifications'>Notifications</a></li>
           <li><img id='nav-icon' src={cog} alt="" /><a href='http://localhost:3000/Settings'>Settings</a></li>
+          <button onClick={logout}>Logout</button>
         </ul>
       </nav>
       </div>
