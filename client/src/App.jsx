@@ -13,7 +13,6 @@ function App() {
 
   const [ logoutUser, setLogoutUser ] = useState(false)
   const session = localStorage.getItem("session")
-  const token = localStorage.getItem("token")
 
   // adds userName, userId, token and steamId to local storage
   function updateLocalStorage(newToken, newUserName, newUserId, newSteamId ) {
@@ -39,8 +38,9 @@ useEffect(() => {
 
 // logout
 const logout = () => {
-    localStorage.clear()
+  localStorage.setItem("session", false)
     setLogoutUser(true)
+    setTimeout(() => localStorage.clear())
   }
 
 function renderNav() {
