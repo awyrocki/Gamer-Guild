@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { TextField, Button } from "@mui/material"
 import "./Settings.css"
+import UpdateBio from './Settings-Functionality/UpdateBio';
 import CheckIcon from '@mui/icons-material/Check';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -40,6 +41,7 @@ function Settings() {
                 variant="filled"
                 size='small'
                 color='secondary'
+                onChange={e => setBio(e.target.value)}
             />
             <Button
                 size='small'
@@ -48,6 +50,7 @@ function Settings() {
                 onClick={() => checkMark ? setCheckMark(!checkMark) : null}
                 startIcon={checkMark ? null : <CheckIcon/>}
             >{checkMark ? "Add" : "Bio updated"}</Button>
+            <UpdateBio bio={bio} checkMark={checkMark}/>
             </div>
             <hr id='divider'/>
             <div id='light-dark-mode'>

@@ -31,7 +31,8 @@ const Icons = styled(Box)(({ theme }) => ({
 }))
 
 function Nav({ logout }) {
-
+// userName from local storage
+const userName = localStorage.getItem("userName")
   const handleClick = e => {
     console.log("Icon clicked")
   }
@@ -89,7 +90,7 @@ function Nav({ logout }) {
         <a
         id='menu-options' 
         onClick={handleClick} 
-        href='http://localhost:3000/Profile'
+        href={`http://localhost:3000/user?User=${userName}`}
         ><MenuItem>Profile</MenuItem></a>
         <a
         id='menu-options'

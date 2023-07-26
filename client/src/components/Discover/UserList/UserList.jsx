@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import { Cursor } from 'mongoose';
 
 function UserList({ GuildName }) {
     const [ guildUsers, setGuildUsers ] = useState([])
@@ -59,21 +60,32 @@ useEffect(() => {
     }
 }, [go])
 
+// redirects to user profile page
+function userProfile(user) {
+    window.location = `http://localhost:3000/user?User=${user}`
+}
 
     return (
         <>
         <div id='userlist-container'>
         <h2 id='user-title'>Users</h2>
         {userProfiles.map((user, i) => (
-            <div key={i} className='user-list'>
+            <div key={i} className='user-list' onClick={e => userProfile(user)} >
             <List sx={{ width: '90%', maxWidth: 360, bgcolor: '#121212' }}>
-            <ListItem alignItems="center">
+            <ListItem alignItems="center"   >
             <ListItemAvatar>
             <Avatar />
             </ListItemAvatar>
             <ListItemText
                 primary={user}
-                sx={{color:"white"}}
+                sx={{
+                    color: "white",
+                    cursor: "pointer",
+                    ":hover": {
+                        color: "#b3b3b3",
+                        cursor: "pointer"
+                    }
+                }}
             />
             </ListItem>
             <Divider variant="inset" component="li" />

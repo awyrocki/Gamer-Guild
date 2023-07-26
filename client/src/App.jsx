@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link, redirect, Navigate, useNa
 import Login from "./components/Login/Login"
 import Forgot from "./components/Forgot/Forgot"
 import Nav from './components/Nav/Nav';
+import UserProfile from './components/UserProfile/UserProfile';
 import Settings from './components/Settings/Settings';
 import About from './components/About/About';
 
@@ -12,7 +13,6 @@ function App() {
 
   const [ logoutUser, setLogoutUser ] = useState(false)
   const session = localStorage.getItem("session")
-  const token = localStorage.getItem("token")
 
   // adds userName, userId, token and steamId to local storage
   function updateLocalStorage(newToken, newUserName, newUserId, newSteamId ) {
@@ -38,8 +38,9 @@ useEffect(() => {
 
 // logout
 const logout = () => {
-    localStorage.clear()
+  localStorage.setItem("session", false)
     setLogoutUser(true)
+    setTimeout(() => localStorage.clear())
   }
 
 function renderNav() {
@@ -60,6 +61,7 @@ function renderNav() {
           <Route path='/' element={ <Login updateLocalStorage={updateLocalStorage} /> } />
           <Route path='/Recover' element={ <Forgot /> } />
           <Route path={'/Home'} element={ <Dashboard logout={logout}/> } />
+          <Route path={'/User'} element={ <UserProfile /> } />
           <Route path={'/Settings'} element={ <Settings /> } />
           <Route path='/About' element={ <About /> } />
         </Routes>
