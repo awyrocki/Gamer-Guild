@@ -175,7 +175,7 @@ router.put("/updatepassword/:id", sessionValidation, async (req, res) => {
         const password = {
             password: bcrypt.hashSync(newPassword, SALT)
         }
-        console.log(password)
+        
         const foundUser = await User.findOne({ _id });
 
         if(!foundUser) throw Error("User not Found");
