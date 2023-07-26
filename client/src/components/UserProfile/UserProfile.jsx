@@ -100,7 +100,7 @@ useEffect(() => {
                 </div>
                 <div id='pic-bio'>
                 <img id='user-pic' src={whichPic()} alt="profile pic" />
-                <p id='user-bio'>{user.bio}</p>
+                <p id='user-bio'> &emsp; {user.bio}</p>
                 </div>
                 <h2 id='profile-guild-title'>Joined Guilds</h2>
                 <div id='profile-guilds'>
