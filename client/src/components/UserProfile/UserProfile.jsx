@@ -98,9 +98,11 @@ useEffect(() => {
                 <div id='profile-name-container'>
                     <p id='profile-name'>{user.userName}</p>
                 </div>
+                <div id='pic-bio'>
                 <img id='user-pic' src={whichPic()} alt="profile pic" />
                 <p id='user-bio'>{user.bio}</p>
-                <h2 id='profile-guild-title'>Guilds</h2>
+                </div>
+                <h2 id='profile-guild-title'>Joined Guilds</h2>
                 <div id='profile-guilds'>
                     {joinedGuilds.map((guild, i) => (
                     <div key={i} id='single-guild'>
