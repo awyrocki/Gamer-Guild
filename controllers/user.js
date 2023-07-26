@@ -140,7 +140,7 @@ router.get("/:id", sessionValidation, async (req, res) => {
 })
 
 // ! UPDATE USER BY ID-------------------------------------------------//
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", sessionValidation, async (req, res) => {
     try {
         const { id: _id } = req.params;
 
@@ -151,6 +151,36 @@ router.put("/update/:id", async (req, res) => {
         if(!foundUser) throw Error("User not Found");
 
         const updatedUser = await User.updateOne({ _id }, { $set: newInfo})
+
+        if (updatedUser.matchedCount === 0) throw Error("Specify Updated Info");
+
+        res.status(200).json({
+            message: "User updated",
+            updatedUser
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: `${err}`
+        })
+    }
+});
+
+// ! UPDATE PASSWORD
+router.put("/updatepassword/:id", sessionValidation, async (req, res) => {
+    try {
+        const { id: _id } = req.params;
+
+        const newPassword = await req.body.password
+
+        const password = {
+            password: bcrypt.hashSync(newPassword, SALT)
+        }
+        
+        const foundUser = await User.findOne({ _id });
+
+        if(!foundUser) throw Error("User not Found");
+
+        const updatedUser = await User.updateOne({ _id }, { $set: password})
 
         if (updatedUser.matchedCount === 0) throw Error("Specify Updated Info");
 

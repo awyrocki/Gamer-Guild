@@ -4,23 +4,14 @@ import Dashboard from './components/Dashboard/Dashboard';
 import { BrowserRouter as Router, Routes, Route, Link, redirect, Navigate, useNavigate } from 'react-router-dom';
 import Login from "./components/Login/Login"
 import Forgot from "./components/Forgot/Forgot"
+import NotFound from './components/404/NotFound';
 import Nav from './components/Nav/Nav';
 import UserProfile from './components/UserProfile/UserProfile';
 import Settings from './components/Settings/Settings';
 import About from './components/About/About';
 
 function App() {
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
-    }
-  }, []);
   
-  let updateLocalStorage = newToken => {
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
-  };
   const [ logoutUser, setLogoutUser ] = useState(false)
   const session = localStorage.getItem("session")
 
@@ -37,7 +28,7 @@ function App() {
   // checks for valid session 
 function loginRedirect() {
   if(session === "false" || session === null) {
-    return <Navigate replace to="/" />
+    return <Navigate replace to="/login" />
   } 
 }
 
@@ -59,8 +50,8 @@ function renderNav() {
   } else {
     return <Nav logout={logout}/>
   }
-
   }
+
 
   return (
     <>
@@ -68,7 +59,8 @@ function renderNav() {
         {renderNav()}
         {loginRedirect()}
         <Routes>
-          <Route path='/' element={ <Login updateLocalStorage={updateLocalStorage} /> } />
+          <Route path='/*' element={ <NotFound />}/>
+          <Route path='/Login' element={ <Login updateLocalStorage={updateLocalStorage} /> } />
           <Route path='/Recover' element={ <Forgot /> } />
           <Route path={'/Home'} element={ <Dashboard logout={logout}/> } />
           <Route path={'/User'} element={ <UserProfile /> } />
