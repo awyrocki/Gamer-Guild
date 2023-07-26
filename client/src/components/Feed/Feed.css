@@ -91,3 +91,7 @@
     height: fit-content;
     background-color: w14171b;
 }
+
+#morevert:hover {
+    cursor: pointer;
+}
