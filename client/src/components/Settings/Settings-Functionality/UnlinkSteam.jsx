@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 
-function UpdateBio({ bio, checkMark}) {
+function UnlinkSteam({ disSteam }) {
     const userID = localStorage.getItem("id")
     const token = localStorage.getItem("token")
 
-    function bioUpdate() {
+    // Unlinks steam account
+    function unlink() {
         const url = `http://127.0.0.1:4000/user/update/${userID}`
         const body = {
-            "bio": `${bio}` 
+            "steamId": "" 
         };
     
         fetch(url, {
@@ -21,20 +22,23 @@ function UpdateBio({ bio, checkMark}) {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            localStorage.setItem("steamID", "")
             setTimeout(() => window.location = "http://localhost:3000/Home", 1000)
         })
         .catch(err => console.log(err))
     }
 
     useEffect(() => {
-        if (bio !== "") {
-            bioUpdate()
-        }
-    },[checkMark])
+    if(disSteam === false) {
 
+        unlink()
+    }
+    }, [disSteam])
+
+    
     return (
     <></>
     )
 }
 
-export default UpdateBio
+export default UnlinkSteam
