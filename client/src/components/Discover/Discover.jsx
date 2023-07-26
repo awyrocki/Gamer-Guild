@@ -95,6 +95,7 @@ useEffect(() => {
                         setGuild(e.target.innerHTML)
                         setGuildId(e.target.id)
                     }} id={guild._id} className='guild' >{guild.name}</h3><p id='guild-description'>{guild.description}</p>
+                <hr />
                 </div>
             ))}
         </div>
