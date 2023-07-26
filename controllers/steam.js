@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const Steam = require("../models/Steam")
 const passport = require("passport");
 const session = require("express-session");
 const passportSteam = require("passport-steam");
@@ -54,19 +53,8 @@ router.get('/',  async (req, res) => {
         const steamUser = req.user;
         if(!steamUser) throw Error("Invalid Login");
         const steamID = await steamUser._json.steamid;
-
-        const foundSteamUser = await Steam.findOne({ steamID});
-
-        if(foundSteamUser) throw Error("That steam account already exists");
         
-        const userInfo = new Steam ({
-            steamId: steamUser._json.steamid,
-            userName: steamUser._json.personaname,
-            avatar: steamUser._json.avatarfull
-        })
-        await userInfo.save();
-        let ID = userInfo.steamId;
-        let url = `http://localhost:3000/home/?ID=${ID}`
+        let url = `http://localhost:3000/home/?ID=${steamID}`
 
         res.redirect(url)
         
@@ -85,34 +73,8 @@ router.get('/api/auth/steam/return', passport.authenticate('steam', {failureRedi
     res.redirect('/')
 });
 
-
-// ? GET STEAM DATA FROM OUR DB with STEAMID ---------------------------------------//
-router.get("/steamUser/:steamId",  async (req, res) => {
-    try {
-        const { steamId } = req.params;
-        const findSteamUser = await Steam.findOne({ steamId: steamId })
-        if(!findSteamUser) {
-            throw Error("user not found");
-        }
-
-            let userName = findSteamUser.userName;
-            let avatar = findSteamUser.avatar;
-            
-            res.status(200).json({
-                steamId,
-                userName,
-                avatar,
-            })
-            
-    } catch (err) {
-        res.status(500).json({
-            message: `${err}`
-        })
-        
-    }
-})
-
-router.get("/onlineStatus/:steamId", async (req, res) => {
+// access to player summaries with steam id
+router.get("/steamUser/:steamId", async (req, res) => {
         const { steamId } = req.params;
         await axios({
             url: ` http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${STEAM_KEY}&steamids=${steamId}`,

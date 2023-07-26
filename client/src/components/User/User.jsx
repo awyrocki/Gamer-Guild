@@ -6,28 +6,10 @@ import "./User.css"
 function User({ logout }) {
   const [ userProfile, setUserProfile ] = useState(null);
   const [ steamUser, setSteamUser ] = useState(null)
-  const [ status, setStatus ] = useState("")
   const userId = localStorage.getItem("id")
   const steamID = localStorage.getItem("steamID")
   const userName = localStorage.getItem("userName")
   const token = localStorage.getItem("token")
-
-
-  // Checks users online status pushes to db for site wide access
-  useEffect(() => {
-    if(steamID !== "") {
-    const url = `http://localhost:4000/onlineStatus/${steamID}`
-
-    fetch(url, {
-        method: "GET",
-        headers: new Headers({
-          "Content-Type": "application/json"
-        })
-    })
-    .then(res => res.json())
-    .then(data => setStatus(data.response.players[0].personastate))
-    }
-}, [])
   
   // if user isnt linked to steam gets their regular profile
   function fetchUser() {
@@ -59,7 +41,7 @@ function User({ logout }) {
     })
   })
   .then(res => res.json())
-  .then(data => setSteamUser(data))
+  .then(data => setSteamUser(data.response.players[0]))
   }
 
   useEffect(() => {
@@ -70,30 +52,31 @@ function User({ logout }) {
   }, [])
 
 function whichPic() {
-  return steamID !== ""
-  ? `${steamUser.avatar}`
+  return steamUser !== null
+  ? steamUser.avatarfull
   : profilePic
 }
 // displays online status using steam
 // ! not sure how to implement this to other users
-function onlineStatus() {
-  if (steamID === "") {
-    return <p></p>
-  } else {
-    return status === 0
-    ? <><p>Offline</p><span id='status-light-off'></span></>
-    : status === 1
-    ? <><p>Online</p><span id='status-light-on'></span></>
-    : <p></p>
-  }
-}
+// function onlineStatus() {
+//   if (steamID === "") {
+//     return <p></p>
+//   } else {
+//     return status === 0
+//     ? <><p>Offline</p><span id='status-light-off'></span></>
+//     : status === 1
+//     ? <><p>Online</p><span id='status-light-on'></span></>
+//     : <p></p>
+//   }
+// }
+
 function renderUser() {
   return !userProfile
     ? <h2>Loading User</h2>
     : userProfile
     ? <><a href={`http://localhost:3000/user?User=${userName}`} id='user-name'>{userName}</a> 
       <div id="profile-pic"><img src={whichPic()} alt="profile picture" width="75px" /> </div>
-      <div id='status'>{onlineStatus()}</div>
+      {/* <div id='status'>{onlineStatus()}</div> */}
       <span id='bio'>{userProfile.bio}</span>
       </>
     : null

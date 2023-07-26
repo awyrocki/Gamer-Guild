@@ -18,7 +18,6 @@ function Steam({ userId }) {
         // initiate call for adding steamid to user
         useEffect(() => {
             if(steamId !== "") {
-            console.log(steamId)
                 linkSteam()
             }
         },[steamId])
