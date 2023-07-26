@@ -39,6 +39,8 @@ function joinGuild() {
     const body = {
         "addedUsers": `${userID}` 
     };
+
+    console.log(body)
             fetch(url, {
                 method: "PUT",
                 body: JSON.stringify(body),
@@ -92,7 +94,7 @@ useEffect(() => {
                         // e.preventDefault()
                         setGuild(e.target.innerHTML)
                         setGuildId(e.target.id)
-                    }} id={guild._id} className='guild' >{guild.name}</h3><p>{guild.description}</p>
+                    }} id={guild._id} className='guild' >{guild.name}</h3><p id='guild-description'>{guild.description}</p>
                 </div>
             ))}
         </div>

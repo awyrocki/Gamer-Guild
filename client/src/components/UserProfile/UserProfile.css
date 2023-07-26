@@ -1,0 +1,83 @@
+#outer-profile {
+    display: flex;
+    justify-content: center;
+    background-color: #404040;
+}
+
+#inner-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #282828;
+    min-width: 600px;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px 3px #181818;
+}
+
+#profile-name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #181818;
+    margin: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 5px;
+    width: 15em;
+    height: 3em;
+    color: #ffffff;
+    text-shadow: 3px 3px #000000;
+    box-shadow: 0px 0px 5px 3px #121212;
+}
+
+#profile-name {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#user-pic {
+    width: 150px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px 2px #121212;
+}
+
+#user-bio {
+    max-width: 15em;
+    color: #b3b3b3;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+}
+
+#profile-guild-title {
+    color: #b3b3b3;
+    text-shadow: 2px 2px #121212;
+}
+
+#profile-guilds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #181818;
+    color: #ffffff;
+    box-shadow: 0px 0px 5px 3px #121212;
+    width: 20em;
+    max-height: 10em;
+    margin-bottom: 2em;
+    overflow-y: auto;
+}
+
+#single-guild {
+    width: 15em;
+}
+
+#profile-guild-description {
+    color: #b3b3b3;
+}
+
+#guild-linebreak {
+    width: 15em;
+}

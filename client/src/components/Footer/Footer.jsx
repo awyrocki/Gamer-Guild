@@ -1,9 +1,10 @@
 import React from 'react'
 import "./Footer.css"
 
+
 function Footer() {
   return (
-    <footer>© 2023 Upright Education | All Rights Reserved</footer>
+    <footer>© 2023 Upright Education | All Rights Reserved |<a href="/about"> About the Team</a></footer>
   )
 }
 

@@ -3,17 +3,19 @@ import Steam from '../Steam/Steam';
 import profilePic from "./default-profile.jpg"
 import "./User.css"
 
-function User() {
+function User({ logout }) {
   const [ userProfile, setUserProfile ] = useState(null);
+  const [ steamUser, setSteamUser ] = useState(null)
   const [ status, setStatus ] = useState("")
   const userId = localStorage.getItem("id")
   const steamID = localStorage.getItem("steamID")
-  const userName = localStorage.getItem("user-name")
+  const userName = localStorage.getItem("userName")
+  const token = localStorage.getItem("token")
 
 
   // Checks users online status pushes to db for site wide access
   useEffect(() => {
-    if(steamID) {
+    if(steamID !== "") {
     const url = `http://localhost:4000/onlineStatus/${steamID}`
 
     fetch(url, {
@@ -30,15 +32,21 @@ function User() {
   // if user isnt linked to steam gets their regular profile
   function fetchUser() {
       const url = `http://localhost:4000/user/${userId}`
-
       fetch(url, {
         method: "GET",
         headers: new Headers({
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "authorization": token
       })
     })
     .then(res => res.json())
-    .then(data => setUserProfile(data))
+    .then(data => {
+      if(data.message === "You are not authorized" || data.message === "invalid signature" || data.message === "jwt malformed" || data.message === "invalid token" ) {
+        logout()
+    } else {
+      setUserProfile(data)
+    }
+    })
   }
 
   // if user is linked to steam grabs that profile
@@ -51,26 +59,25 @@ function User() {
     })
   })
   .then(res => res.json())
-  .then(data => setUserProfile(data))
+  .then(data => setSteamUser(data))
   }
 
   useEffect(() => {
-      if(steamID === null){
         fetchUser()
-      } else {
+      if (steamID !== ""){
         fetchSteamUser()
       }
   }, [])
 
 function whichPic() {
-  return steamID 
-  ? userProfile.avatar
+  return steamID !== ""
+  ? `${steamUser.avatar}`
   : profilePic
 }
 // displays online status using steam
 // ! not sure how to implement this to other users
 function onlineStatus() {
-  if (!steamID) {
+  if (steamID === "") {
     return <p></p>
   } else {
     return status === 0
@@ -84,10 +91,10 @@ function renderUser() {
   return !userProfile
     ? <h2>Loading User</h2>
     : userProfile
-    ? <><h3 id='user-name'>{userName}</h3> 
+    ? <><a href={`http://localhost:3000/user?User=${userName}`} id='user-name'>{userName}</a> 
       <div id="profile-pic"><img src={whichPic()} alt="profile picture" width="75px" /> </div>
       <div id='status'>{onlineStatus()}</div>
-      <span id='bio'>Add a bio and tell users a bit more about yourself (in settings)</span>
+      <span id='bio'>{userProfile.bio}</span>
       </>
     : null
 }
@@ -98,7 +105,6 @@ function renderUser() {
         {renderUser()}
         <Steam userId={userId} />
     </div>
-    
     </>
   )
 }

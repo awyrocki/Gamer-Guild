@@ -24,7 +24,7 @@ function Guildlist() {
   // grabs joined guilds when user logs in
   useEffect(() => {
     fetchJoinedGuilds()
-  })
+  }, [])
 
   //sets param to guild name
   function setGuildParam(guild) {
@@ -39,7 +39,7 @@ function Guildlist() {
                 e.preventDefault()
                 setGuildParam(guild.name)
             }} id='guild'>{guild.name}</h3>
-          <p>{guild.description}</p>
+          <p id='guild-description'>{guild.description}</p>
         </div>
       ))}
     </div>

@@ -5,7 +5,6 @@ const session = require("express-session");
 const passportSteam = require("passport-steam");
 const steamStrategy = passportSteam.Strategy;
 const axios = require("axios")
-const sessionValidation = require("../middleware/token");
 const { url } = require("inspector");
 
 
