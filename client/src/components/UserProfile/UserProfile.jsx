@@ -11,7 +11,7 @@ function UserProfile() {
     const [ joinedGuilds, setJoinedGuilds ] = useState([])
     const [ steamUser, setSteamUser ] = useState(null)
     const token = localStorage.getItem("token")
-    const steamID = localStorage.getItem("steamID")
+    const [steamID, setSteamID ] = useState("")
 
     // holds user data
     const [ user, setUser ] = useState("")
@@ -29,6 +29,7 @@ function UserProfile() {
         .then(res => res.json())
         .then(data => {
             setUser(data)
+            setSteamID(data.steamID)
             setProfileID(data.id)
         })
         .catch(err => console.log(err))
@@ -73,7 +74,7 @@ useEffect(() => {
     if(steamID !== "") {
         fetchSteamUser()
     }
-    }, [])
+    }, [steamID])
 
     // fetches list of guilds
     useEffect(() => {
@@ -110,6 +111,7 @@ useEffect(() => {
                 </div>
             </div>
         </div>
+        {console.log(steamID)}
         <Footer />
         </>
     )
