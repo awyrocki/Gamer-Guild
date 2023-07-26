@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Nav from '../Nav/Nav';
 import User from '../User/User';
 import Guildlist from '../Guildlist/Guildlist';
 import Feed from '../Feed/Feed';
@@ -21,6 +20,7 @@ function Dashboard({ logout }) {
         return <UserList GuildName={GuildName}/>
     }
   }
+
   return (
     <>
       <div id='container'>
