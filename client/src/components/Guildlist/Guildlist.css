@@ -22,6 +22,10 @@
     cursor: pointer;
 }
 
+#guild:hover {
+    color: #b3b3b3;
+}
+
 #game-description {
     color: #b3b3b3;
 }
