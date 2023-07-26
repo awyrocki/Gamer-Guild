@@ -8,19 +8,9 @@ import Nav from './components/Nav/Nav';
 import UserProfile from './components/UserProfile/UserProfile';
 import Settings from './components/Settings/Settings';
 import About from './components/About/About';
-
+import ForgotLink from './components/ForgotLink/ForgotLink';
 function App() {
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
-    }
-  }, []);
-  
-  let updateLocalStorage = newToken => {
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
-  };
   const [ logoutUser, setLogoutUser ] = useState(false)
   const session = localStorage.getItem("session")
 
@@ -74,6 +64,7 @@ function renderNav() {
           <Route path={'/User'} element={ <UserProfile /> } />
           <Route path={'/Settings'} element={ <Settings /> } />
           <Route path='/About' element={ <About /> } />
+          <Route path='/ForgotLink' element={ <ForgotLink /> } />
         </Routes>
       </Router>
     </>
