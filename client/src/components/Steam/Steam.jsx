@@ -4,6 +4,7 @@ function Steam({ userId }) {
     const queryParameters = new URLSearchParams(window.location.search)
     const ID = queryParameters.get("ID")
     const steamID = localStorage.getItem("steamID")
+    const token = localStorage.getItem("token")
     const [ redirectHome, setRedirectHome ] = useState(false)
     const [ steamId, setSteamId ] = useState("")
 
@@ -33,7 +34,7 @@ function Steam({ userId }) {
                         body: JSON.stringify(body),
                         headers: new Headers({
                         "Content-Type": "application/json",
-                        authorization: ""
+                        "authorization": token
                         })
                 })
                 .then(res => res.json())
