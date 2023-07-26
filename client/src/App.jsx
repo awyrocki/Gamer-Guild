@@ -21,25 +21,6 @@ function App() {
     setToken(newToken);
   };
   
-  // const PrivateRoute = ({ element: Element, ...rest }) => (
-  //   <Route
-  //     {...rest}
-  //     element={
-  //       token ? (
-  //         <Element />
-  //       ) : (
-  //         <Login to="/Home" replace state={{ from: rest.location }} />
-  //       )
-  //     }
-  //   />
-  // );
-
-
-  // useEffect(() => {
-  //   if (token !== undefined ) {
-  //      window.location.replace("localhost3000/home")
-  //   }
-  // }, [] )
 
 
   return (
