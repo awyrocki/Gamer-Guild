@@ -21,7 +21,6 @@ app.use("/user",  userController);
 app.use("/guild", guildController);
 app.use("/message", messageController);
 app.use("/", steamController)
-
 app.get("/auth", sessionValidation, async (req, res) => {
     try {
         console.log("here")

@@ -11,6 +11,16 @@ import About from './components/About/About';
 
 function App() {
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
+  
+  let updateLocalStorage = newToken => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
+  };
   const [ logoutUser, setLogoutUser ] = useState(false)
   const session = localStorage.getItem("session")
 
