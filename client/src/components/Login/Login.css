@@ -102,6 +102,17 @@
     height: 30px;
 }
 
+.contact-label {
+	color: #fff;
+	font-size: 1.5em;
+	justify-content: center;
+	display: flex;
+	margin: 30px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: .5s ease-in-out;
+}
+
 @keyframes gradient {
     0% {
         background-position: 100% 0%;
