@@ -9,6 +9,9 @@ import Badge from '@mui/material/Badge'
 import { AppBar, Box, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material"
 import InputBase from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar'
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import IconButton from '@mui/material/IconButton'
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -36,7 +39,34 @@ const userName = localStorage.getItem("userName")
   const handleClick = e => {
     console.log("Icon clicked")
   }
+// sets the body theme to dark
+  const setDarkMode = () => {
+    document.querySelector("body").setAttribute('data-theme', 'dark')
+}
+// sets the body theme to light
+const setLightMode = () => {
+    document.querySelector("body").setAttribute('data-theme', 'light')
+}
+// toggles the light/dark mode theme
+const toggleTheme = () => {
+    const body = document.querySelector('body')
+    const currentTheme = body.getAttribute('data-theme')
+    if(currentTheme === 'dark') {
+        setLightMode()
+    } else {
+        setDarkMode()
+    }
+}
+  
+  const [ mode, setMode ] = useState(false)
 
+
+  const handleIconClick = () => {
+    setMode(!mode)
+  }
+  
+
+  const [ lightDarkMode, setLightDarkMode ] = useState(true)
   const [ open, setOpen ] = useState(false)
 
   return (
@@ -67,6 +97,15 @@ const userName = localStorage.getItem("userName")
               href='http://localhost:3000/Notifications'
               ><NotificationsIcon id='nav-icon'/></a>
             </Badge>
+            <IconButton id='nav-icon' onClick={handleIconClick}>
+              {mode ? <LightModeIcon 
+              onClick={() => {setLightDarkMode(!lightDarkMode);
+                toggleTheme();}}
+              /> : <DarkModeIcon 
+              onClick={() => {setLightDarkMode(!lightDarkMode);
+                toggleTheme();}}
+              />}
+            </IconButton>
             <SettingsIcon
             onClick={(e) => setOpen(true)}
             id='nav-icon'
@@ -107,5 +146,13 @@ const userName = localStorage.getItem("userName")
     </>
   )
 }
+
+/* <Button
+                startIcon={lightDarkMode ? <LightModeIcon/> : <DarkModeIcon/>}
+                onClick={() => {setLightDarkMode(!lightDarkMode);
+                toggleTheme();}}
+                color='warning'
+                variant='outlined'
+            ></Button> */
 
 export default Nav
