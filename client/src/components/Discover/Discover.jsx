@@ -63,7 +63,7 @@ function askJoin() {
     setJoin(
         <>
         <div id='join-container'>
-        <h3>{`Join? ${guild}`}</h3>
+        <h3>{`Join ${guild}?`}</h3>
         <button onClick={e => {
             e.preventDefault()
             joinGuild()
@@ -88,6 +88,8 @@ useEffect(() => {
   return (
     <>
         <div id='discover-container'>
+        <h3 id='discover-title'>Discover</h3>
+        <hr />
             {allGuild.map((guild, i) => (
                 <div key={i} className='guild-list' >
                     <h3 onClick={e => {

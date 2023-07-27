@@ -21,6 +21,8 @@
 .guild, #guild {
     cursor: pointer;
     color: #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .guild:hover {
@@ -29,9 +31,18 @@
 
 #guild-description {
     color: #B3B3B3;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #join-container {
     display: flex;
     flex-direction: column;
+}
+
+#discover-title {
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
