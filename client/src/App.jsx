@@ -9,9 +9,9 @@ import Nav from './components/Nav/Nav';
 import UserProfile from './components/UserProfile/UserProfile';
 import Settings from './components/Settings/Settings';
 import About from './components/About/About';
-
+import Contact from './components/Contact/Contact';
 function App() {
-  
+
   const [ logoutUser, setLogoutUser ] = useState(false)
   const session = localStorage.getItem("session")
 
@@ -66,6 +66,7 @@ function renderNav() {
           <Route path={'/User'} element={ <UserProfile /> } />
           <Route path={'/Settings'} element={ <Settings /> } />
           <Route path='/About' element={ <About /> } />
+          <Route path='/Contact' element={ <Contact /> } />
         </Routes>
       </Router>
     </>

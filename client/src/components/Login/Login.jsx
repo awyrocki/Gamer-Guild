@@ -76,7 +76,7 @@ return (
     <div className="login">
     <form method='post'>
         <label className='my-label' htmlFor="chk" aria-hidden="true">Gamer Guild</label>
-        <p>{error}</p> 
+        <p className='enter'>{error}</p> 
         <h1 className='enter'>Login</h1>
         <input className='my-input' type="email" onChange={(e)=> setEmail(e.target.value)} name="email" placeholder="Email" required="" />
         <input className='my-input' type="password" onChange={(e)=> setPassword(e.target.value)} name="pswd" placeholder="Password" required="" />
