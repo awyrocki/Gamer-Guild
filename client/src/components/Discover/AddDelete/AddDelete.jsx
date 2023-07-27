@@ -19,7 +19,7 @@ function AddDelete() {
                 type='text'
                 variant='filled'
                 size='small'
-                color='primary'
+                sx={{color:"black"}}
                 onChange={e => setName(e.target.value)}
             />
             <TextField
@@ -83,7 +83,10 @@ function AddDelete() {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            setTimeout(() => window.location = (`http://localhost:3000/home?GuildName=${name}`), 1000 )
+            if (data.message === "Guild created" ) {
+                setTimeout(() => window.location = (`http://localhost:3000/home?GuildName=${name}`), 1000 )
+            } 
+            // ! possibly add an error message for already created guilds
         })
         .catch(err => console.log(err))
     }

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { TextField, Button } from "@mui/material"
 import "./Settings.css"
 import UpdateBio from './Settings-Functionality/UpdateBio';
+import ChangePassword from './Settings-Functionality/ChangePassword';
+import UnlinkSteam from './Settings-Functionality/UnlinkSteam';
 import CheckIcon from '@mui/icons-material/Check';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -71,6 +73,7 @@ function Settings() {
                 autoComplete="current-password"
                 variant="standard"
                 required
+                onChange={e => setNewPass(e.target.value)}
                 />
             <Button
                 size='small'
@@ -79,6 +82,7 @@ function Settings() {
                 onClick={() => passCheck ? setPassCheck(!passCheck) : null}
                 startIcon={passCheck ? null : <CheckIcon/>}
             >{passCheck ? "Change password" : "Password changed" }</Button>
+            <ChangePassword newPass={newPass} passCheck={passCheck}/>
             </div>
             <hr id='divider'/>
             <div id='disconnect-steam'>
@@ -90,6 +94,7 @@ function Settings() {
                 onClick={() => disSteam ? setDisSteam(!disSteam) : null}
                 startIcon={disSteam ? <DisabledByDefaultIcon/> : <CheckIcon/>}
             >{disSteam? "Disconnect steam" : "Steam Disconnected"}</Button>
+            <UnlinkSteam disSteam={disSteam}/>
             </div>
             <hr />
         </div>

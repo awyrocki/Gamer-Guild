@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 
-function UpdateBio({ bio, checkMark}) {
+function ChangePassword({ newPass, passCheck}) {
     const userID = localStorage.getItem("id")
     const token = localStorage.getItem("token")
 
-    function bioUpdate() {
-        const url = `http://127.0.0.1:4000/user/update/${userID}`
+    // Changes users password
+    function changePassword() {
+        const url = `http://127.0.0.1:4000/user/updatepassword/${userID}`
         const body = {
-            "bio": `${bio}` 
+            "password": `${newPass}` 
         };
     
         fetch(url, {
@@ -21,20 +22,21 @@ function UpdateBio({ bio, checkMark}) {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            setTimeout(() => window.location = "http://localhost:3000/Home", 1000)
+            localStorage.setItem("session", false)
+            setTimeout(() => window.location = "http://localhost:3000/login", 1000)
         })
         .catch(err => console.log(err))
     }
 
     useEffect(() => {
-        if (bio !== "") {
-            bioUpdate()
+        if(newPass !== ""){
+            changePassword()
         }
-    },[checkMark])
+    }, [passCheck])
 
     return (
     <></>
     )
 }
 
-export default UpdateBio
+export default ChangePassword

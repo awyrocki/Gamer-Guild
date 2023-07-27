@@ -33,6 +33,8 @@ function Guildlist() {
 
   return (
     <div id='guildlist-container'>
+      <h3 id='discover-title'>Joined Guilds</h3>
+      <hr />
       {joinedGuilds.map((guild, i) => (
         <div key={i} className='joined-guild-list'>
           <h3 onClick={e => {
@@ -40,6 +42,7 @@ function Guildlist() {
                 setGuildParam(guild.name)
             }} id='guild'>{guild.name}</h3>
           <p id='guild-description'>{guild.description}</p>
+          <hr />
         </div>
       ))}
     </div>

@@ -4,4 +4,14 @@ footer {
     text-align: center;
     color: #FFFFFF;
     margin-top: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+#about-team {
+    text-decoration: none;
+    color: white;
 }

@@ -98,7 +98,6 @@ const userName = localStorage.getItem("userName")
         href='http://localhost:3000/Settings'
         ><MenuItem>My Settings</MenuItem></a>
         <a
-        /* Needs to logout the user! */
         id='menu-options'
         onClick={logout}
         href='http://localhost:3000/'
