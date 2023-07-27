@@ -54,7 +54,7 @@ router.get('/',  async (req, res) => {
         if(!steamUser) throw Error("Invalid Login");
         const steamID = await steamUser._json.steamid;
         
-        let url = `http://localhost:3000/home/?ID=${steamID}`
+        let url = `http://localhost:3000/?ID=${steamID}`
 
         res.redirect(url)
         

@@ -49,6 +49,7 @@
 	border-radius: 5px;
 }
 .my-button{
+	display: flex;
 	width: 60%;
 	height: 40px;
 	margin: 10px auto;
@@ -66,6 +67,11 @@
 	cursor: pointer;
 	align-items: center;
 	text-align: center;
+	text-decoration: none;
+}
+
+#forgot-button {
+	display: flex;
 }
 
 .my-button:hover{

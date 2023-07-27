@@ -46,7 +46,7 @@ const userName = localStorage.getItem("userName")
           <Typography 
           variant='h6'
           sx={{display:{xs:"none", sm:"block"}}}
-          ><VideogameAssetIcon fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/Home'>GamerGuild</a>
+          ><VideogameAssetIcon fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/'>GamerGuild</a>
           </Typography>
           <Avatar
           alt='Logo'
@@ -57,7 +57,7 @@ const userName = localStorage.getItem("userName")
           <Icons>
             <a
             onClick={handleClick}
-            href='http://localhost:3000/Home'
+            href='http://localhost:3000/'
             ><HomeIcon
             id='nav-icon'
             /></a>
@@ -100,7 +100,7 @@ const userName = localStorage.getItem("userName")
         <a
         id='menu-options'
         onClick={logout}
-        href='http://localhost:3000/'
+        href='http://localhost:3000/login'
         ><MenuItem>Logout</MenuItem></a>
       </Menu>
       </AppBar>

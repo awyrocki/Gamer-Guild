@@ -56,7 +56,7 @@ function Steam({ userId }) {
 
     useEffect(() => {
         if(redirectHome) {
-            window.location = ("http://localhost:3000/home")
+            window.location = ("http://localhost:3000/")
         }
     }, [redirectHome])
 
