@@ -40,6 +40,7 @@ function Guildlist() {
                 setGuildParam(guild.name)
             }} id='guild'>{guild.name}</h3>
           <p id='guild-description'>{guild.description}</p>
+          <hr />
         </div>
       ))}
     </div>

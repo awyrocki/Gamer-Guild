@@ -23,6 +23,10 @@
     color: #FFFFFF;
 }
 
+.guild:hover {
+    color: #B3B3B3;
+}
+
 #guild-description {
     color: #B3B3B3;
 }
