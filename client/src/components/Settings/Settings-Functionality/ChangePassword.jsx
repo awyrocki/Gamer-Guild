@@ -23,6 +23,7 @@ function ChangePassword({ newPass, passCheck}) {
         .then(data => {
             console.log(data)
             localStorage.setItem("session", false)
+            localStorage.setItem("token", "")
             setTimeout(() => window.location = "http://localhost:3000/login", 1000)
         })
         .catch(err => console.log(err))
