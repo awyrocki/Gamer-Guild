@@ -95,3 +95,26 @@
 #morevert:hover {
     cursor: pointer;
 }
+
+#leave-container {
+    display: flex;
+    justify-content: right;
+}
+
+#leave-guild {
+    display: flex;
+    justify-content: right;
+    padding: 5px;
+    width: fit-content;
+    border: none;
+    border-radius: 3px;
+    background-color: #181818;
+    color: #ffffff;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+#leave-guild:hover {
+    cursor: pointer;
+    background-color: #282828;
+}

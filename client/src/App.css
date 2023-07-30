@@ -1,6 +1,7 @@
 body {
     background-image: linear-gradient(#404040, #282828);
     height: 100vh;
+    margin-bottom: 5em
 }
 
 #container {
