@@ -1,21 +1,21 @@
 #guildlist-container {
-    background-color: #121212;
+    background-color: var(--body_color);
     margin-left: 1em;
     padding-left: 0.5em;
     width: 10em;
     border-radius: 5px;
-    box-shadow: 0px 3px 10px 3px #14171b;
+    box-shadow: 0px 3px 10px 3px var(--boxshadow_color);
     max-height: 30em;
     overflow-y: auto;
 }
 
 #guild-title {
-    color: #FFFFFF;
+    color: var(--text_color);
     text-align: center;
 }
 
 #game-title {
-    color: #FFFFFF;
+    color: var(--text_color);
 }
 
 #guild {
@@ -23,9 +23,9 @@
 }
 
 #guild:hover {
-    color: #b3b3b3;
+    color: var(--subtext_color);
 }
 
-#game-description {
-    color: #b3b3b3;
+.joined-guild-list {
+    margin-right: 0.5em;
 }

@@ -3,7 +3,7 @@
 }
 
 #create {
-    color: #B3B3B3;
+    color: var(--text_color);
 }
 
 #create-guild-form {

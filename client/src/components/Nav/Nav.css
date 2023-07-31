@@ -10,11 +10,15 @@
 }
 
 #nav-icon {
-    color: white;
+    color: var(--text_color);
     text-decoration: none;
 }
 
 #menu-options {
     text-decoration: none;
     color: black;
+}
+
+#search-bar {
+    max-width: 20em;
 }

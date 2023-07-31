@@ -72,7 +72,7 @@ function userProfile(user) {
         <h2 id='user-title'>Users</h2>
         {userProfiles.map((user, i) => (
             <div key={i} className='user-list' onClick={e => userProfile(user)} >
-            <List sx={{ width: '90%', maxWidth: 360, bgcolor: '#121212' }}>
+            <List sx={{ width: '90%', maxWidth: 360, bgcolor: 'var(--body_color)' }}>
             <ListItem alignItems="center"   >
             <ListItemAvatar>
             <Avatar />
@@ -80,10 +80,10 @@ function userProfile(user) {
             <ListItemText
                 primary={user}
                 sx={{
-                    color: "white",
+                    color: "var(--text_color)",
                     cursor: "pointer",
                     ":hover": {
-                        color: "#b3b3b3",
+                        color: "var(--subtext_color)",
                         cursor: "pointer"
                     }
                 }}

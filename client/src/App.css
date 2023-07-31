@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(#404040, #282828);
+    background-image: var(--body_background);
     height: 100vh;
     margin-bottom: 5em
 }
