@@ -26,7 +26,7 @@ function GuildPage({ GuildName }) {
     const [messages, setMessages ] = useState([])
     // to trigger fetch
     const [ sent, setSent ] = useState("")
-    const [ messageId, setMessageId ] = useState("")
+    const [ messageId, setMessageId ] = useState(null)
     const [ editMessage, setEditMessage ] = useState(false)
     const [ delMessage, setDelMessage ] = useState(false)
     const [ newMessage, setNewMessage ] = useState("")
@@ -86,8 +86,9 @@ useEffect(() => {
         }}>Save</button>
         <button className='message-buttons' onClick={e => {
             e.preventDefault()
-            setMessageId("")
+            setMessageId(null)
             setEdit(false)
+            setDeleteFlag(false)
             setNewMessage("")
         }}>Cancel</button>
         </div>
@@ -109,9 +110,10 @@ useEffect(() => {
             }}>Delete</button>
             <button className='message-buttons' onClick={e => {
                 e.preventDefault()
-                setMessageId("")
+                setMessageId(null)
                 setDelMessage(false)
                 setDeleteFlag(false)
+                setEdit(false)
             }}>cancel</button>
             </div>
             </>
@@ -165,7 +167,7 @@ useEffect(() => {
         </MenuItem>
         <div onClick={e => {
             e.preventDefault()
-            setEdit(!edit)
+            setEdit(true)
         }}>
         <MenuItem>
             <ListItemIcon>
@@ -176,7 +178,7 @@ useEffect(() => {
         </div>
         <div onClick={e => {
             e.preventDefault()
-            setDeleteFlag(!deleteFlag)
+            setDeleteFlag(true)
         }}>
         <MenuItem>
             <ListItemIcon>

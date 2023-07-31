@@ -103,12 +103,23 @@ useEffect(() => {
         }
     }
 
+    function steamName() {
+        if (!steamUser) {
+            return <p></p>
+        } else {
+            return <>
+            <p> &emsp;({steamUser.personaname})</p>
+            </>
+        }
+    }
+
     return (
         <>
         <div id='outer-profile'>
             <div id='inner-profile'>
                 <div id='profile-name-container'>
                     <p id='profile-name'>{user.userName}</p>
+                    {steamName()}
                 </div>
                 <div id='pic-bio'>
                 <img id='user-pic' src={whichPic()} alt="profile pic" />
