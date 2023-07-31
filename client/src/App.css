@@ -1,6 +1,7 @@
 body {
     background-image: var(--body_background);
     height: 100vh;
+    margin-bottom: 5em
 }
 
 #container {

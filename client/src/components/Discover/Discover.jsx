@@ -52,7 +52,7 @@ function joinGuild() {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-        setTimeout(() => window.location = (`http://localhost:3000/home?GuildName=${guild}`), 1000 )
+        setTimeout(() => window.location = (`http://localhost:3000/?GuildName=${guild}`), 1000 )
         })
         .catch(err => console.log(err))
     

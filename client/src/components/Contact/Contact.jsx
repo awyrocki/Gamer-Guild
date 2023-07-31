@@ -6,20 +6,8 @@ const [name, setName] = useState('');
 const [email, setEmail] = useState('');
 const [message, setMessage] = useState('');
 
-const handleNameChange = (e) => {
-setName(e.target.value);
-};
+const handleSubmit = async () => {
 
-const handleEmailChange = (e) => {
-setEmail(e.target.value);
-};
-
-const handleMessageChange = (e) => {
-setMessage(e.target.value);
-};
-
-const handleSubmit = async (e) => {
-e.preventDefault();
 
 // Check if name, email, and message are not empty
 if (!name.trim() || !email.trim() || !message.trim()) {
@@ -30,7 +18,7 @@ if (!name.trim() || !email.trim() || !message.trim()) {
 // Your emailjs configuration
 const serviceId = 'service_t4anc4h';
 const templateId = 'template_a19flfm';
-const userId = 'FSXQI4e91phNbkyNx'; // Replace with your actual user id (public key)
+const userId = 'FSXQI4e91phNbkyNx'; 
 
 const templateParams = {
     from_name: name,
@@ -42,10 +30,10 @@ try {
     const response = await emailjs.send(serviceId, templateId, templateParams, userId);
     console.log('SUCCESS!', response.status, response.text);
     console.log('Email sent:', response);
-    // Add any success handling here (e.g., show a success message to the user)
+    setTimeout(() => window.location = "http://localhost:3000/", 500)
 } catch (error) {
     console.error('Error sending email:', error);
-    // Add any error handling here (e.g., show an error message to the user)
+    
 }
 };
 
@@ -60,7 +48,7 @@ return (
             name='name'
             placeholder='Name'
             value={name}
-            onChange={handleNameChange}
+            onChange={e => {setName(e.target.value)}}
             required
         />
         <input
@@ -69,7 +57,7 @@ return (
             name='email'
             placeholder='Email'
             value={email}
-            onChange={handleEmailChange}
+            onChange={e => {setEmail(e.target.value)}}
             required
         />
         <textarea
@@ -77,10 +65,13 @@ return (
             name='message'
             placeholder='Message'
             value={message}
-            onChange={handleMessageChange}
+            onChange={e => setMessage(e.target.value)}
             required
         />
-        <button type='submit' className='my-button'>
+        <button  className='my-button' onClick={e => {
+            e.preventDefault();
+            handleSubmit()
+        }}>
             Send
         </button>
         </form>

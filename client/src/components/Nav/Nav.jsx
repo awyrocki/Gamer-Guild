@@ -96,7 +96,7 @@ const toggleTheme = () => {
           <Icons>
             <a
             onClick={handleClick}
-            href='http://localhost:3000/Home'
+            href='http://localhost:3000/'
             ><HomeIcon
             id='nav-icon'
             /></a>
@@ -148,7 +148,7 @@ const toggleTheme = () => {
         <a
         id='menu-options'
         onClick={logout}
-        href='http://localhost:3000/'
+        href='http://localhost:3000/login'
         ><MenuItem>Logout</MenuItem></a>
       </Menu>
       </AppBar>

@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import Dashboard from './components/Dashboard/Dashboard';
 import { BrowserRouter as Router, Routes, Route, Link, redirect, Navigate, useNavigate } from 'react-router-dom';
 import Login from "./components/Login/Login"
-import Forgot from "./components/Forgot/Forgot"
+import Forgot from "./components/Forgot/Forgot";
+import ForgotLink from './components/ForgotLink/ForgotLink';
 import NotFound from './components/404/NotFound';
 import Nav from './components/Nav/Nav';
 import UserProfile from './components/UserProfile/UserProfile';
@@ -15,6 +16,7 @@ function App() {
 
   const [ logoutUser, setLogoutUser ] = useState(false)
   const session = localStorage.getItem("session")
+  const token = localStorage.getItem("token")
 
   // adds userName, userId, token and steamId to local storage
   function updateLocalStorage(newToken, newUserName, newUserId, newSteamId ) {
@@ -46,7 +48,7 @@ const logout = () => {
   }
 
 function renderNav() {
-  if (session === "false" || session === null) {
+  if (token === null || !token) {
     return <></>
   } else {
     return <Nav logout={logout}/>
@@ -59,10 +61,11 @@ function renderNav() {
         {renderNav()}
         {loginRedirect()}
         <Routes>
-          <Route path='/*' element={ <NotFound />}/>
+          <Route path='*' element={ <NotFound />}/>
+          <Route path={'/'} element={ <Dashboard logout={logout}/> } />
           <Route path='/Login' element={ <Login updateLocalStorage={updateLocalStorage} /> } />
           <Route path='/Recover' element={ <Forgot /> } />
-          <Route path={'/Home'} element={ <Dashboard logout={logout}/> } />
+          <Route path='/ForgotLink' element={ <ForgotLink />} /> 
           <Route path={'/User'} element={ <UserProfile /> } />
           <Route path={'/Settings'} element={ <Settings /> } />
           <Route path='/About' element={ <About /> } />

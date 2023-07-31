@@ -23,7 +23,7 @@ function User({ logout }) {
     })
     .then(res => res.json())
     .then(data => {
-      if(data.message === "You are not authorized" || data.message === "invalid signature" || data.message === "jwt malformed" || data.message === "invalid token" ) {
+      if(data.message === "You are not authorized" || data.message === "invalid signature" || data.message === "jwt malformed" || data.message === "invalid token" || data.message === "expired token" ) {
         logout()
     } else {
       setUserProfile(data)
@@ -56,27 +56,28 @@ function whichPic() {
   ? steamUser.avatarfull
   : profilePic
 }
+
 // displays online status using steam
 // ! not sure how to implement this to other users
-// function onlineStatus() {
-//   if (steamID === "") {
-//     return <p></p>
-//   } else {
-//     return status === 0
-//     ? <><p>Offline</p><span id='status-light-off'></span></>
-//     : status === 1
-//     ? <><p>Online</p><span id='status-light-on'></span></>
-//     : <p></p>
-//   }
-// }
+function onlineStatus() {
+  if (!steamUser) {
+    return <p></p>
+  } else {
+    return steamUser.personastate === 0
+    ? <><p>Offline</p><span id='status-light-off'></span></>
+    : steamUser.personastate === 1
+    ? <><p>Online</p><span id='status-light-on'></span></>
+    : <p></p>
+  }
+}
 
 function renderUser() {
   return !userProfile
-    ? <h2>Loading User</h2>
+    ? <h3 style={{color: 'white'}}>Loading User</h3>
     : userProfile
     ? <><a href={`http://localhost:3000/user?User=${userName}`} id='user-name'>{userName}</a> 
       <div id="profile-pic"><img src={whichPic()} alt="profile picture" width="75px" /> </div>
-      {/* <div id='status'>{onlineStatus()}</div> */}
+      <div id='status'>{onlineStatus()}</div>
       </>
     : null
 }

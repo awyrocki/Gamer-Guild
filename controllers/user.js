@@ -165,7 +165,7 @@ router.put("/update/:id", sessionValidation, async (req, res) => {
     }
 });
 
-// ! UPDATE PASSWORD
+// ! UPDATE PASSWORD BY ID ---------------------------------------------------------//
 router.put("/updatepassword/:id", sessionValidation, async (req, res) => {
     try {
         const { id: _id } = req.params;
@@ -181,6 +181,36 @@ router.put("/updatepassword/:id", sessionValidation, async (req, res) => {
         if(!foundUser) throw Error("User not Found");
 
         const updatedUser = await User.updateOne({ _id }, { $set: password})
+
+        if (updatedUser.matchedCount === 0) throw Error("Specify Updated Info");
+
+        res.status(200).json({
+            message: "User updated",
+            updatedUser
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: `${err}`
+        })
+    }
+});
+
+// ! UPDATE PASSWORD BY email ---------------------------------------------------------//
+router.put("/recover/:email",  async (req, res) => {
+    try {
+        const { email: email } = req.params;
+
+        const newPassword = await req.body.password
+
+        const password = {
+            password: bcrypt.hashSync(newPassword, SALT)
+        }
+        
+        const foundUser = await User.findOne({ email });
+
+        if(!foundUser) throw Error("User not Found");
+
+        const updatedUser = await User.updateOne({ email }, { $set: password})
 
         if (updatedUser.matchedCount === 0) throw Error("Specify Updated Info");
 

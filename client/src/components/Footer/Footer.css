@@ -12,6 +12,10 @@ footer {
 }
 
 #about-team {
-    text-decoration: none;
     color: var(--text_color);
+}
+
+#contact-us {
+    color: var(--text_color);
+    text-decoration: none;
 }

@@ -85,7 +85,7 @@ function AddDelete() {
         .then(data => {
             console.log(data)
             if (data.message === "Guild created" ) {
-                setTimeout(() => window.location = (`http://localhost:3000/home?GuildName=${name}`), 1000 )
+                setTimeout(() => window.location = (`http://localhost:3000/?GuildName=${name}`), 1000 )
             } 
             // ! possibly add an error message for already created guilds
         })

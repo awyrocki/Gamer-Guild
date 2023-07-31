@@ -18,12 +18,27 @@ import PushPinIcon from '@mui/icons-material/PushPin';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import MessageEditDelete from './MessageEditDelete';
+import LeaveGuild from './LeaveGuild';
 
 
 function GuildPage({ GuildName }) {
     const [messages, setMessages ] = useState([])
     // to trigger fetch
     const [ sent, setSent ] = useState("")
+    const [ messageId, setMessageId ] = useState(null)
+    const [ editMessage, setEditMessage ] = useState(false)
+    const [ delMessage, setDelMessage ] = useState(false)
+    const [ newMessage, setNewMessage ] = useState("")
+    //flag for edit input
+    const [ edit, setEdit ] = useState(false)
+    //flag for delete input
+    const [ deleteFlag, setDeleteFlag ] = useState(false)
+    // leave guild flag
+    const [ leaveFlag, setLeaveFlag ] = useState(false)
+
+    const userName = localStorage.getItem("userName")
+
 
     function fetchMessages() {
         const url = `http://localhost:4000/message/guild/${GuildName}`
@@ -45,34 +60,84 @@ useEffect(() => {
     fetchMessages()
     }, [sent])
 
+    // for message cards
     const [ anchorElement, setAnchorElement ] = useState(null)
     const handleMenuClick = e => {
+        setMessageId(e.target.id)
         setAnchorElement(e.currentTarget)
     }
     const handleCloseMenu = () => {
         setAnchorElement(null)
     }
 
-    function render() {
 
-    
+    // change to input field when edit is selected
+    function renderEdit(message) {
+        if (edit && messageId === message._id && userName === message.user){
+        return <>
+        <input type="text" name="message edit" id="new-message"  placeholder={message.body} onChange={e => {
+            e.preventDefault()
+            setNewMessage(e.target.value)
+        }}/>
+        <div id='edit-buttons'>
+        <button className='message-buttons'  onClick={e => {
+            e.preventDefault()
+            setEditMessage(true)
+        }}>Save</button>
+        <button className='message-buttons' onClick={e => {
+            e.preventDefault()
+            setMessageId(null)
+            setEdit(false)
+            setDeleteFlag(false)
+            setNewMessage("")
+        }}>Cancel</button>
+        </div>
+        </>
+        } else {
+            return <>{message.body}</>
+        }
+    }
+
+    // renders delete choice
+    function renderDelete(message) {
+        if (deleteFlag && messageId === message._id && userName === message.user) {
+            return <>
+            <p>delete message?</p>
+            <div id='delete-message-buttons'>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setDelMessage(true)
+            }}>Delete</button>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setMessageId(null)
+                setDelMessage(false)
+                setDeleteFlag(false)
+                setEdit(false)
+            }}>cancel</button>
+            </div>
+            </>
+        }
+    }
+
+    function render() {
 
         return <>
         <div id='guild-container'>
         <div>
         {messages.map((message, i) => (
-        <div key={i} className='message-list'>
+        <div key={i} className='message-list' >
         <Card sx={{width:"25em"}}>
             <CardHeader
             titleTypographyProps={{variant:'h7'}}
             avatar={<Avatar src={mod} ></Avatar>}
                 // change the avatar to the avatar of the user?
-            action={<IconButton 
+            action={<IconButton
             aria-label="settings"
             onClick={handleMenuClick}
             aria-haspopup="true"
             aria-controls='demo-positioned-menu'
-            ><MoreVert id='morevert' sx={{color:"var(--subtext_color)"}}/>
+            ><MoreVert id={message._id} sx={{color:"var(--subtext_color)"}}/>
             </IconButton>}
             title={message.user}
             // Could add a user nickname
@@ -100,22 +165,33 @@ useEffect(() => {
             </ListItemIcon>
             Pin
         </MenuItem>
+        <div onClick={e => {
+            e.preventDefault()
+            setEdit(true)
+        }}>
         <MenuItem>
             <ListItemIcon>
                 <EditIcon fontSize='small' sx={{color:"black"}}/>
             </ListItemIcon>
             Edit
         </MenuItem>
+        </div>
+        <div onClick={e => {
+            e.preventDefault()
+            setDeleteFlag(true)
+        }}>
         <MenuItem>
             <ListItemIcon>
                 <DeleteIcon fontSize='small' sx={{color:"black"}}/>
             </ListItemIcon>
             Delete
         </MenuItem>
+        </div>
         </Menu>
             <CardContent sx={{bgcolor:"var(--body_color)"}}>
                 <Typography sx={{wordBreak:"break-word"}} variant="h8" color="var(--text_color)" bgcolor={"var(--body_color)"}>
-                {message.body}
+                {renderEdit(message)}
+                {renderDelete(message)}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing sx={{bgcolor:"var(--body_color)"}}>
@@ -132,9 +208,8 @@ useEffect(() => {
             </div>
             </div>
             </>
-            
-        
     }
+
 
     // renders messages
     return (
@@ -142,8 +217,16 @@ useEffect(() => {
     <div id='guild-name'>{GuildName}</div>
         {render()}
         <div id='input-container'>
-            <MessageInput GuildName={GuildName} setSent={setSent}/>
+        <MessageInput GuildName={GuildName} setSent={setSent}/>
         </div>
+        <div id='leave-container'>
+        <button id='leave-guild' onClick={e => {
+            e.preventDefault()
+            setLeaveFlag(true)
+        }}>Leave Guild</button>
+        </div>
+        <MessageEditDelete GuildName={GuildName} delMessage={delMessage} editMessage={editMessage} messageId={messageId} newMessage={newMessage}/>
+        <LeaveGuild leaveFlag={leaveFlag}/>
     </>
     )
 }
