@@ -51,7 +51,7 @@ const setLightMode = () => {
 }
 
 const selectedTheme = localStorage.getItem("selectedTheme");
-if(selectedTheme === 'dark') {
+if(!selectedTheme || selectedTheme !== 'light') {
   setDarkMode();
 } else {
   setLightMode()
