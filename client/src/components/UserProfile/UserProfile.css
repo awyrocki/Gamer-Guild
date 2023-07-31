@@ -26,7 +26,7 @@
 #profile-name {
     font-size: 28px;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--text_color);
 }
 
   /* Profile picture and bio */
@@ -41,7 +41,7 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #00ffcc;
+    border: 4px solid var(--body_color);
     animation: glow 3s infinite alternate;
 }
 
@@ -51,7 +51,7 @@
     flex: 1;
     margin-left: 20px;
     font-size: 16px;
-    color: #cccccc;
+    color: var(--text_color);
 }
 
   /* Joined Guilds */
@@ -71,7 +71,7 @@
 #single-guild {
     margin-bottom: 15px;
     padding: 10px;
-    background-color: #3a3a3a;
+    background-color: var(--body_color);
     border-radius: 5px;
     position: relative; /* Add position relative for absolute positioning of neon accents */
 }
@@ -79,12 +79,12 @@
 #single-guild h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #00ffcc; /* Neon accent color for guild names */
+    color: var(--text_color); /* Neon accent color for guild names */
 }
 
 #profile-guild-description {
     font-size: 14px;
-    color: #cccccc;
+    color: var(--text_color);
     position: relative;
 }
 
@@ -96,7 +96,7 @@
     bottom: 0;
     left: 0;
     pointer-events: none;
-    background-image: linear-gradient(45deg, #00ffcc, #ff6d00); /* Neon accent gradient for guild descriptions */
+    background-image: var(--body_background); /* Neon accent gradient for guild descriptions */
     opacity: 0.5; /* Adjust the opacity of the neon accent */
     z-index: -1; /* Move the neon accent behind the text */
 }
@@ -104,12 +104,3 @@
 #guild-linebreak {
     margin-top: 10px;
 }
-
-  /* Footer */
-footer {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 14px;
-    color: #999999;
-}
-    
