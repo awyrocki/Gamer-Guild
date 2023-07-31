@@ -85,7 +85,7 @@ const toggleTheme = () => {
           <Typography 
           variant='h6'
           sx={{display:{xs:"none", sm:"block"}}}
-          ><VideogameAssetIcon sx={{color:"var(--text_color)"}} fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/Home'>GamerGuild</a>
+          ><VideogameAssetIcon sx={{color:"var(--text_color)"}} fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/'>GamerGuild</a>
           </Typography>
           <Avatar
           alt='Logo'
