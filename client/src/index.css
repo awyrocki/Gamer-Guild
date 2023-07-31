@@ -1,11 +1,17 @@
 :root {
-  --body_background: white;
-  --body_color: black;
+  --body_background: linear-gradient(#A7BBC7, #E1E5EA);
+  --body_color: #E4EFE7;
+  --text_color: black;
+  --subtext_color: #A7BBC7;
+  --boxshadow_color: #A7BBC7;
 }
 
 [data-theme='dark'] {
-  --body_background: #121212;
-  --body_color: white;
+  --body_background: linear-gradient(#282828, #404040);
+  --body_color: #121212;
+  --text_color: White;
+  --subtext_color: #B3B3B3;
+  --boxshadow_color: #14171b;
 }
 
 body {

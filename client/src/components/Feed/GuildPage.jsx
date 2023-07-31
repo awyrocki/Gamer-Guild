@@ -72,11 +72,11 @@ useEffect(() => {
             onClick={handleMenuClick}
             aria-haspopup="true"
             aria-controls='demo-positioned-menu'
-            ><MoreVert id='morevert' sx={{color:"#B3B3B3"}}/>
+            ><MoreVert id='morevert' sx={{color:"var(--subtext_color)"}}/>
             </IconButton>}
             title={message.user}
             // Could add a user nickname
-            sx={{color:"White", bgcolor:"#121212", fontSize:"20px"}}
+            sx={{color:"var(--text_color)", bgcolor:"var(--body_color)", fontSize:"20px"}}
             />
             <Menu
         id="demo-positioned-menu"
@@ -113,16 +113,16 @@ useEffect(() => {
             Delete
         </MenuItem>
         </Menu>
-            <CardContent sx={{bgcolor:"#121212"}}>
-                <Typography sx={{wordBreak:"break-word"}} variant="h8" color="#B3B3B3" bgcolor={"#121212"}>
+            <CardContent sx={{bgcolor:"var(--body_color)"}}>
+                <Typography sx={{wordBreak:"break-word"}} variant="h8" color="var(--text_color)" bgcolor={"var(--body_color)"}>
                 {message.body}
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing sx={{bgcolor:"#121212"}}>
+            <CardActions disableSpacing sx={{bgcolor:"var(--body_color)"}}>
                 <IconButton aria-label="add to favorites">
-                <Checkbox icon={<FavoriteBorder sx={{color:"#B3B3B3"}}/>} checkedIcon={<Favorite sx={{color: "#B3B3B3"}}/>} />
+                <Checkbox icon={<FavoriteBorder sx={{color:"var(--subtext_color)"}}/>} checkedIcon={<Favorite sx={{color: "var(--subtext_color)"}}/>} />
                 </IconButton>
-                <IconButton aria-label="share" sx={{color:"#B3B3B3"}}>
+                <IconButton aria-label="share" sx={{color:"var(--subtext_color)"}}>
                     <ShareIcon />
                 </IconButton>
             </CardActions>

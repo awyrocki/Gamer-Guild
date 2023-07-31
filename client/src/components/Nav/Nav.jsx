@@ -17,7 +17,7 @@ const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-around",
   alignItems:"center",
-  backgroundColor:"#121212"
+  backgroundColor:"var(--body_color)"
 })
 
 const Search = styled("div")(({ theme }) => ({
@@ -41,11 +41,20 @@ const userName = localStorage.getItem("userName")
   }
 // sets the body theme to dark
   const setDarkMode = () => {
-    document.querySelector("body").setAttribute('data-theme', 'dark')
+    document.querySelector("body").setAttribute('data-theme', 'dark');
+    localStorage.setItem("selectedTheme", "dark")
 }
 // sets the body theme to light
 const setLightMode = () => {
-    document.querySelector("body").setAttribute('data-theme', 'light')
+    document.querySelector("body").setAttribute('data-theme', 'light');
+    localStorage.setItem("selectedTheme", "light")
+}
+
+const selectedTheme = localStorage.getItem("selectedTheme");
+if(selectedTheme === 'dark') {
+  setDarkMode();
+} else {
+  setLightMode()
 }
 // toggles the light/dark mode theme
 const toggleTheme = () => {
@@ -76,14 +85,14 @@ const toggleTheme = () => {
           <Typography 
           variant='h6'
           sx={{display:{xs:"none", sm:"block"}}}
-          ><VideogameAssetIcon fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/Home'>GamerGuild</a>
+          ><VideogameAssetIcon sx={{color:"var(--text_color)"}} fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/Home'>GamerGuild</a>
           </Typography>
           <Avatar
           alt='Logo'
           src={icon}
           sx={{display:{xs:"block", sm:"none"}}}
           />
-          <Search><InputBase placeholder='Search'/></Search>
+          <Search id='search-bar'><InputBase placeholder='Search Guilds'/></Search>
           <Icons>
             <a
             onClick={handleClick}
@@ -146,13 +155,5 @@ const toggleTheme = () => {
     </>
   )
 }
-
-/* <Button
-                startIcon={lightDarkMode ? <LightModeIcon/> : <DarkModeIcon/>}
-                onClick={() => {setLightDarkMode(!lightDarkMode);
-                toggleTheme();}}
-                color='warning'
-                variant='outlined'
-            ></Button> */
 
 export default Nav
