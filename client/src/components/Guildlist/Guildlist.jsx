@@ -28,7 +28,7 @@ function Guildlist() {
 
   //sets param to guild name
   function setGuildParam(guild) {
-    window.location = (`http://localhost:3000/home?GuildName=${guild}`)
+    window.location = (`http://localhost:3000/?GuildName=${guild}`)
   }
 
   return (

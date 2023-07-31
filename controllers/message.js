@@ -46,7 +46,7 @@ router.put("/update/:id", async (req, res) => {
         const updated = await Message.updateOne({ _id}, {$set: updateMessage})
         if (!updated) throw Error("ID not found")
         res.status(200).json({
-            message: `Item updated`,
+            message: `Message updated`,
             updateMessage
         })
     } catch(err) {

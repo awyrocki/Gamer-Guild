@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import { Cursor } from 'mongoose';
+
 
 function UserList({ GuildName }) {
     const [ guildUsers, setGuildUsers ] = useState([])
@@ -43,7 +43,7 @@ function getUserProfile() {
             })
         })
         .then(res => res.json())
-        .then(data => setUserProfiles(oldProfiles => [...oldProfiles, data.userName]))
+        .then(data => {setUserProfiles(oldProfiles => [...oldProfiles, data.userName])})
         .catch(err => console.log(err))
     })
 }
@@ -65,13 +65,14 @@ function userProfile(user) {
     window.location = `http://localhost:3000/user?User=${user}`
 }
 
+
     return (
         <>
         <div id='userlist-container'>
         <h2 id='user-title'>Users</h2>
         {userProfiles.map((user, i) => (
             <div key={i} className='user-list' onClick={e => userProfile(user)} >
-            <List sx={{ width: '90%', maxWidth: 360, bgcolor: '#121212' }}>
+            <List sx={{ width: '90%', maxWidth: 360, bgcolor: 'var(--body_color)' }}>
             <ListItem alignItems="center"   >
             <ListItemAvatar>
             <Avatar />
@@ -79,10 +80,10 @@ function userProfile(user) {
             <ListItemText
                 primary={user}
                 sx={{
-                    color: "white",
+                    color: "var(--text_color)",
                     cursor: "pointer",
                     ":hover": {
-                        color: "#b3b3b3",
+                        color: "var(--subtext_color)",
                         cursor: "pointer"
                     }
                 }}

@@ -48,6 +48,7 @@ router.get("/guild/:GuildName", async (req, res) => {
 
 })
 
+// ? update by id -------------------------------------------//
 router.put("/update/:id", async (req, res) => {
     try {
         const { id } = req.params
@@ -66,6 +67,22 @@ router.put("/update/:id", async (req, res) => {
         res.json(guild)
     } catch(err) {
         res.status(500).json(err)
+    }
+} )
+
+router.put("/leaveguild/:name", async (req, res) => {
+    try {
+        const { name: name } = req.params
+        // added the ability to add and remove users
+        const user = req.body.user
+        const foundGuild = await Guild.findOne({name})
+        if(!foundGuild) throw new Error("guild not found")
+        const updated = await Guild.updateOne({ name }, { $pull: { addedUsers: user}})
+        res.json(updated)
+    } catch(err) {
+        res.status(500).json({
+            message: `${err}`
+        })
     }
 } )
 

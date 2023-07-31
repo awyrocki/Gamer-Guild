@@ -43,17 +43,17 @@ function MessageInput({ GuildName, setSent }) {
                 inputProps={{ ref: textFieldRef }}
                 id="standard-multiline-flexible"
                 multiline
-                sx={{bgcolor:"#B3B3B3", borderRadius:"5px", width:"100%"}}
+                sx={{bgcolor:"#E4EFE7", borderRadius:"5px", width:"100%", color:"var(--text_color)"}}
                 color='primary'
                 maxRows={4}
                 placeholder='Create new post'
                 variant="standard"
                 />
             <Stack direction="row" gap={1} mt={1} mb={1}>
-                <AddCircleIcon sx={{color:"white"}}/>
-                <EmojiEmotionsIcon sx={{color:"white"}}/>
-                <AddPhotoAlternateIcon sx={{color:"white"}}/>
-                <GifIcon sx={{color:"white"}}/>
+                <AddCircleIcon sx={{color:"var(--text_color)"}}/>
+                <EmojiEmotionsIcon sx={{color:"var(--text_color)"}}/>
+                <AddPhotoAlternateIcon sx={{color:"var(--text_color)"}}/>
+                <GifIcon sx={{color:"var(--text_color)"}}/>
                 <Button
                 id='send' 
                 onClick={e => {

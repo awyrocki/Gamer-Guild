@@ -21,7 +21,7 @@ function UpdateBio({ bio, checkMark}) {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            setTimeout(() => window.location = "http://localhost:3000/Home", 1000)
+            setTimeout(() => window.location = "http://localhost:3000/", 1000)
         })
         .catch(err => console.log(err))
     }

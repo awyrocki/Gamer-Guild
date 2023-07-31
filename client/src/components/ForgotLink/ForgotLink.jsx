@@ -1,44 +1,53 @@
 import React, { useState } from 'react';
 
 const ForgotLink = () => {
-const [userId, setUserId] = useState('');
+const [userEmail, setUserEmail] = useState('');
 const [newPassword, setNewPassword] = useState('');
 const [message, setMessage] = useState('');
+localStorage.setItem("session", true)
+setTimeout(() => localStorage.clear(), 60000)
 
-const handleUpdatePassword = async () => {
-try {
-    const response = await fetch(`/update/${userId}`, {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        password: newPassword,
-    }),
-    });
 
-    const data = await response.json();
+function handleUpdatePassword() {
+    const url = `http://127.0.0.1:4000/user/recover/${userEmail}`
 
-    setMessage(data.message);
-} catch (error) {
-    setMessage('Failed to update password. Please try again.');
+    const body = {
+
+        "password": `${newPassword}` 
+
+    };
+
+    fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: new Headers({
+        "Content-Type": "application/json"
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        setMessage(data.message)
+        localStorage.setItem("session", false)
+        setTimeout(() => window.location = "http://localhost:3000/login", 1000)
+    })
+    .catch(err => console.log(err))
 }
-};
+
 
 return (
 <div className='my-body'>
     <div className='main'>
     <form>
-        <h2 className='enter'>Update Password by ID</h2>
-        <label className='enter' htmlFor='userId'>
-        User ID:
+        <h2 className='enter'>Update Password by Email</h2>
+        <label className='enter' htmlFor='Email'>
+        Email:
         </label>
         <input
         className='my-input'
         type='text'
         id='userId'
-        value={userId}
-        onChange={(e) => setUserId(e.target.value)}
+        value={userEmail}
+        onChange={(e) => setUserEmail(e.target.value)}
         />
         <div className='main'>
         <label className='enter' htmlFor='newPassword'>
@@ -52,7 +61,10 @@ return (
             onChange={(e) => setNewPassword(e.target.value)}
         />
         <div className='main'>
-            <button className='my-button' onClick={handleUpdatePassword}>
+            <button className='my-button' onClick={e => {
+                e.preventDefault();
+                handleUpdatePassword()
+            }}>
             Update Password
             </button>
         </div>

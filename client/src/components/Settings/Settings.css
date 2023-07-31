@@ -4,7 +4,7 @@
 }
 
 #bio-textarea {
-    background-color: #B3B3B3;
+    background-color: var(--subtext_color);
     height: 1em;
     margin-bottom: 1em;
 }
@@ -16,7 +16,7 @@
 }
 
 #bio-span {
-    color: #FFFFFF;
+    color: var(--text_color);
 }
 
 #light-dark-mode {

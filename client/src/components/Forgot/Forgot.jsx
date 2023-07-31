@@ -5,14 +5,9 @@ import emailjs from 'emailjs-com';
 
 function Forgot() {
   const [email, setEmail] = useState('');
+  setTimeout(() => localStorage.clear(), 30000)
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    console.log(email)
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     console.log(email)
 
     // Check if email is not empty
@@ -35,7 +30,7 @@ function Forgot() {
       const response = await emailjs.send(serviceId, templateId, templateParams, userId) 
           console.log('SUCCESS!', response.status, response.text);
       console.log('Email sent:', response);
-      // Add any success handling here (e.g., show a success message to the user)
+      setTimeout(() => window.location = "http://localhost:3000/login", 500)
     } catch (error) {
       console.error('Error sending email:', error);
       // Add any error handling here (e.g., show an error message to the user)
@@ -46,7 +41,7 @@ function Forgot() {
     <div className='my-body'>
       <div className='main'>
         <div className='forgot'>
-          <form onSubmit={handleSubmit}>
+          <form type="/">
             <h1 className='enter'>Input your email</h1>
             <input
               className='my-input'
@@ -54,10 +49,13 @@ function Forgot() {
               name='email'
               placeholder='Email'
               value={email}
-              onChange={handleEmailChange}
+              onChange={e => setEmail(e.target.value)}
               required
             />
-            <button type='submit' className='my-button'>
+            <button className='my-button' onClick={e => {
+              e.preventDefault();
+              handleSubmit()
+            }}>
               Send
             </button>
           </form>

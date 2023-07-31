@@ -30,7 +30,7 @@ function signUp1() {
         .then(data => {
             if (data.message === "User created") {
                 updateLocalStorage(data.token, data.userName, data.id, data.steamdID)
-                window.location = "http://localhost:3000/home"
+                window.location = "http://localhost:3000/"
             } else {
                 setError(data.message)
             }
@@ -55,7 +55,7 @@ function loginUser() {
         console.log(data.steamdID)
         if (data.message === "Login succesful") {
             updateLocalStorage(data.token, data.userName, data.id, data.steamID)
-            window.location = "http://localhost:3000/home"
+            window.location = "http://localhost:3000/"
         } else {
             setError(data.message)
         }
@@ -84,7 +84,7 @@ return (
             e.preventDefault()
             loginUser()
         }}>Login</button>
-<a className='my-button' href='http://localhost:3000/Recover'>Forgot password</a>
+<a className='my-button' id='forgot-button' onClick={e => localStorage.setItem("session", true)} href='http://localhost:3000/Recover'>Forgot password</a>
     </form>
     </div>
 

@@ -1,11 +1,11 @@
 #userlist-container {
-    background-color: #121212;
+    background-color: var(--body_color);
     margin-left: 1em;
     padding-left: 0.5em;
     margin-top: 0.5em;
     width: 12em;
     border-radius: 5px;
-    box-shadow: 0px 3px 10px 3px #14171b;
+    box-shadow: 0px 3px 10px 3px var(--boxshadow_color);
     height: 20em;
     overflow-y: auto;
 }
@@ -17,13 +17,13 @@
 }
 
 .listed-users {
-    color: #FFFFFF;
-    border-bottom: 1px solid #14171b;
+    color: var(--text_color);
+    border-bottom: 1px solid var(--subtext_color);
 }
 
 #user-title {
-    border-top: 1px solid #14171b;
-    border-bottom: 1px solid #14171b;
-    color: #b3b3b3;
+    border-bottom: 1px solid var(--subtext_color);
+    color: var(--text_color);
     margin: 0;
+    text-align: center;
 }

@@ -9,12 +9,15 @@ import Badge from '@mui/material/Badge'
 import { AppBar, Box, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material"
 import InputBase from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar'
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import IconButton from '@mui/material/IconButton'
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-around",
   alignItems:"center",
-  backgroundColor:"#121212"
+  backgroundColor:"var(--body_color)"
 })
 
 const Search = styled("div")(({ theme }) => ({
@@ -36,7 +39,43 @@ const userName = localStorage.getItem("userName")
   const handleClick = e => {
     console.log("Icon clicked")
   }
+// sets the body theme to dark
+  const setDarkMode = () => {
+    document.querySelector("body").setAttribute('data-theme', 'dark');
+    localStorage.setItem("selectedTheme", "dark")
+}
+// sets the body theme to light
+const setLightMode = () => {
+    document.querySelector("body").setAttribute('data-theme', 'light');
+    localStorage.setItem("selectedTheme", "light")
+}
 
+const selectedTheme = localStorage.getItem("selectedTheme");
+if(!selectedTheme || selectedTheme !== 'light') {
+  setDarkMode();
+} else {
+  setLightMode()
+}
+// toggles the light/dark mode theme
+const toggleTheme = () => {
+    const body = document.querySelector('body')
+    const currentTheme = body.getAttribute('data-theme')
+    if(currentTheme === 'dark') {
+        setLightMode()
+    } else {
+        setDarkMode()
+    }
+}
+  
+  const [ mode, setMode ] = useState(false)
+
+
+  const handleIconClick = () => {
+    setMode(!mode)
+  }
+  
+
+  const [ lightDarkMode, setLightDarkMode ] = useState(true)
   const [ open, setOpen ] = useState(false)
 
   return (
@@ -46,18 +85,18 @@ const userName = localStorage.getItem("userName")
           <Typography 
           variant='h6'
           sx={{display:{xs:"none", sm:"block"}}}
-          ><VideogameAssetIcon fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/Home'>GamerGuild</a>
+          ><VideogameAssetIcon sx={{color:"var(--text_color)"}} fontSize='small'/> <a id='nav-icon' onClick={handleClick} href='http://localhost:3000/'>GamerGuild</a>
           </Typography>
           <Avatar
           alt='Logo'
           src={icon}
           sx={{display:{xs:"block", sm:"none"}}}
           />
-          <Search><InputBase placeholder='Search'/></Search>
+          <Search id='search-bar'><InputBase placeholder='Search Guilds'/></Search>
           <Icons>
             <a
             onClick={handleClick}
-            href='http://localhost:3000/Home'
+            href='http://localhost:3000/'
             ><HomeIcon
             id='nav-icon'
             /></a>
@@ -67,6 +106,15 @@ const userName = localStorage.getItem("userName")
               href='http://localhost:3000/Notifications'
               ><NotificationsIcon id='nav-icon'/></a>
             </Badge>
+            <IconButton id='nav-icon' onClick={handleIconClick}>
+              {mode ? <LightModeIcon 
+              onClick={() => {setLightDarkMode(!lightDarkMode);
+                toggleTheme();}}
+              /> : <DarkModeIcon 
+              onClick={() => {setLightDarkMode(!lightDarkMode);
+                toggleTheme();}}
+              />}
+            </IconButton>
             <SettingsIcon
             onClick={(e) => setOpen(true)}
             id='nav-icon'
@@ -100,7 +148,7 @@ const userName = localStorage.getItem("userName")
         <a
         id='menu-options'
         onClick={logout}
-        href='http://localhost:3000/'
+        href='http://localhost:3000/login'
         ><MenuItem>Logout</MenuItem></a>
       </Menu>
       </AppBar>
