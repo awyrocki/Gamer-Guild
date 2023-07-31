@@ -19,6 +19,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MessageEditDelete from './MessageEditDelete';
+import LeaveGuild from './LeaveGuild';
 
 
 function GuildPage({ GuildName }) {
@@ -33,6 +34,8 @@ function GuildPage({ GuildName }) {
     const [ edit, setEdit ] = useState(false)
     //flag for delete input
     const [ deleteFlag, setDeleteFlag ] = useState(false)
+    // leave guild flag
+    const [ leaveFlag, setLeaveFlag ] = useState(false)
 
     const userName = localStorage.getItem("userName")
 
@@ -205,22 +208,23 @@ useEffect(() => {
             </>
     }
 
-    function Leave() {
-        return <></>
-    }
 
     // renders messages
     return (
     <>
-    <div id='guild-name'>{GuildName} {Leave()}</div>
+    <div id='guild-name'>{GuildName}</div>
         {render()}
         <div id='input-container'>
         <MessageInput GuildName={GuildName} setSent={setSent}/>
         </div>
         <div id='leave-container'>
-        <button id='leave-guild'>Leave Guild</button>
+        <button id='leave-guild' onClick={e => {
+            e.preventDefault()
+            setLeaveFlag(true)
+        }}>Leave Guild</button>
         </div>
         <MessageEditDelete GuildName={GuildName} delMessage={delMessage} editMessage={editMessage} messageId={messageId} newMessage={newMessage}/>
+        <LeaveGuild leaveFlag={leaveFlag}/>
     </>
     )
 }

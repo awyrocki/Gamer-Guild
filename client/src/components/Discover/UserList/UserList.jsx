@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import { Cursor } from 'mongoose';
+
 
 function UserList({ GuildName }) {
     const [ guildUsers, setGuildUsers ] = useState([])
@@ -43,7 +43,7 @@ function getUserProfile() {
             })
         })
         .then(res => res.json())
-        .then(data => setUserProfiles(oldProfiles => [...oldProfiles, data.userName]))
+        .then(data => {setUserProfiles(oldProfiles => [...oldProfiles, data.userName])})
         .catch(err => console.log(err))
     })
 }
@@ -64,6 +64,7 @@ useEffect(() => {
 function userProfile(user) {
     window.location = `http://localhost:3000/user?User=${user}`
 }
+
 
     return (
         <>

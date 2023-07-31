@@ -11,7 +11,7 @@ function UserProfile() {
     const [ joinedGuilds, setJoinedGuilds ] = useState([])
     const [ steamUser, setSteamUser ] = useState(null)
     const token = localStorage.getItem("token")
-    const [steamID, setSteamID ] = useState("")
+    const [ steamID, setSteamID ] = useState("")
 
     // holds user data
     const [ user, setUser ] = useState("")
@@ -90,6 +90,18 @@ useEffect(() => {
         : profilePic
     }
 
+    // renders online status
+    function onlineStatus() {
+        if (!steamUser) {
+            return <p></p>
+        } else {
+            return steamUser.personastate === 0
+            ? <><p>Offline</p><span id='status-light-off'></span></>
+            : steamUser.personastate === 1
+            ? <><p>Online</p><span id='status-light-on'></span></>
+            : <p></p>
+        }
+    }
 
     return (
         <>
@@ -100,6 +112,7 @@ useEffect(() => {
                 </div>
                 <div id='pic-bio'>
                 <img id='user-pic' src={whichPic()} alt="profile pic" />
+                <div id='status'>{onlineStatus()}</div>
                 <p id='user-bio'> &emsp; {user.bio}</p>
                 </div>
                 <h2 id='profile-guild-title'>Joined Guilds</h2>
