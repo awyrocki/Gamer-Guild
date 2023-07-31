@@ -137,7 +137,6 @@ useEffect(() => {
                 </div>
             </div>
         </div>
-        {console.log(steamID)}
         <Footer />
         </>
     )
