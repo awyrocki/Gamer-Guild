@@ -5,8 +5,6 @@ import UpdateBio from './Settings-Functionality/UpdateBio';
 import ChangePassword from './Settings-Functionality/ChangePassword';
 import UnlinkSteam from './Settings-Functionality/UnlinkSteam';
 import CheckIcon from '@mui/icons-material/Check';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
 
@@ -14,20 +12,12 @@ import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 function Settings() {
 
     const [ checkMark, setCheckMark ] = useState(true)
-    const [ lightDarkMode, setLightDarkMode ] = useState(true)
     const [ passCheck, setPassCheck ] = useState(true)
     const [ disSteam, setDisSteam ] = useState(true)
 
     // use states for handling the submit of the password and bio updates
     const [ bio, setBio ] = useState("")
     const [ newPass, setNewPass ] = useState("")
-
-    // handle submit function for buttons - https://www.youtube.com/watch?v=sTdt2cJS2dg
-    const handleSubmit = e => {
-        e.preventDefault()
-
-
-    }
 
   return (
     <>
@@ -53,16 +43,6 @@ function Settings() {
                 startIcon={checkMark ? null : <CheckIcon/>}
             >{checkMark ? "Add" : "Bio updated"}</Button>
             <UpdateBio bio={bio} checkMark={checkMark}/>
-            </div>
-            <hr id='divider'/>
-            <div id='light-dark-mode'>
-            <span id='bio-span'>Light/Dark mode</span>
-            <Button
-                startIcon={lightDarkMode ? <LightModeIcon/> : <DarkModeIcon/>}
-                onClick={() => setLightDarkMode(!lightDarkMode)}
-                color='warning'
-                variant='outlined'
-            ></Button>
             </div>
             <hr id='divider'/>
             <div id='change-password'>

@@ -10,6 +10,7 @@ import UserProfile from './components/UserProfile/UserProfile';
 import Settings from './components/Settings/Settings';
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
+
 function App() {
 
   const [ logoutUser, setLogoutUser ] = useState(false)
@@ -51,7 +52,6 @@ function renderNav() {
     return <Nav logout={logout}/>
   }
   }
-
 
   return (
     <>

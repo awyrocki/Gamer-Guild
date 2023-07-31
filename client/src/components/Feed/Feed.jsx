@@ -31,24 +31,24 @@ function Feed({ GuildName}) {
         action={
           <IconButton aria-label="settings">
             {/* implement settings? (delete, edit posts) */}
-            <PushPinIcon sx={{color:"#B3B3B3"}}/>
+            <PushPinIcon sx={{color:"var(--text_color)"}}/>
           </IconButton>
         }
         title="Welcome to Gamer Guild!"
         subheader="Mod Arcanine"
-        subheaderTypographyProps={{color:"#B3B3B3"}}
-        sx={{color:"White", bgcolor:"#121212"}}
+        subheaderTypographyProps={{color:"var(--text_color)"}}
+        sx={{color:"var(--text_color)", bgcolor:"var(--body_color)"}}
       />
-      <CardContent sx={{bgcolor:"#121212"}}>
-        <Typography variant="body2" color="#B3B3B3" bgcolor={"#121212"}>
+      <CardContent sx={{bgcolor:"var(--body_color)"}}>
+        <Typography variant="body2" color="var(--text_color)" bgcolor={"var(--body_color)"}>
         We extend our warm welcome to you! For newcomers, you have the opportunity to connect your Steam account through the user profile section on the dashboard. Access settings by clicking on the cog icon above, where you can also unlink your Steam account or switch between light and dark modes. In the discover section, you can find and join various guilds, or take the initiative and create your own community using the dedicated button. Always remember to be kind and respectful, and most importantly, have a fantastic time!
         </Typography>
       </CardContent>
-      <CardActions disableSpacing sx={{bgcolor:"#121212"}}>
+      <CardActions disableSpacing sx={{bgcolor:"var(--body_color)"}}>
         <IconButton aria-label="add to favorites">
-        <Checkbox icon={<FavoriteBorder sx={{color:"#B3B3B3"}}/>} checkedIcon={<Favorite sx={{color: "#B3B3B3"}}/>} />
+        <Checkbox icon={<FavoriteBorder sx={{color:"var(--subtext_color)"}}/>} checkedIcon={<Favorite sx={{color: "var(--subtext_color)"}}/>} />
         </IconButton>
-        <IconButton aria-label="share" sx={{color:"#B3B3B3"}}>
+        <IconButton aria-label="share" sx={{color:"var(--subtext_color)"}}>
           <ShareIcon />
         </IconButton>
       </CardActions>
