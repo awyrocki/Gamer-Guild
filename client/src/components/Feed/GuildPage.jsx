@@ -26,11 +26,14 @@ function GuildPage({ GuildName }) {
     // to trigger fetch
     const [ sent, setSent ] = useState("")
     const [ messageId, setMessageId ] = useState("")
-    const [ delMessage, setDelMessage ] = useState(false)
     const [ editMessage, setEditMessage ] = useState(false)
+    const [ delMessage, setDelMessage ] = useState(false)
     const [ newMessage, setNewMessage ] = useState("")
     //flag for edit input
     const [ edit, setEdit ] = useState(false)
+    //flag for delete input
+    const [ deleteFlag, setDeleteFlag ] = useState(false)
+
     const userName = localStorage.getItem("userName")
 
 
@@ -69,23 +72,46 @@ useEffect(() => {
     function renderEdit(message) {
         if (edit && messageId === message._id && userName === message.user){
         return <>
-        <input type="text" name="message edit" id="" placeholder={message.body} onChange={e => {
+        <input type="text" name="message edit" id="new-message"  placeholder={message.body} onChange={e => {
             e.preventDefault()
             setNewMessage(e.target.value)
         }}/>
-        <button onClick={e => {
+        <div id='edit-buttons'>
+        <button className='message-buttons'  onClick={e => {
             e.preventDefault()
             setEditMessage(true)
         }}>Save</button>
-        <button onClick={e => {
+        <button className='message-buttons' onClick={e => {
             e.preventDefault()
             setMessageId("")
             setEdit(false)
             setNewMessage("")
         }}>Cancel</button>
+        </div>
         </>
         } else {
             return <>{message.body}</>
+        }
+    }
+
+    // renders delete choice
+    function renderDelete(message) {
+        if (deleteFlag && messageId === message._id && userName === message.user) {
+            return <>
+            <p>delete message?</p>
+            <div id='delete-message-buttons'>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setDelMessage(true)
+            }}>Delete</button>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setMessageId("")
+                setDelMessage(false)
+                setDeleteFlag(false)
+            }}>cancel</button>
+            </div>
+            </>
         }
     }
 
@@ -134,25 +160,33 @@ useEffect(() => {
             </ListItemIcon>
             Pin
         </MenuItem>
+        <div onClick={e => {
+            e.preventDefault()
+            setEdit(!edit)
+        }}>
         <MenuItem>
             <ListItemIcon>
                 <EditIcon fontSize='small' sx={{color:"black"}}/>
             </ListItemIcon>
-            <p onClick={e => {
-            e.preventDefault()
-            setEdit(true)
-        }}>Edit</p>
+            Edit
         </MenuItem>
+        </div>
+        <div onClick={e => {
+            e.preventDefault()
+            setDeleteFlag(!deleteFlag)
+        }}>
         <MenuItem>
             <ListItemIcon>
                 <DeleteIcon fontSize='small' sx={{color:"black"}}/>
             </ListItemIcon>
             Delete
         </MenuItem>
+        </div>
         </Menu>
             <CardContent sx={{bgcolor:"#121212"}}>
                 <Typography sx={{wordBreak:"break-word"}} variant="h8" color="#B3B3B3" bgcolor={"#121212"}>
                 {renderEdit(message)}
+                {renderDelete(message)}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing sx={{bgcolor:"#121212"}}>

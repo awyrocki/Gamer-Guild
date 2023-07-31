@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 
+// edits message
 function MessageEditDelete({ GuildName, delMessage, editMessage, messageId, newMessage }) {
     function editMessages() {
-            console.log("here")
             const url = `http://localhost:4000/message/update/${messageId}`
             const body = {
                 body: newMessage
@@ -22,6 +22,31 @@ function MessageEditDelete({ GuildName, delMessage, editMessage, messageId, newM
             })
         
     }
+
+    // deletes message
+    function deleteMessages() {
+        const url = `http://localhost:4000/message/delete/${messageId}`
+
+        fetch(url, {
+            method: "DELETE",
+            headers: new Headers({
+            "Content-Type": "application/json"
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.message === "Message deleted") {
+                setTimeout(() => window.location = `http://localhost:3000/?GuildName=${GuildName}`)
+            }
+        })
+    
+}
+
+useEffect(() => {
+if (delMessage === true) {
+    deleteMessages()
+}
+}, [delMessage])
 
 useEffect(() => {
 if (editMessage === true) {
