@@ -22,12 +22,22 @@
     display: flex;
     flex-direction: column;
     background-color: var(--body_color);
-    margin-left: 1em;
-    margin-top: 0.5em;
-    width: 25em;
+    margin-left: 2em;
+    width: 50vw;
+    max-width: 35em;
+    min-width: 20em;
+    margin-bottom: 3em;
     border-radius: 5px;
     box-shadow: 0px 3px 10px 3px var(--boxshadow_color);
     text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+    #feed-container {
+        min-width: none;
+        max-width: none;
+        width: 100%;
+    }
 }
 
 /* Guild page */
@@ -36,9 +46,8 @@
     flex-direction: column-reverse;
     color: var(--subtext_color);
     /* matches feed container to keep input at bottom */
-    height: 40em;
+    height: 38em;
     overflow-y: auto;
-    width: 26em;
 }
 
 .message-list {
@@ -65,14 +74,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    gap: 5px;
+    gap: 20px;
     background-color: var(--body_color);
 }
 
 #message-input {
     height: 1em;
-    width: 100%;
     font-size: 1em;
     font-weight: bold;
 }
@@ -85,8 +92,6 @@
 }
 
 #input-container {
-    width: 24em;
-    margin-left: 3px;
     height: fit-content;
 }
 
@@ -115,12 +120,6 @@
 #leave-guild:hover {
     cursor: pointer;
     background-color: #282828;
-}
-
-#new-message {
-    width: 20em;
-    max-width: 20em;
-    
 }
 
 .message-buttons {

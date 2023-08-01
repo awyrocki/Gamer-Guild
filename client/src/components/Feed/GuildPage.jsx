@@ -148,7 +148,7 @@ useEffect(() => {
         })
     }
     
-
+    // returns the correct avatar for message
     function renderAvatar(message, profilePic) {
         let singlePic = profilePic.filter(user => user.userName === message.user)
         if(singlePic.length !== 0 ) {
@@ -173,7 +173,7 @@ useEffect(() => {
         <div>
         {messages.map((message, i) => (
         <div key={i} className='message-list' >
-        <Card sx={{width:"25em"}}>
+        <Card sx={{width:"100%"}}>
             <CardHeader
             titleTypographyProps={{variant:'h7'}}
             avatar={renderAvatar(message, profilePic)}
