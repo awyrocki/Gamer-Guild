@@ -1,10 +1,48 @@
 body {
     background-image: var(--body_background);
-    height: 100vh;
-    margin-bottom: 5em
+    height: fit-content;
 }
 
 #container {
     display: flex;
     justify-content: center;
+    min-height: 90vh;
+    max-height: fit-content;
+    margin-top: 1em;
+    width: 100vw;
 }
+
+#left-columns {
+    margin-left: 1.5em;
+    width: fit-content;
+}
+
+@media screen and (max-width: 700px) {
+    #left-columns {
+        display: none;
+    }
+
+    #discover-create {
+        display: none;
+    }
+
+    #userlist-container {
+        display: none;
+    }
+
+    #discover-container {
+        display: none;
+    }
+
+    #create {
+        display: none;
+    }
+
+    #center-container {
+        max-width: none;
+        min-width: none;
+        margin-left: 0;
+        padding: 0;
+    }
+}
+

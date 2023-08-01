@@ -38,7 +38,7 @@ function MessageInput({ GuildName, setSent }) {
     <>
         <div id='input-container'>
         <form action="" id='message-form'>
-        <Box sx={{width:"100%"}}>
+        <Box sx={{width:"95%"}}>
             <TextField
                 inputProps={{ ref: textFieldRef }}
                 id="standard-multiline-flexible"
