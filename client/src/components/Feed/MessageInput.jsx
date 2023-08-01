@@ -8,7 +8,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import GifIcon from '@mui/icons-material/Gif';
 import Button from '@mui/material/Button';
 
-function MessageInput({ GuildName, setSent }) {
+function MessageInput({ GuildName, setSent, sent }) {
     const textFieldRef = useRef()
     
     function createMessage() {
@@ -31,7 +31,7 @@ function MessageInput({ GuildName, setSent }) {
             })
         })
         .then(res => res.json())
-        .then(data => setSent(data)) //triggers useState to render messages
+        .then(data => setSent(!sent)) //triggers useState to render messages
         .catch(err => console.log(err))
     }
     return (

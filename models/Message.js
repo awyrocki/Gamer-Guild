@@ -14,7 +14,7 @@ const Messages = new mongoose.Schema(
             type: String,
             required: true
         },
-        flagged: {
+        pinned: {
             type: Boolean,
             required: false
         }
