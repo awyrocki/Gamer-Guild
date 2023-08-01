@@ -13,6 +13,7 @@ footer {
 
 #about-team {
     color: var(--text_color);
+    text-decoration: none;
 }
 
 #contact-us {
