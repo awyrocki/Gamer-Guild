@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Feed.css"
 import GuildPage from './GuildPage'
 import Card from '@mui/material/Card';
@@ -20,7 +20,7 @@ function Feed({ GuildName}) {
 
   function display() {
     if(GuildName) {
-      return <GuildPage GuildName={GuildName}/>
+      return <GuildPage GuildName={GuildName} />
     } else {
       return <>
       <Card >

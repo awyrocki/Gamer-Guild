@@ -51,12 +51,6 @@ function User({ logout }) {
       }
   }, [])
 
-function whichPic() {
-  return steamUser !== null
-  ? steamUser.avatarfull
-  : profilePic
-}
-
 // displays online status using steam
 // ! not sure how to implement this to other users
 function onlineStatus() {
@@ -76,7 +70,7 @@ function renderUser() {
     ? <h3 style={{color: 'white'}}>Loading User</h3>
     : userProfile
     ? <><a href={`http://localhost:3000/user?User=${userName}`} id='user-name'>{userName}</a> 
-      <div id="profile-pic"><img src={whichPic()} alt="profile picture" width="75px" /> </div>
+      <div id="profile-pic"><img src={userProfile.profilePic} alt="profile picture" width="75px" /> </div>
       <div id='status'>{onlineStatus()}</div>
       </>
     : null

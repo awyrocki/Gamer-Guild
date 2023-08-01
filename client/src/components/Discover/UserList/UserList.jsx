@@ -43,7 +43,7 @@ function getUserProfile() {
             })
         })
         .then(res => res.json())
-        .then(data => {setUserProfiles(oldProfiles => [...oldProfiles, data.userName])})
+        .then(data => {setUserProfiles(oldProfiles => [...oldProfiles, data])})
         .catch(err => console.log(err))
     })
 }
@@ -71,14 +71,14 @@ function userProfile(user) {
         <div id='userlist-container'>
         <h2 id='user-title'>Users</h2>
         {userProfiles.map((user, i) => (
-            <div key={i} className='user-list' onClick={e => userProfile(user)} >
+            <div key={i} className='user-list' onClick={e => userProfile(user.userName)} >
             <List sx={{ width: '90%', maxWidth: 360, bgcolor: 'var(--body_color)' }}>
             <ListItem alignItems="center"   >
             <ListItemAvatar>
-            <Avatar />
+            <Avatar src={`${user.profilePic}`}/>
             </ListItemAvatar>
             <ListItemText
-                primary={user}
+                primary={user.userName}
                 sx={{
                     color: "var(--text_color)",
                     cursor: "pointer",

@@ -8,7 +8,8 @@ function UnlinkSteam({ disSteam }) {
     function unlink() {
         const url = `http://127.0.0.1:4000/user/update/${userID}`
         const body = {
-            "steamId": "" 
+            "steamId": "",
+            "profilePic": "https://cdn.vectorstock.com/i/preview-1x/70/84/default-avatar-profile-icon-symbol-for-website-vector-46547084.jpg"
         };
     
         fetch(url, {
