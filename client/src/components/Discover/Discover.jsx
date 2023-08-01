@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "./Discover.css"
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import { Typography } from '@mui/material';
 
 // add sessiontoken
 function Discover() {
@@ -63,17 +68,33 @@ function askJoin() {
     setJoin(
         <>
         <div id='join-container'>
-        <h3>{`Join ${guild}?`}</h3>
-        <button onClick={e => {
-            e.preventDefault()
-            joinGuild()
-        }}>join?</button>
-        <button onClick={e => {
-            e.preventDefault()
-            setJoin(<></>)
-            setGuild("")
-            setGuildId("")
-        }}>Cancel</button>
+        <Typography
+        fontSize={'1em'}
+        color={"var(--text_color)"}
+        >{`Join ${guild}?`}
+        </Typography>
+        <Stack direction="row" spacing={1} alignItems={'center'} justifyContent={'center'}>
+        <IconButton>
+            <CheckIcon
+            sx={{color:"var(--text_color)"}}
+            onClick={e => {
+                e.preventDefault()
+                joinGuild()
+            }}
+            />
+        </IconButton>
+        <IconButton>
+            <CloseIcon
+            sx={{color:"var(--text_color)"}}
+            onClick={e => {
+                e.preventDefault()
+                setJoin(<></>)
+                setGuild("")
+                setGuildId("")
+            }}
+            />
+        </IconButton>
+        </Stack>
         </div>
         </>
     )
