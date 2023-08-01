@@ -141,15 +141,21 @@ useEffect(() => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                {setProfilePic(oldProfiles => [...oldProfiles, data.profilePic])}
+                {setProfilePic(oldProfiles => [...oldProfiles, data])}
             })
             .catch(err => console.log(err))
 
         })
     }
+    
 
-    function renderAvatar(i) {
-            return <Avatar src={`${profilePic[i]}`} ></Avatar>
+    function renderAvatar(message, profilePic) {
+        let singlePic = profilePic.filter(user => user.userName === message.user)
+        if(singlePic.length !== 0 ) {
+            return <Avatar src={`${singlePic[0].profilePic}`} ></Avatar>
+        } else {
+            return <Avatar ></Avatar>
+        }
     }
 
     useEffect(() => {
@@ -170,7 +176,7 @@ useEffect(() => {
         <Card sx={{width:"25em"}}>
             <CardHeader
             titleTypographyProps={{variant:'h7'}}
-            avatar={renderAvatar(i)}
+            avatar={renderAvatar(message, profilePic)}
                 // change the avatar to the avatar of the user?
             action={<IconButton
             aria-label="settings"
