@@ -18,6 +18,7 @@ router.post("/register", async (req, res) => {
         const steamId = "";
         const bio = "";
         const admin = false;
+        const profilePic = "https://cdn.vectorstock.com/i/preview-1x/70/84/default-avatar-profile-icon-symbol-for-website-vector-46547084.jpg"
 
         const newUser = new User({
             firstName,
@@ -27,6 +28,7 @@ router.post("/register", async (req, res) => {
             userName,
             steamId,
             bio,
+            profilePic,
             admin
         });
         // creating user token
@@ -37,18 +39,8 @@ router.post("/register", async (req, res) => {
             { expiresIn: 60 * 60 * 24 }
         );
         
-        // sending basic user to front end for local storage/ session storage
-        let foundUser = await User.findOne({ email });
-        const id = foundUser._id;
-        const user = foundUser.userName;
-        const steamID = foundUser.steamId;
-        
         res.status(201).json({
-            message: "User created",
-            token,
-            user,
-            id,
-            steamID
+            message: "User created"
         });
         
     } catch (err) {
@@ -110,13 +102,15 @@ router.get("/username/:name", sessionValidation,  async (req, res) => {
         const userName = singleUser[0].userName;
         const steamID = singleUser[0].steamId;
         const bio = singleUser[0].bio;
+        const profilePic = singleUser[0].profilePic
 
         res.status(200).json({
             message: "user found",
             id,
             userName,
             steamID,
-            bio
+            bio,
+            profilePic
         });
     } catch (err) {
         res.status(500).json({

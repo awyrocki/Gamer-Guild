@@ -29,8 +29,8 @@ function signUp1() {
         .then(res => res.json())
         .then(data => {
             if (data.message === "User created") {
-                updateLocalStorage(data.token, data.userName, data.id, data.steamdID)
-                window.location = "http://localhost:3000/"
+                setError(data.message)
+                setTimeout(() => window.location = "http://localhost:3000/Login", 500) 
             } else {
                 setError(data.message)
             }

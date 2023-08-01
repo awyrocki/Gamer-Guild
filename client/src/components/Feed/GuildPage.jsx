@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MessageInput from './MessageInput'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -36,8 +36,10 @@ function GuildPage({ GuildName }) {
     const [ deleteFlag, setDeleteFlag ] = useState(false)
     // leave guild flag
     const [ leaveFlag, setLeaveFlag ] = useState(false)
+    const [ picGo, setPicGo ] = useState(false)
 
     const userName = localStorage.getItem("userName")
+    const token = localStorage.getItem("token")
 
 
     function fetchMessages() {
@@ -51,7 +53,11 @@ function GuildPage({ GuildName }) {
             })
         })
         .then(res => res.json())
-        .then(data => setMessages(data))
+        .then(data => {
+            console.log(data)
+            setMessages(data)
+            setPicGo(true)
+        })
         .catch(err => console.log(err))
     }
 
@@ -63,7 +69,6 @@ useEffect(() => {
     // for message cards
     const [ anchorElement, setAnchorElement ] = useState(null)
     const handleMenuClick = e => {
-        setMessageId(e.target.id)
         setAnchorElement(e.currentTarget)
     }
     const handleCloseMenu = () => {
@@ -120,6 +125,47 @@ useEffect(() => {
         }
     }
 
+    // grabs profile pic
+    const [ profilePic, setProfilePic ] = useState([])
+    function fetchPic() {
+        messages.forEach(message => {
+            const url = `http://localhost:4000/user/username/${message.user}`
+    
+            fetch(url, {
+                method: "GET",
+                headers: new Headers({
+                "Content-Type": "application/json",
+                "authorization": token
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                {setProfilePic(oldProfiles => [...oldProfiles, data])}
+            })
+            .catch(err => console.log(err))
+
+        })
+    }
+    
+
+    function renderAvatar(message, profilePic) {
+        let singlePic = profilePic.filter(user => user.userName === message.user)
+        if(singlePic.length !== 0 ) {
+            return <Avatar src={`${singlePic[0].profilePic}`} ></Avatar>
+        } else {
+            return <Avatar ></Avatar>
+        }
+    }
+
+    useEffect(() => {
+        if (picGo === true) {
+
+            fetchPic() 
+        }
+    }, [picGo])
+    
+
     function render() {
 
         return <>
@@ -130,14 +176,16 @@ useEffect(() => {
         <Card sx={{width:"25em"}}>
             <CardHeader
             titleTypographyProps={{variant:'h7'}}
-            avatar={<Avatar src={mod} ></Avatar>}
+            avatar={renderAvatar(message, profilePic)}
                 // change the avatar to the avatar of the user?
             action={<IconButton
             aria-label="settings"
             onClick={handleMenuClick}
             aria-haspopup="true"
             aria-controls='demo-positioned-menu'
-            ><MoreVert id={message._id} sx={{color:"var(--subtext_color)"}}/>
+            ><MoreVert id={message._id} sx={{color:"var(--subtext_color)", padding: "3px"}} onClick={e => {
+                setMessageId(e.target.id)
+            }}/>
             </IconButton>}
             title={message.user}
             // Could add a user nickname
@@ -205,6 +253,7 @@ useEffect(() => {
         </Card>
             </div>
         ))}
+        
             </div>
             </div>
             </>

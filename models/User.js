@@ -32,6 +32,10 @@ const User = new mongoose.Schema(
             type: String,
             required: false
         },
+        profilePic: {
+            type: String,
+            required: false
+        },
         admin: {
             type: Boolean,
             required: false

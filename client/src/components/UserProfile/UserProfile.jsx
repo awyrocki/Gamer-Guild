@@ -83,13 +83,6 @@ useEffect(() => {
         }
     }, [profileID])
 
-    // checks for steam id and grabs avatar from steam API
-    function whichPic() {
-        return steamUser !== null
-        ? steamUser.avatarfull
-        : profilePic
-    }
-
     // renders online status
     function onlineStatus() {
         if (!steamUser) {
@@ -122,7 +115,7 @@ useEffect(() => {
                     {steamName()}
                 </div>
                 <div id='pic-bio'>
-                <img id='user-pic' src={whichPic()} alt="profile pic" />
+                <img id='user-pic' src={user.profilePic} alt="profile pic" />
                 <div id='status'>{onlineStatus()}</div>
                 <p id='user-bio'> &emsp; {user.bio}</p>
                 </div>
