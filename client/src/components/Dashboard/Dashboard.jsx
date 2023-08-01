@@ -6,6 +6,8 @@ import Discover from '../Discover/Discover';
 import Footer from '../Footer/Footer';
 import AddDelete from '../Discover/AddDelete/AddDelete';
 import UserList from '../Discover/UserList/UserList';
+import ScreenWidth from '../Mobile/ScreenWidth'
+import BottomNav from '../Mobile/BottomNav';
 
 function Dashboard({ logout }) {
   // grabs guild name from url params
@@ -35,6 +37,9 @@ function Dashboard({ logout }) {
           <AddDelete />
         </div>
       </div>
+      <ScreenWidth maxWidth={700}>
+        <BottomNav />
+      </ScreenWidth>
       <Footer />
     </>
   )

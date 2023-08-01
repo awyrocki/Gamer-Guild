@@ -44,5 +44,8 @@ body {
         margin-left: 0;
         padding: 0;
     }
-}
 
+    footer {
+        display: none;
+    }
+}
