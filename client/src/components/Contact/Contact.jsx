@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
+import './Contact.css'
 
 function Contact() {
 const [name, setName] = useState('');
@@ -38,12 +39,12 @@ try {
 };
 
 return (
-<div className='my-body'>
-    <div className='main'>
+<div className='mybody'>
+    <div className='my-main'>
         <form onSubmit={handleSubmit}>
-        <h1 className='enter'>Contact Us</h1>
+        <h1 className='my-enter'>Contact Us</h1>
         <input
-            className='my-input'
+            className='myinput'
             type='text'
             name='name'
             placeholder='Name'
@@ -52,7 +53,7 @@ return (
             required
         />
         <input
-            className='my-input'
+            className='myinput'
             type='email'
             name='email'
             placeholder='Email'
@@ -61,14 +62,14 @@ return (
             required
         />
         <textarea
-            className='my-input'
+            className='myinput'
             name='message'
             placeholder='Message'
             value={message}
             onChange={e => setMessage(e.target.value)}
             required
         />
-        <button  className='my-button' onClick={e => {
+        <button  className='mybutton' onClick={e => {
             e.preventDefault();
             handleSubmit()
         }}>
