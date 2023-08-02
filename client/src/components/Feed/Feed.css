@@ -169,3 +169,8 @@
 .pinned-button:hover {
     background-color: var(--subtext_color);
 }
+
+#emoji-picker {
+    position: absolute;
+    top: 20em;
+}

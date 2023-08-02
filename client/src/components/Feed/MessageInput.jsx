@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
@@ -7,19 +7,49 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import GifIcon from '@mui/icons-material/Gif';
 import Button from '@mui/material/Button';
+import EmojiPicker from 'emoji-picker-react';
 
 function MessageInput({ GuildName, setSent, sent }) {
+    const [ emojiShow, setEmojiShow ] = useState(false)
+    const [ emoji, setEmoji ] = useState(null)
+    const [ input, setInput ] = useState("")
     const textFieldRef = useRef()
-    
+    const mode = localStorage.getItem("selectedTheme")
+
+    // adds emoji to input along with text
+    function addEmoji() {
+        setInput(input + emoji.emoji)
+        textFieldRef.current.value = input
+        setEmoji(null)
+    }
+
+    // calls the function to add emoji to input line when clicked
+    useEffect(() => {
+        if (emoji !== null) {
+            addEmoji()
+            setEmojiShow(!emojiShow)
+        }
+    }, [emoji])
+
+    // displays the emoji picker
+    function renderEmoji() {
+        if (emojiShow === true) {
+        return <>
+            <EmojiPicker theme={`${mode}`} onEmojiClick={setEmoji} />
+        </>
+        } else {
+            return <></>
+        }
+    }
+
     function createMessage() {
-        
+
         const user = localStorage.getItem("userName")
-        const message = textFieldRef.current.value
         const url = "http://127.0.0.1:4000/message/create"
         const send = {
             user: user,
             guild: GuildName,
-            body: message
+            body: input
         }
 
         fetch(url, {
@@ -36,11 +66,14 @@ function MessageInput({ GuildName, setSent, sent }) {
     }
     return (
     <>
+        <div id='emoji-picker'>{renderEmoji()}</div>
         <div id='input-container'>
         <form action="" id='message-form'>
         <Box sx={{width:"95%"}}>
             <TextField
+                value={input}
                 inputProps={{ ref: textFieldRef }}
+                onChange={e => setInput(e.target.value)}
                 id="standard-multiline-flexible"
                 multiline
                 sx={{bgcolor:"#E4EFE7", borderRadius:"5px", width:"100%", color:"var(--text_color)"}}
@@ -51,7 +84,10 @@ function MessageInput({ GuildName, setSent, sent }) {
                 />
             <Stack direction="row" gap={1} mt={1} mb={1}>
                 <AddCircleIcon sx={{color:"var(--text_color)"}}/>
-                <EmojiEmotionsIcon sx={{color:"var(--text_color)"}}/>
+                <EmojiEmotionsIcon onClick={ e => {
+                    e.preventDefault()
+                    setEmojiShow(!emojiShow)
+                }} sx={{color:"var(--text_color)"}}/>
                 <AddPhotoAlternateIcon sx={{color:"var(--text_color)"}}/>
                 <GifIcon sx={{color:"var(--text_color)"}}/>
                 <Button
@@ -60,6 +96,8 @@ function MessageInput({ GuildName, setSent, sent }) {
                 e.preventDefault()
                 createMessage()
                 textFieldRef.current.value=''
+                setEmoji(null)
+                setInput("")
                 }}
                 >Post</Button>
             </Stack>
