@@ -30,3 +30,11 @@
 .joined-guild-list {
     margin-right: 0.5em;
 }
+
+@media screen and (max-width: 700px) {
+    #guildlist-container {
+        width: 90%;
+        max-width: none;
+        min-width: none;
+    }
+}
