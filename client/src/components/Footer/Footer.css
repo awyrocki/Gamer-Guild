@@ -16,7 +16,15 @@ footer {
     text-decoration: none;
 }
 
+#about-team:hover {
+    color: var(--subtext_color);
+}
+
 #contact-us {
     color: var(--text_color);
     text-decoration: none;
+}
+
+#contact-us:hover {
+    color: var(--subtext_color);
 }
