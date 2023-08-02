@@ -42,6 +42,12 @@ function MessageInput({ GuildName, setSent, sent }) {
         }
     }
 
+    const inputFile = useRef(null)
+
+    function file() {
+        inputFile.current.click()
+    }
+
     function createMessage() {
 
         const user = localStorage.getItem("userName")
@@ -83,12 +89,12 @@ function MessageInput({ GuildName, setSent, sent }) {
                 variant="standard"
                 />
             <Stack direction="row" gap={1} mt={1} mb={1}>
-                <AddCircleIcon sx={{color:"var(--text_color)"}}/>
+                <AddCircleIcon onClick={file} sx={{color:"var(--text_color)"}}/>
                 <EmojiEmotionsIcon onClick={ e => {
                     e.preventDefault()
                     setEmojiShow(!emojiShow)
                 }} sx={{color:"var(--text_color)"}}/>
-                <AddPhotoAlternateIcon sx={{color:"var(--text_color)"}}/>
+                <AddPhotoAlternateIcon onClick={file} sx={{color:"var(--text_color)"}}/>
                 <GifIcon sx={{color:"var(--text_color)"}}/>
                 <Button
                 id='send' 
@@ -104,6 +110,7 @@ function MessageInput({ GuildName, setSent, sent }) {
         </Box>
     </form>
     </div>
+    <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
     </>
     )
 }
