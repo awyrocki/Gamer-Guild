@@ -48,3 +48,11 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+@media screen and (max-width: 700px) {
+    #discover-container {
+        min-width: none;
+        max-width: none;
+        width: 90%;
+    }
+}
