@@ -33,6 +33,7 @@ function GuildPage({ GuildName }) {
     const [ delMessage, setDelMessage ] = useState(false)
     const [ newMessage, setNewMessage ] = useState("")
     const [ pinMessage, setPinMessage ] = useState(false)
+    const [ unpin, setUnpin ] = useState(false)
     // to render only pinned messages
     const [ onlyPin, setOnlyPin ] = useState(false);
     // flag for pin 
@@ -88,6 +89,7 @@ function GuildPage({ GuildName }) {
         setDelMessage(false)
         setDeleteFlag(false)
         setPinMessage(false)
+        setUnpin(false)
         setPinFlag(false)
         setEditMessage(false)
         setEdit(false)
@@ -123,7 +125,27 @@ function GuildPage({ GuildName }) {
     }
     // Pin the message function
     function renderPin(message) {
-        if (pinFlag && messageId === message._id && userName === message.user) {
+        if (pinFlag && messageId === message._id && userName === message.user && message.pinned === true) {
+            return <>
+            <p>Unpin Message?</p>
+            <div id='delete-message-buttons'>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setUnpin(true)
+            }}> &emsp; Unpin &emsp; </button>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setMessageId(null)
+                setDelMessage(false)
+                setDeleteFlag(false)
+                setPinMessage(false)
+                setEditMessage(false)
+                setPinFlag(false)
+                setEdit(false)
+            }}>Cancel</button>
+            </div>
+            </>
+        } else if (pinFlag && messageId === message._id && userName === message.user) {
             return <>
             <p>Pin Message?</p>
             <div id='delete-message-buttons'>
@@ -360,7 +382,7 @@ function GuildPage({ GuildName }) {
         </div>
         <MessageEditDelete GuildName={GuildName} delMessage={delMessage} editMessage={editMessage} messageId={messageId} newMessage={newMessage} setSent={setSent} sent={sent}/>
         <LeaveGuild leaveFlag={leaveFlag}/>
-        <Pin pinMessage={pinMessage} messageId={messageId} setSent={setSent} sent={sent}/>
+        <Pin pinMessage={pinMessage} unpin={unpin} messageId={messageId} setSent={setSent} sent={sent}/>
     </>
     )
 }

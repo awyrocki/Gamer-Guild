@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 
-function Pin({ pinMessage, messageId, setSent, sent }) {
-
+function Pin({ pinMessage, unpin, messageId, setSent, sent }) {
+    let body = {
+        pinned: true
+    }
     function pinNewMessage() {
         const url = `http://localhost:4000/message/update/${messageId}`
         
-        const body = {
-            pinned: true
-        }
         fetch(url, {
             method: "PUT",
             body: JSON.stringify(body),
@@ -24,9 +23,22 @@ function Pin({ pinMessage, messageId, setSent, sent }) {
 
     useEffect(() => {
         if (pinMessage === true) {
+            body = {
+                pinned: true
+            }
             pinNewMessage()
-        }
+        } 
     }, [pinMessage])
+
+    useEffect(() => {
+        if (unpin === true) {
+            body = {
+                pinned: false
+            }
+            pinNewMessage()
+        } 
+    }, [unpin])
+
     return (
     <>
     </>
