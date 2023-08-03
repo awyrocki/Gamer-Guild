@@ -69,6 +69,7 @@ function GuildPage({ GuildName }) {
         .catch(err => console.log(err))
     }
 
+
     // filters pinned messages 
     function filterPin() {
         if (onlyPin === true) {
@@ -167,7 +168,6 @@ function GuildPage({ GuildName }) {
             </>
         }
     }
-
 
     // change to input field when edit is selected
     function renderEdit(message) {
