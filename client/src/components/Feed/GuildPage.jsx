@@ -173,6 +173,7 @@ function GuildPage({ GuildName }) {
     function renderEdit(message) {
         if (edit && messageId === message._id && userName === message.user){
         return <>
+        <div id='message-body-conatiner'>
         <img src={message.gifUrl} alt=""  width={'250px'} id='message-gif'/>
         <input type="text" name="message edit" id="new-message"  placeholder={message.body} onChange={e => {
             e.preventDefault()
@@ -192,6 +193,7 @@ function GuildPage({ GuildName }) {
             setPinFlag(false)
             setNewMessage("")
         }}>Cancel</button>
+        </div>
         </div>
         </>
         } else {
