@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./Nav.css"
 import icon from "./gg.png"
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
@@ -7,11 +7,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge'
 import { AppBar, Box, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material"
-import InputBase from '@mui/material/InputBase';
+import TextField from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar'
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import IconButton from '@mui/material/IconButton'
+import Autocomplete from '@mui/material/Autocomplete';
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -73,7 +74,6 @@ const toggleTheme = () => {
   const handleIconClick = () => {
     setMode(!mode)
   }
-  
 
   const [ lightDarkMode, setLightDarkMode ] = useState(true)
   const [ open, setOpen ] = useState(false)
@@ -92,7 +92,9 @@ const toggleTheme = () => {
           src={icon}
           sx={{display:{xs:"block", sm:"none"}}}
           />
-          <Search id='search-bar'><InputBase placeholder='Search Guilds'/></Search>
+          <Search id='search-bar'>
+          
+          </Search>
           <Icons>
             <a
             onClick={handleClick}
