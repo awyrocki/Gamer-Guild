@@ -20,6 +20,9 @@
   /* Profile name */
   #profile-name-container {
     text-align: center;
+    color: var(--text_color);
+    background-color: var(--button_background);
+
   }
   
   #profile-name {
@@ -94,4 +97,22 @@
     color: #999999;
   }
   
-  
+/* Button for toggling guilds */
+.show {
+  display: block;
+  margin-left: auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: underline;
+  font-weight: bold;
+  color: var(--text_color);
+  background-color: var(--button_background);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.show:hover {
+  background-color: var(--button_hover_background);
+}
+
