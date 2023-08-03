@@ -61,7 +61,6 @@ function GuildPage({ GuildName }) {
         .catch(err => console.log(err))
     }
 
-
 useEffect(() => {
     fetchMessages()
     }, [sent])
@@ -74,7 +73,6 @@ useEffect(() => {
     const handleCloseMenu = () => {
         setAnchorElement(null)
     }
-
 
     // change to input field when edit is selected
     function renderEdit(message) {

@@ -20,7 +20,6 @@ body {
 @media screen and (max-width: 700px) {
     #left-columns {
         width: auto;
-        
         min-width: none;
     }
 
