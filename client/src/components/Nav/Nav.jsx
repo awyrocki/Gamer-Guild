@@ -12,6 +12,7 @@ import Avatar from '@mui/material/Avatar'
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import IconButton from '@mui/material/IconButton'
+import SearchGuilds from './SearchGuilds';
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -78,6 +79,9 @@ const toggleTheme = () => {
   const [ lightDarkMode, setLightDarkMode ] = useState(true)
   const [ open, setOpen ] = useState(false)
 
+  // search text input
+  const [ search, setSearch ] = useState("")
+
   return (
     <>
       <AppBar position='sticky' id="nav-bar">
@@ -92,7 +96,13 @@ const toggleTheme = () => {
           src={icon}
           sx={{display:{xs:"block", sm:"none"}}}
           />
-          <Search id='search-bar'><InputBase placeholder='Search Guilds'/></Search>
+          <Search onChange={e => {
+              e.preventDefault()
+              setSearch(e.target.value)
+            }} id='search-bar'>
+            <InputBase placeholder='Search Guilds'/>
+            <SearchGuilds search={search}/>
+            </Search>
           <Icons>
             <a
             onClick={handleClick}

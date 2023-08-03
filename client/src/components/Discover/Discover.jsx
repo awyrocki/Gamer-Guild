@@ -125,7 +125,7 @@ useEffect(() => {
             ))}
         </div>
     </>
-  )
+    )
 }
 
 export default Discover
