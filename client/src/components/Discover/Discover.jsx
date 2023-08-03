@@ -8,11 +8,11 @@ import { Typography } from '@mui/material';
 
 // add sessiontoken
 function Discover() {
+    const queryParameters = new URLSearchParams(window.location.search)
+    const GuildName = queryParameters.get("GuildName")
 
     const [ allGuild, setAllGuild ] = useState([])
-    const [ join, setJoin ] = useState(<></>)
     const [ guild, setGuild ] = useState("")
-    const [ guildId, setGuildId ] = useState("") 
     const userID = localStorage.getItem("id")
 
     const fetchGuild = () => {
@@ -39,8 +39,8 @@ function Discover() {
         fetchGuild()
     }, [])
 
-function joinGuild() {
-    const url = `http://127.0.0.1:4000/guild/update/${guildId}`
+function joinGuild(id) {
+    const url = `http://127.0.0.1:4000/guild/update/${id}`
     const body = {
         "addedUsers": `${userID}` 
     };
@@ -57,21 +57,23 @@ function joinGuild() {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-        setTimeout(() => window.location = (`http://localhost:3000/?GuildName=${guild}`), 1000 )
+        setTimeout(() => window.location = (`http://localhost:3000/?GuildName=${GuildName}`), 1000 )
         })
         .catch(err => console.log(err))
     
 }
 
-// renders buttons for join
-function askJoin() {
-    setJoin(
-        <>
+// displays the ask button if user is not in guild
+function notJoined() {
+    let found = allGuild.filter(guild => guild.name === GuildName)
+    if (found.length > 0) {
+        return <>
+        <div id='restricted'>
         <div id='join-container'>
         <Typography
         fontSize={'1em'}
         color={"var(--text_color)"}
-        >{`Join ${guild}?`}
+        >{`Join ${GuildName}?`}
         </Typography>
         <Stack direction="row" spacing={1} alignItems={'center'} justifyContent={'center'}>
         <IconButton>
@@ -79,7 +81,7 @@ function askJoin() {
             sx={{color:"var(--text_color)"}}
             onClick={e => {
                 e.preventDefault()
-                joinGuild()
+                joinGuild(found[0]._id)
             }}
             />
         </IconButton>
@@ -88,43 +90,42 @@ function askJoin() {
             sx={{color:"var(--text_color)"}}
             onClick={e => {
                 e.preventDefault()
-                setJoin(<></>)
-                setGuild("")
-                setGuildId("")
+                setTimeout(() => window.location = (`http://localhost:3000/`), 100 )
             }}
             />
         </IconButton>
         </Stack>
         </div>
+        </div>
         </>
-    )
+    }
 }
 
+// redirects to guild page
 useEffect(() => {
-    if(guild !== "") {
-        askJoin()
+    if (guild !== "") {
+        setTimeout(() => window.location = (`http://localhost:3000/?GuildName=${guild}`), 200 )
     }
 }, [guild])
 
-  return (
+    return (
     <>
+        {notJoined()}
         <div id='discover-container'>
         <h3 id='discover-title'>Discover</h3>
         <hr />
             {allGuild.map((guild, i) => (
                 <div key={i} className='guild-list' >
                     <h3 onClick={e => {
-                        // e.preventDefault()
+                        e.preventDefault()
                         setGuild(e.target.innerHTML)
-                        setGuildId(e.target.id)
                     }} id={guild._id} className='guild' >{guild.name}</h3><p id='guild-description'>{guild.description}</p>
                 <hr />
                 </div>
             ))}
         </div>
-        {join}
     </>
-  )
+    )
 }
 
 export default Discover

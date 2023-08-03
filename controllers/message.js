@@ -5,9 +5,10 @@ const sessionValidation = require("../middleware/token")
 // Create a message inside a guild room
 router.post("/create", async (req, res) => {
     try {
-        const { user, guild, body, flagged } = req.body
+        const { user, guild, body, gifUrl } = req.body
         if (!user || !guild || !body) throw Error("Please include all criteria")
-        const newMessage = new Message({ user, guild, body })
+        const pinned = false
+        const newMessage = new Message({ user, guild, body, pinned, gifUrl })
         await newMessage.save()
         res.status(201).json({
             message: 'message saved',

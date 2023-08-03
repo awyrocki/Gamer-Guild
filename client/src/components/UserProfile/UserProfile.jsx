@@ -101,7 +101,7 @@ useEffect(() => {
             return <p></p>
         } else {
             return <>
-            <p> &emsp;({steamUser.personaname})</p>
+            <p>({steamUser.personaname})</p>
             </>
         }
     }
@@ -111,13 +111,18 @@ useEffect(() => {
         <div id='outer-profile'>
             <div id='inner-profile'>
                 <div id='profile-name-container'>
-                    <p id='profile-name'>{user.userName}</p>
-                    {steamName()}
+                    <p id='profile-name'>{user.userName}&emsp;</p>
+                    <div id='steam-name-container'>
+                    <h4>steam:&nbsp;</h4>
+                    <p id='steam-name'>{steamName()}</p>
+                    </div>
                 </div>
                 <div id='pic-bio'>
-                <img id='user-pic' src={user.profilePic} alt="profile pic" />
-                <div id='status'>{onlineStatus()}</div>
-                <p id='user-bio'> &emsp; {user.bio}</p>
+                <div id='user-profile-pic-container'>
+                    <img id='user-pic' src={user.profilePic} alt="profile pic" />
+                    <div id='status'>{onlineStatus()}</div>
+                </div>
+                <p id='user-bio'>{user.bio}</p>
                 </div>
                 <h2 id='profile-guild-title'>Joined Guilds</h2>
                 <div id='profile-guilds'>

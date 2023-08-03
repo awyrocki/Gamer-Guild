@@ -138,8 +138,8 @@
 #edit-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: .5em;
+    gap: 30px;
+    margin-top: 1em;
 }
 
 #delete-message-buttons {
@@ -149,8 +149,53 @@
     margin-top: .5em;
 }
 
+#new-message{
+    width: 100vw;
+    max-width: 22em;
+    min-width: 10em;
+}
+
+#pinned-container {
+    display: flex;
+    justify-content: right;
+}
+
+.pinned-button {
+    font-size: 1em;
+    background-color: var(--body_color);
+    color: var(--text_color);
+    border: 2px solid var(--boxshadow_color);
+    border-radius: 3px;
+}
+
+.pinned-button:hover {
+    background-color: var(--subtext_color);
+}
+
+#emoji-picker {
+    position: absolute;
+    top: 20em;
+}
+
+#gif-picker {
+    position: absolute;
+    top: 20em;
+}
+
+#message-gif {
+    border-radius: 5px;
+}
+
+#message-body-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 @media screen and (max-width: 700px) {
     #feed-container {
         margin-left: 0;
     }
+
 }
