@@ -173,6 +173,7 @@ function GuildPage({ GuildName }) {
     function renderEdit(message) {
         if (edit && messageId === message._id && userName === message.user){
         return <>
+        <img src={message.gifUrl} alt=""  width={'250px'} id='message-gif'/>
         <input type="text" name="message edit" id="new-message"  placeholder={message.body} onChange={e => {
             e.preventDefault()
             setNewMessage(e.target.value)
@@ -194,7 +195,12 @@ function GuildPage({ GuildName }) {
         </div>
         </>
         } else {
-            return <>{message.body}</>
+            return <>
+            <div id='message-body-conatiner'>
+            <img src={message.gifUrl} alt=""  width={'250px'} id='message-gif'/>
+            <p>{message.body}</p>
+            </div>
+            </>
         }
     }
 

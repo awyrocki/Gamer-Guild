@@ -174,3 +174,17 @@
     position: absolute;
     top: 20em;
 }
+
+#gif-picker {
+    position: absolute;
+    top: 20em;
+}
+
+#message-gif {
+    border-radius: 5px;
+}
+
+#message-body-container {
+    display: flex;
+    flex-direction: column;
+}

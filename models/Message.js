@@ -14,6 +14,10 @@ const Messages = new mongoose.Schema(
             type: String,
             required: true
         },
+        gifUrl: {
+            type: String,
+            required: false
+        },
         pinned: {
             type: Boolean,
             required: false

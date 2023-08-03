@@ -8,10 +8,15 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import GifIcon from '@mui/icons-material/Gif';
 import Button from '@mui/material/Button';
 import EmojiPicker from 'emoji-picker-react';
+import GifPicker from 'gif-picker-react';
+
 
 function MessageInput({ GuildName, setSent, sent }) {
     const [ emojiShow, setEmojiShow ] = useState(false)
+    const [ gifShow, setGifShow ] = useState(false)
     const [ emoji, setEmoji ] = useState(null)
+    const [ gif, setGif ] = useState(null)
+    const [gifURL , setGifURL ] = useState("")
     const [ input, setInput ] = useState("")
     const textFieldRef = useRef()
     const mode = localStorage.getItem("selectedTheme")
@@ -31,6 +36,25 @@ function MessageInput({ GuildName, setSent, sent }) {
         }
     }, [emoji])
 
+    // sets gif url
+    const [gifGo, setGifGo ] = useState(false)
+    useEffect(() => {
+        if (gif !== null) {
+            setGifURL(gif.url)
+            setInput(" ")
+            setGifShow(!gifShow)
+            setGifGo(true)
+        }
+    }, [gif])
+
+    // triggers the message to send gif
+    useEffect(() => {
+        if (gifGo === true && gifURL !== "") {
+            setGifGo(false)
+            createMessage()
+        }
+    }, [gifGo])
+
     // displays the emoji picker
     function renderEmoji() {
         if (emojiShow === true) {
@@ -42,20 +66,30 @@ function MessageInput({ GuildName, setSent, sent }) {
         }
     }
 
-    const inputFile = useRef(null)
+    function renderGif() {
+        if (gifShow === true) {
+        return <>
+            <GifPicker theme={mode} tenorApiKey={process.env.REACT_APP_TENOR_KEY}  onGifClick={setGif}/>
+        </>
+        } else {
+            return <></>
+        }
+    }
 
+    // opens file explorer
+    const inputFile = useRef(null)
     function file() {
         inputFile.current.click()
     }
 
     function createMessage() {
-
         const user = localStorage.getItem("userName")
         const url = "http://127.0.0.1:4000/message/create"
         const send = {
             user: user,
             guild: GuildName,
-            body: input
+            body: input,
+            gifUrl: gifURL
         }
 
         fetch(url, {
@@ -70,9 +104,11 @@ function MessageInput({ GuildName, setSent, sent }) {
         .then(data => setSent(!sent)) //triggers useState to render messages
         .catch(err => console.log(err))
     }
+
     return (
     <>
         <div id='emoji-picker'>{renderEmoji()}</div>
+        <div id='gif-picker'>{renderGif()}</div>
         <div id='input-container'>
         <form action="" id='message-form'>
         <Box sx={{width:"95%"}}>
@@ -95,7 +131,10 @@ function MessageInput({ GuildName, setSent, sent }) {
                     setEmojiShow(!emojiShow)
                 }} sx={{color:"var(--text_color)"}}/>
                 <AddPhotoAlternateIcon onClick={file} sx={{color:"var(--text_color)"}}/>
-                <GifIcon sx={{color:"var(--text_color)"}}/>
+                <GifIcon onClick={e => {
+                    e.preventDefault()
+                    setGifShow(!gifShow)
+                }} sx={{color:"var(--text_color)"}}/>
                 <Button
                 id='send' 
                 onClick={e => {
