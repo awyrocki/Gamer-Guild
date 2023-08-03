@@ -13,6 +13,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import IconButton from '@mui/material/IconButton'
 import SearchGuilds from './SearchGuilds';
+import InputBase from '@mui/material/InputBase'
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
