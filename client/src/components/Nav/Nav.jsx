@@ -96,7 +96,6 @@ const toggleTheme = () => {
           src={icon}
           sx={{display:{xs:"block", sm:"none"}}}
           />
-
           <Search onChange={e => {
               e.preventDefault()
               setSearch(e.target.value)
@@ -104,7 +103,6 @@ const toggleTheme = () => {
             <InputBase placeholder='Search Guilds'/>
             <SearchGuilds search={search}/>
             </Search>
-
           <Icons>
             <a
             onClick={handleClick}
