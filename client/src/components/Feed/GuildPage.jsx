@@ -23,7 +23,6 @@ import LeaveGuild from './LeaveGuild';
 import Pin from './Pin';
 import { set } from 'mongoose';
 
-
 function GuildPage({ GuildName }) {
     const [messages, setMessages ] = useState([])
     // to trigger fetch
@@ -68,7 +67,6 @@ function GuildPage({ GuildName }) {
         })
         .catch(err => console.log(err))
     }
-
 
     // filters pinned messages 
     function filterPin() {
@@ -235,7 +233,6 @@ function GuildPage({ GuildName }) {
     function fetchPic() {
         messages.forEach(message => {
             const url = `http://localhost:4000/user/username/${message.user}`
-    
             fetch(url, {
                 method: "GET",
                 headers: new Headers({
@@ -248,7 +245,6 @@ function GuildPage({ GuildName }) {
                 {setProfilePic(oldProfiles => [...oldProfiles, data])}
             })
             .catch(err => console.log(err))
-
         })
     }
     
@@ -264,14 +260,18 @@ function GuildPage({ GuildName }) {
 
     useEffect(() => {
         if (picGo === true) {
-
             fetchPic() 
         }
     }, [picGo])
-    
+    // counting the likes
+    const [ likes, setLikes ] = useState(0)
+
+    const handleLikes = () => {
+        setLikes(prevLikes => (prevLikes === 1 ? prevLikes -1 : prevLikes + 1))
+        
+    }
 
     function render() {
-
         return <>
         <div id='guild-container'>
         <div>
@@ -354,7 +354,8 @@ function GuildPage({ GuildName }) {
             </CardContent>
             <CardActions disableSpacing sx={{bgcolor:"var(--body_color)"}}>
                 <IconButton aria-label="add to favorites">
-                <Checkbox icon={<FavoriteBorder sx={{color:"var(--subtext_color)"}}/>} checkedIcon={<Favorite sx={{color: "var(--subtext_color)"}}/>} />
+                <Checkbox onClick={handleLikes} icon={<FavoriteBorder sx={{color:"var(--subtext_color)"}}/>} checkedIcon={<Favorite sx={{color: "var(--subtext_color)"}}/>} />
+                <Typography sx={{color: "var(--text_color)"}}>{likes}</Typography>
                 </IconButton>
                 <IconButton aria-label="share" sx={{color:"var(--subtext_color)"}}>
                     <ShareIcon />
@@ -363,17 +364,13 @@ function GuildPage({ GuildName }) {
         </Card>
             </div>
         ))}
-        
             </div>
             </div>
             </>
     }
-
-
     // renders messages
     return (
-    <>
-    
+    <>    
     <div id='guild-name'>{GuildName}</div>
         <div id='pinned-container'>
         {showPinned()}
