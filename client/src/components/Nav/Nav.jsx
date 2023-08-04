@@ -17,7 +17,7 @@ import InputBase from '@mui/material/InputBase'
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
-  justifyContent: "space-around",
+  justifyContent: "space-evenly",
   alignItems:"center",
   backgroundColor:"var(--body_color)"
 })
@@ -77,10 +77,18 @@ const toggleTheme = () => {
   }
 
   const [ lightDarkMode, setLightDarkMode ] = useState(true)
-  const [ open, setOpen ] = useState(false)
 
   // search text input
   const [ search, setSearch ] = useState("")
+
+  // added same drop down menu behavior as message card
+  const [ anchorElement, setAnchorElement ] = useState(null)
+  const handleMenuClick = e => {
+      setAnchorElement(e.currentTarget)
+  }
+  const handleCloseMenu = () => {
+      setAnchorElement(null)
+  }
 
   return (
     <>
@@ -102,7 +110,7 @@ const toggleTheme = () => {
             }} id='search-bar'>
             <InputBase placeholder='Search Guilds'/>
             <SearchGuilds search={search}/>
-            </Search>
+          </Search>
           <Icons>
             <a
             onClick={handleClick}
@@ -126,7 +134,7 @@ const toggleTheme = () => {
               />}
             </IconButton>
             <SettingsIcon
-            onClick={(e) => setOpen(true)}
+            onClick={handleMenuClick}
             id='nav-icon'
             />
           </Icons>
@@ -134,8 +142,9 @@ const toggleTheme = () => {
         <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose={(e) => setOpen(false)}
+        anchorEl={anchorElement}
+        open={Boolean(anchorElement)}
+        onClose={handleCloseMenu}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'right',
