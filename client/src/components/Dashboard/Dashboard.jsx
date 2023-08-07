@@ -9,6 +9,7 @@ import UserList from '../Discover/UserList/UserList';
 import ScreenWidth from '../Mobile/ScreenWidth'
 import BottomNav from '../Mobile/BottomNav';
 import ScreenWidthMin from '../Mobile/ScreenWidthMin';
+import MobileJoin from '../Discover/MobileJoin';
 
 function Dashboard({ logout }) {
   // grabs guild name from url params
@@ -69,6 +70,7 @@ function Dashboard({ logout }) {
         <div id='container'>
           {renderMobile()}
         </div>
+        <MobileJoin />
         <BottomNav left={left} setLeft={setLeft} feed={feed} setFeed={setFeed} right={right} setRight={setRight} />
       </ScreenWidth>
       <Footer />
