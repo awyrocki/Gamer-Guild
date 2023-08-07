@@ -116,11 +116,15 @@ function UserProfile() {
                 <div id='inner-profile'>
                     <div id='profile-name-container'>
                         <p id='profile-name'>{user && user.userName}</p>
+                        <div id='steam-name-container'>
                         {steamName()}
+                        </div>
                     </div>
                     <div id='pic-bio'>
+                    <div id='user-profile-pic-container'>
                         <img id='user-pic' src={user && (user.profilePic || profilePic)} alt="profile pic" />
                         <div id='status'>{onlineStatus()}</div>
+                    </div>
                         <p id='user-bio'> &emsp; {user && user.bio}</p>
                     </div>
                     <div>
