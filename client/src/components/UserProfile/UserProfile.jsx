@@ -132,7 +132,7 @@ function UserProfile() {
                             {showAllGuilds ? "Show Mutual Guilds" : "Show Joined Guilds"}
                         </button>
                     </div>
-                    <h2 id='profile-guild-title'>Joined Guilds</h2>
+                    <h2></h2>
                     <div id='profile-guilds'>
                         {joinedGuilds
                             .filter((guild) => {
