@@ -259,7 +259,6 @@ function GuildPage({ GuildName }) {
     }
 
     useEffect(() => {
-        if (picGo === true) {
             fetchPic() 
     }, [picGo])
 
