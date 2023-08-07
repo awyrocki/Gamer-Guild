@@ -64,7 +64,7 @@ function GuildPage({ GuildName }) {
         .then(res => res.json())
         .then(data => {
             setMessages(data)
-            setPicGo(true)
+            setPicGo(!picGo)
         })
         .catch(err => console.log(err))
     }
@@ -263,10 +263,7 @@ function GuildPage({ GuildName }) {
     }
 
     useEffect(() => {
-        if (picGo === true) {
-
             fetchPic() 
-        }
     }, [picGo])
     
 
