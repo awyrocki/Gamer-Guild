@@ -129,7 +129,7 @@ function UserProfile() {
                     </div>
                     <div>
                         <button className='show' onClick={toggleFilter}>
-                            {showAllGuilds ? "Show joined Guilds Only" : "Show All Guilds"}
+                            {showAllGuilds ? "Show Mutual Guilds" : "Show Joined Guilds"}
                         </button>
                     </div>
                     <h2 id='profile-guild-title'>Joined Guilds</h2>
@@ -137,9 +137,9 @@ function UserProfile() {
                         {joinedGuilds
                             .filter((guild) => {
                                 if (showAllGuilds) {
-                                    return !guild.addedUsers.includes(id);
+                                    return guild.addedUsers.includes(user.id);
                                 } else {
-                                    return guild.addedUsers.includes(id);
+                                    return guild.addedUsers.includes(user.id) && guild.addedUsers.includes(id) ;
                                 }
                             })
                             .filter((guild) => {
