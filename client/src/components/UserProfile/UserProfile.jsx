@@ -11,7 +11,7 @@ function UserProfile() {
     const [steamUser, setSteamUser] = useState(null);
     const token = localStorage.getItem("token");
     const [steamID, setSteamID] = useState("");
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState(null);
     const [showAllGuilds, setShowAllGuilds] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
     let id = localStorage.getItem("id");
@@ -116,23 +116,17 @@ function UserProfile() {
             <div id='outer-profile'>
                 <div id='inner-profile'>
                     <div id='profile-name-container'>
-                        <p id='profile-name'>{user.userName}</p>
+                        <p id='profile-name'>{user && user.userName}</p>
                         {steamName()}
                     </div>
                     <div id='pic-bio'>
-                        <img id='user-pic' src={user.profilePic || profilePic} alt="profile pic" />
+                        <img id='user-pic' src={user && (user.profilePic || profilePic)} alt="profile pic" />
                         <div id='status'>{onlineStatus()}</div>
-                        <p id='user-bio'> &emsp; {user.bio}</p>
+                        <p id='user-bio'> &emsp; {user && user.bio}</p>
                     </div>
                     <div>
-                        <input
-                            type="text"
-                            placeholder="Search users..."
-                            value={searchQuery}
-                            onChange={handleSearch}
-                        />
                         <button className='show' onClick={toggleFilter}>
-                            {showAllGuilds ? "Show Unjoined Guilds Only" : "Show All Guilds"}
+                            {showAllGuilds ? "Show joined Guilds Only" : "Show All Guilds"}
                         </button>
                     </div>
                     <h2 id='profile-guild-title'>Joined Guilds</h2>
