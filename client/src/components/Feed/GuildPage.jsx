@@ -64,7 +64,7 @@ function GuildPage({ GuildName }) {
         .then(res => res.json())
         .then(data => {
             setMessages(data)
-            setPicGo(true)
+            setPicGo(!picGo)
         })
         .catch(err => console.log(err))
     }
@@ -263,10 +263,7 @@ function GuildPage({ GuildName }) {
     }
 
     useEffect(() => {
-        if (picGo === true) {
-
             fetchPic() 
-        }
     }, [picGo])
     
 
@@ -287,7 +284,7 @@ function GuildPage({ GuildName }) {
             onClick={handleMenuClick}
             aria-haspopup="true"
             aria-controls='demo-positioned-menu'
-            ><MoreVert id={message._id} sx={{color:"var(--subtext_color)", padding: "3px"}} onClick={e => {
+            ><MoreVert id={message._id} sx={{color:"var(--subtext_color)", padding: "5px"}} onClick={e => {
                 setMessageId(e.target.id)
             }}/>
             </IconButton>}

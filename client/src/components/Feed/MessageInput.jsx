@@ -52,6 +52,8 @@ function MessageInput({ GuildName, setSent, sent }) {
         if (gifGo === true && gifURL !== "") {
             setGifGo(false)
             createMessage()
+            setGifURL("")
+            setInput("")
         }
     }, [gifGo])
 

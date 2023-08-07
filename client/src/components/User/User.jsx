@@ -23,7 +23,7 @@ function User({ logout }) {
     })
     .then(res => res.json())
     .then(data => {
-      if(data.message === "You are not authorized" || data.message === "invalid signature" || data.message === "jwt malformed" || data.message === "invalid token" || data.message === "expired token" ) {
+      if(data.message === "You are not authorized" || data.message === "invalid signature" || data.message === "jwt malformed" || data.message === "invalid token" || data.message === "jwt expired" ) {
         logout()
     } else {
       setUserProfile(data)
