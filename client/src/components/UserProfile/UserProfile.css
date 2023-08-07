@@ -21,12 +21,15 @@
   
   /* Profile name */
   #profile-name-container {
+    text-align: center;
+    background-color: var(--button_background);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--text_color);
     margin-bottom: -1em;
+
   }
   
   #profile-name {
@@ -114,4 +117,30 @@
   #guild-linebreak {
     margin-top: 10px;
   }
+
+  /* Footer */
+  footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #999999;
+  }
   
+/* Button for toggling guilds */
+.show {
+  display: block;
+  margin-left: auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: underline;
+  font-weight: bold;
+  color: var(--text_color);
+  background-color: var(--button_background);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.show:hover {
+  background-color: var(--button_hover_background);
+}

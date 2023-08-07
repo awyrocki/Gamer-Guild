@@ -3,6 +3,7 @@ import Steam from '../Steam/Steam';
 import profilePic from "./default-profile.jpg"
 import "./User.css"
 
+
 function User({ logout }) {
   const [ userProfile, setUserProfile ] = useState(null);
   const [ steamUser, setSteamUser ] = useState(null)
