@@ -23,7 +23,6 @@ import LeaveGuild from './LeaveGuild';
 import Pin from './Pin';
 import { set } from 'mongoose';
 
-
 function GuildPage({ GuildName }) {
     const [messages, setMessages ] = useState([])
     // to trigger fetch
@@ -68,7 +67,6 @@ function GuildPage({ GuildName }) {
         })
         .catch(err => console.log(err))
     }
-
 
     // filters pinned messages 
     function filterPin() {
@@ -235,7 +233,6 @@ function GuildPage({ GuildName }) {
     function fetchPic() {
         messages.forEach(message => {
             const url = `http://localhost:4000/user/username/${message.user}`
-    
             fetch(url, {
                 method: "GET",
                 headers: new Headers({
@@ -248,7 +245,6 @@ function GuildPage({ GuildName }) {
                 {setProfilePic(oldProfiles => [...oldProfiles, data])}
             })
             .catch(err => console.log(err))
-
         })
     }
     
@@ -263,12 +259,11 @@ function GuildPage({ GuildName }) {
     }
 
     useEffect(() => {
+        if (picGo === true) {
             fetchPic() 
     }, [picGo])
-    
 
     function render() {
-
         return <>
         <div id='guild-container'>
         <div>
@@ -360,17 +355,13 @@ function GuildPage({ GuildName }) {
         </Card>
             </div>
         ))}
-        
             </div>
             </div>
             </>
     }
-
-
     // renders messages
     return (
-    <>
-    
+    <>    
     <div id='guild-name'>{GuildName}</div>
         <div id='pinned-container'>
         {showPinned()}

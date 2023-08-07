@@ -110,7 +110,7 @@ const toggleTheme = () => {
             }} id='search-bar'>
             <InputBase placeholder='Search Guilds'/>
             <SearchGuilds search={search}/>
-          </Search>
+            </Search>
           <Icons>
             <a
             onClick={handleClick}
@@ -124,7 +124,7 @@ const toggleTheme = () => {
               href='http://localhost:3000/Notifications'
               ><NotificationsIcon id='nav-icon'/></a>
             </Badge>
-            <IconButton id='nav-icon' onClick={handleIconClick}>
+            <IconButton sx={{ml: -1, mr: -1}} id='nav-icon' onClick={handleIconClick}>
               {mode ? <LightModeIcon 
               onClick={() => {setLightDarkMode(!lightDarkMode);
                 toggleTheme();}}

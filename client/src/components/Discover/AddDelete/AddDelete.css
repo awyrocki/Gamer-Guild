@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     max-width: 13em;
+    gap: 0.5em;
     min-width: 8em;
 }
 
@@ -19,4 +20,8 @@
     display: flex;
     gap: 1.5em;
     margin-top: 0.5em;
+}
+
+#create-guild-field {
+    margin-top: -20px;
 }
