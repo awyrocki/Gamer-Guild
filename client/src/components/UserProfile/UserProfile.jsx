@@ -101,7 +101,8 @@ useEffect(() => {
             return <p></p>
         } else {
             return <>
-            <p>({steamUser.personaname})</p>
+            <h4>steam:&nbsp;</h4>
+            <p id='steam-name'>({steamUser.personaname})</p>
             </>
         }
     }
@@ -113,8 +114,7 @@ useEffect(() => {
                 <div id='profile-name-container'>
                     <p id='profile-name'>{user.userName}&emsp;</p>
                     <div id='steam-name-container'>
-                    <h4>steam:&nbsp;</h4>
-                    <p id='steam-name'>{steamName()}</p>
+                    {steamName()}
                     </div>
                 </div>
                 <div id='pic-bio'>
