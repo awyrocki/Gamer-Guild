@@ -263,13 +263,6 @@ function GuildPage({ GuildName }) {
             fetchPic() 
         }
     }, [picGo])
-    // counting the likes
-    const [ likes, setLikes ] = useState(0)
-
-    const handleLikes = () => {
-        setLikes(prevLikes => (prevLikes === 1 ? prevLikes -1 : prevLikes + 1))
-        
-    }
 
     function render() {
         return <>
@@ -354,8 +347,7 @@ function GuildPage({ GuildName }) {
             </CardContent>
             <CardActions disableSpacing sx={{bgcolor:"var(--body_color)"}}>
                 <IconButton aria-label="add to favorites">
-                <Checkbox onClick={handleLikes} icon={<FavoriteBorder sx={{color:"var(--subtext_color)"}}/>} checkedIcon={<Favorite sx={{color: "var(--subtext_color)"}}/>} />
-                <Typography sx={{color: "var(--text_color)"}}>{likes}</Typography>
+                <Checkbox icon={<FavoriteBorder sx={{color:"var(--subtext_color)"}}/>} checkedIcon={<Favorite sx={{color: "var(--subtext_color)"}}/>} />
                 </IconButton>
                 <IconButton aria-label="share" sx={{color:"var(--subtext_color)"}}>
                     <ShareIcon />

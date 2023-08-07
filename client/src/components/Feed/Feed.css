@@ -111,27 +111,27 @@
     width: fit-content;
     border: none;
     border-radius: 3px;
-    background-color: #181818;
-    color: #ffffff;
+    background-color: var(--body_color);
+    color: var(--text_color);
     margin-right: 5px;
     margin-bottom: 5px;
 }
 
 #leave-guild:hover {
     cursor: pointer;
-    background-color: #282828;
+    background-color: var(--subtext_color);
 }
 
 .message-buttons {
     padding: 5px;
     border: none;
     border-radius: 3px;
-    background-color: #181818;
-    color: #ffffff;
+    background-color: var(--body_color);
+    color: var(--text_color);
 }
 
 .message-buttons:hover {
-    background-color: #282828;
+    background-color: var(--subtext_color);
     cursor: pointer;
 }
 
@@ -164,8 +164,8 @@
     font-size: 1em;
     background-color: var(--body_color);
     color: var(--text_color);
-    border: 2px solid var(--boxshadow_color);
-    border-radius: 3px;
+    border: 2px solid var(--body_color);
+    margin-top: 1em;
 }
 
 .pinned-button:hover {
