@@ -1,10 +1,33 @@
 body {
     background-image: var(--body_background);
-    height: 100vh;
-    margin-bottom: 5em
+    height: fit-content;
 }
 
 #container {
     display: flex;
     justify-content: center;
+    min-height: 90vh;
+    max-height: fit-content;
+    margin-top: 1em;
+    width: 100vw;
+}
+
+#left-columns {
+    margin-left: 1.5em;
+    width: fit-content;
+}
+
+@media screen and (max-width: 700px) {
+    #left-columns {
+        width: auto;
+        min-width: none;
+    }
+
+    #center-container {
+        width: 90%;
+    }
+
+    footer {
+        display: none;
+    }
 }

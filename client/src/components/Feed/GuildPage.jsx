@@ -20,28 +20,36 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MessageEditDelete from './MessageEditDelete';
 import LeaveGuild from './LeaveGuild';
-
+import Pin from './Pin';
+import { set } from 'mongoose';
 
 function GuildPage({ GuildName }) {
     const [messages, setMessages ] = useState([])
     // to trigger fetch
-    const [ sent, setSent ] = useState("")
+    const [ sent, setSent ] = useState(false)
     const [ messageId, setMessageId ] = useState(null)
     const [ editMessage, setEditMessage ] = useState(false)
     const [ delMessage, setDelMessage ] = useState(false)
     const [ newMessage, setNewMessage ] = useState("")
-    //flag for edit input
+    const [ pinMessage, setPinMessage ] = useState(false)
+    const [ unpin, setUnpin ] = useState(false)
+    // to render only pinned messages
+    const [ onlyPin, setOnlyPin ] = useState(false);
+    // flag for pin 
+    const [ pinFlag, setPinFlag ] = useState(false)
+    // flag for edit input
     const [ edit, setEdit ] = useState(false)
-    //flag for delete input
+    // flag for delete input
     const [ deleteFlag, setDeleteFlag ] = useState(false)
     // leave guild flag
     const [ leaveFlag, setLeaveFlag ] = useState(false)
+    // flag to grab user profile pics
     const [ picGo, setPicGo ] = useState(false)
 
     const userName = localStorage.getItem("userName")
     const token = localStorage.getItem("token")
 
-
+    // grabs messages by guild name
     function fetchMessages() {
         const url = `http://localhost:4000/message/guild/${GuildName}`
         
@@ -54,17 +62,37 @@ function GuildPage({ GuildName }) {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             setMessages(data)
-            setPicGo(true)
+            setPicGo(!picGo)
         })
         .catch(err => console.log(err))
     }
 
+    // filters pinned messages 
+    function filterPin() {
+        if (onlyPin === true) {
+            let pinnedMessages = messages.filter(message => message.pinned == true)
+            setMessages(pinnedMessages);
+        }
+    }
 
-useEffect(() => {
-    fetchMessages()
-    }, [sent])
+    useEffect(() => {
+        if (onlyPin === true) {
+            filterPin()
+        }
+    }, [onlyPin])
+
+    useEffect(() => {
+        fetchMessages()
+        setMessageId(null)
+        setDelMessage(false)
+        setDeleteFlag(false)
+        setPinMessage(false)
+        setUnpin(false)
+        setPinFlag(false)
+        setEditMessage(false)
+        setEdit(false)
+        }, [sent])
 
     // for message cards
     const [ anchorElement, setAnchorElement ] = useState(null)
@@ -75,11 +103,76 @@ useEffect(() => {
         setAnchorElement(null)
     }
 
+    // for pinned message button
+    function showPinned() {
+        if( onlyPin === false) {
+            return <>
+            <button className='pinned-button' onClick={e => {
+            e.preventDefault()
+            setOnlyPin(true)
+            }}>Pinned Messages</button>
+            </>
+        } else {
+            return  <>
+            <button className='pinned-button' onClick={e => {
+            e.preventDefault()
+            setOnlyPin(false)
+            setSent(!sent)
+            }}>All Messages</button>
+        </>
+        }
+    }
+    // Pin the message function
+    function renderPin(message) {
+        if (pinFlag && messageId === message._id && userName === message.user && message.pinned === true) {
+            return <>
+            <p>Unpin Message?</p>
+            <div id='delete-message-buttons'>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setUnpin(true)
+            }}> &emsp; Unpin &emsp; </button>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setMessageId(null)
+                setDelMessage(false)
+                setDeleteFlag(false)
+                setPinMessage(false)
+                setEditMessage(false)
+                setPinFlag(false)
+                setEdit(false)
+            }}>Cancel</button>
+            </div>
+            </>
+        } else if (pinFlag && messageId === message._id && userName === message.user) {
+            return <>
+            <p>Pin Message?</p>
+            <div id='delete-message-buttons'>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setPinMessage(true)
+            }}> &emsp; Pin &emsp; </button>
+            <button className='message-buttons' onClick={e => {
+                e.preventDefault()
+                setMessageId(null)
+                setDelMessage(false)
+                setDeleteFlag(false)
+                setPinMessage(false)
+                setEditMessage(false)
+                setPinFlag(false)
+                setEdit(false)
+            }}>Cancel</button>
+            </div>
+            </>
+        }
+    }
 
     // change to input field when edit is selected
     function renderEdit(message) {
         if (edit && messageId === message._id && userName === message.user){
         return <>
+        <div id='message-body-conatiner'>
+        <img src={message.gifUrl} alt=""  width={'250px'} id='message-gif'/>
         <input type="text" name="message edit" id="new-message"  placeholder={message.body} onChange={e => {
             e.preventDefault()
             setNewMessage(e.target.value)
@@ -94,12 +187,20 @@ useEffect(() => {
             setMessageId(null)
             setEdit(false)
             setDeleteFlag(false)
+            setPinMessage(false)
+            setPinFlag(false)
             setNewMessage("")
         }}>Cancel</button>
         </div>
+        </div>
         </>
         } else {
-            return <>{message.body}</>
+            return <>
+            <div id='message-body-conatiner'>
+            <img src={message.gifUrl} alt=""  width={'250px'} id='message-gif'/>
+            <p>{message.body}</p>
+            </div>
+            </>
         }
     }
 
@@ -107,7 +208,7 @@ useEffect(() => {
     function renderDelete(message) {
         if (deleteFlag && messageId === message._id && userName === message.user) {
             return <>
-            <p>delete message?</p>
+            <p>Delete message?</p>
             <div id='delete-message-buttons'>
             <button className='message-buttons' onClick={e => {
                 e.preventDefault()
@@ -118,8 +219,10 @@ useEffect(() => {
                 setMessageId(null)
                 setDelMessage(false)
                 setDeleteFlag(false)
+                setPinMessage(false)
+                setPinFlag(false)
                 setEdit(false)
-            }}>cancel</button>
+            }}>Cancel</button>
             </div>
             </>
         }
@@ -130,7 +233,6 @@ useEffect(() => {
     function fetchPic() {
         messages.forEach(message => {
             const url = `http://localhost:4000/user/username/${message.user}`
-    
             fetch(url, {
                 method: "GET",
                 headers: new Headers({
@@ -140,15 +242,13 @@ useEffect(() => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 {setProfilePic(oldProfiles => [...oldProfiles, data])}
             })
             .catch(err => console.log(err))
-
         })
     }
     
-
+    // returns the correct avatar for message
     function renderAvatar(message, profilePic) {
         let singlePic = profilePic.filter(user => user.userName === message.user)
         if(singlePic.length !== 0 ) {
@@ -160,20 +260,16 @@ useEffect(() => {
 
     useEffect(() => {
         if (picGo === true) {
-
             fetchPic() 
-        }
     }, [picGo])
-    
 
     function render() {
-
         return <>
         <div id='guild-container'>
         <div>
         {messages.map((message, i) => (
         <div key={i} className='message-list' >
-        <Card sx={{width:"25em"}}>
+        <Card sx={{width:"100%"}}>
             <CardHeader
             titleTypographyProps={{variant:'h7'}}
             avatar={renderAvatar(message, profilePic)}
@@ -183,7 +279,7 @@ useEffect(() => {
             onClick={handleMenuClick}
             aria-haspopup="true"
             aria-controls='demo-positioned-menu'
-            ><MoreVert id={message._id} sx={{color:"var(--subtext_color)", padding: "3px"}} onClick={e => {
+            ><MoreVert id={message._id} sx={{color:"var(--subtext_color)", padding: "5px"}} onClick={e => {
                 setMessageId(e.target.id)
             }}/>
             </IconButton>}
@@ -207,12 +303,17 @@ useEffect(() => {
         }}
         >
             {/* functionality for the menu items goes here */}
+        <div onClick={e => {
+            e.preventDefault()
+            setPinFlag(true)
+        }}>
         <MenuItem>
             <ListItemIcon>
                 <PushPinIcon fontSize='small' sx={{color:"black"}}/>
             </ListItemIcon>
             Pin
         </MenuItem>
+        </div>
         <div onClick={e => {
             e.preventDefault()
             setEdit(true)
@@ -240,6 +341,7 @@ useEffect(() => {
                 <Typography sx={{wordBreak:"break-word"}} variant="h8" color="var(--text_color)" bgcolor={"var(--body_color)"}>
                 {renderEdit(message)}
                 {renderDelete(message)}
+                {renderPin(message)}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing sx={{bgcolor:"var(--body_color)"}}>
@@ -253,20 +355,20 @@ useEffect(() => {
         </Card>
             </div>
         ))}
-        
             </div>
             </div>
             </>
     }
-
-
     // renders messages
     return (
-    <>
+    <>    
     <div id='guild-name'>{GuildName}</div>
+        <div id='pinned-container'>
+        {showPinned()}
+        </div>
         {render()}
         <div id='input-container'>
-        <MessageInput GuildName={GuildName} setSent={setSent}/>
+        <MessageInput GuildName={GuildName} setSent={setSent} sent={sent}/>
         </div>
         <div id='leave-container'>
         <button id='leave-guild' onClick={e => {
@@ -274,8 +376,9 @@ useEffect(() => {
             setLeaveFlag(true)
         }}>Leave Guild</button>
         </div>
-        <MessageEditDelete GuildName={GuildName} delMessage={delMessage} editMessage={editMessage} messageId={messageId} newMessage={newMessage}/>
+        <MessageEditDelete GuildName={GuildName} delMessage={delMessage} editMessage={editMessage} messageId={messageId} newMessage={newMessage} setSent={setSent} sent={sent}/>
         <LeaveGuild leaveFlag={leaveFlag}/>
+        <Pin pinMessage={pinMessage} unpin={unpin} messageId={messageId} setSent={setSent} sent={sent}/>
     </>
     )
 }

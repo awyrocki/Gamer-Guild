@@ -1,9 +1,9 @@
 #userlist-container {
     background-color: var(--body_color);
-    margin-left: 1em;
     padding-left: 0.5em;
-    margin-top: 0.5em;
-    width: 12em;
+    width: 100%;
+    min-width: 8em;
+    max-width: 13em;
     border-radius: 5px;
     box-shadow: 0px 3px 10px 3px var(--boxshadow_color);
     height: 20em;
@@ -26,4 +26,12 @@
     color: var(--text_color);
     margin: 0;
     text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+    #userlist-container {
+        min-width: none;
+        max-width: none;
+        width: 90%;
+    }
 }

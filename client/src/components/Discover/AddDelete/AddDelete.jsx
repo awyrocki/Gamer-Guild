@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./AddDelete.css"
-import { Button, TextField } from "@mui/material"
+import { Button, TextField, Box } from "@mui/material"
 
 function AddDelete() {
 
@@ -13,27 +13,39 @@ function AddDelete() {
         : <>
         <div id='create-guild-form'>
             <TextField
-                placeholder='Enter Guild name'
-                id='new-guild-name'
                 value={name}
-                type='text'
-                variant='filled'
-                size='small'
-                sx={{bgcolor:"#E4EFE7"}}
                 onChange={e => setName(e.target.value)}
-            />
+                id="create-guild-field"
+                multiline
+                sx={{bgcolor:"#E4EFE7", borderRadius:"5px", width:"100%", color:"var(--text_color)"}}
+                color='primary'
+                maxRows={1}
+                placeholder='Enter Guild name'
+                variant="filled"
+                />
             <TextField
-                placeholder='Guild description'
-                id='new-guild-description'
                 value={description}
                 onChange={e => setDescription(e.target.value)}
-                type='text'
-                sx={{bgcolor:"#E4EFE7"}}
-                variant='filled'
-                size='small'
+                id='create-guild-field'
+                multiline
+                sx={{bgcolor:"#E4EFE7", borderRadius:"5px", width:"100%", color:"var(--text_color)"}}
                 color='primary'
+                maxRows={1}
+                placeholder='Guild description'
+                variant='filled'
             />
             <div id='create-cancel'>
+                <Button
+                    onClick={e => {
+                        e.preventDefault()
+                        setName("")
+                        setDescription("")
+                        setCreate(!create)
+                    }}
+                    variant='text'
+                    size='small'
+                    color='error'
+                >Cancel</Button>
                 <Button
                     onClick={e => {
                         e.preventDefault()
@@ -42,20 +54,9 @@ function AddDelete() {
                         setDescription("")
                         setCreate(!create)
                     }}
-                    variant="outlined"
+                    variant="text"
                     size="small"
                 >Create</Button>
-                <Button
-                    onClick={e => {
-                        e.preventDefault()
-                        setName("")
-                        setDescription("")
-                        setCreate(!create)
-                    }}
-                    variant='outlined'
-                    size='small'
-                    color='error'
-                >Cancel</Button>
             </div>
         </div>
         </>

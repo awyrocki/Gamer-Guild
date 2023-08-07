@@ -51,7 +51,9 @@ function renderNav() {
   if (token === null || !token) {
     return <></>
   } else {
-    return <Nav logout={logout}/>
+    return <>
+    <Nav logout={logout} />
+    </>
   }
   }
 

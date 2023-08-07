@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Typography } from '@mui/material';
 
 // add sessiontoken
-function Discover() {
+function MobileJoin() {
     const queryParameters = new URLSearchParams(window.location.search)
     const GuildName = queryParameters.get("GuildName")
 
@@ -111,21 +111,8 @@ useEffect(() => {
     return (
     <>
         {notJoined()}
-        <div id='discover-container'>
-        <h3 id='discover-title'>Discover</h3>
-        <hr />
-            {allGuild.map((guild, i) => (
-                <div key={i} className='guild-list' >
-                    <h3 onClick={e => {
-                        e.preventDefault()
-                        setGuild(e.target.innerHTML)
-                    }} id={guild._id} className='guild' >{guild.name}</h3><p id='guild-description'>{guild.description}</p>
-                <hr />
-                </div>
-            ))}
-        </div>
     </>
     )
 }
 
-export default Discover
+export default MobileJoin

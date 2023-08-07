@@ -95,11 +95,10 @@ function UserProfile() {
         if (!steamUser) {
             return <p></p>;
         } else {
-            return (
-                <>
-                    <p> &emsp;({steamUser.personaname})</p>
-                </>
-            );
+            return <>
+            <h4>steam:&nbsp;</h4>
+            <p id='steam-name'>({steamUser.personaname})</p>
+            </>
         }
     }
 

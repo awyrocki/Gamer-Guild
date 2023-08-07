@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./Nav.css"
 import icon from "./gg.png"
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
@@ -7,15 +7,17 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge'
 import { AppBar, Box, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material"
-import InputBase from '@mui/material/InputBase';
+import TextField from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar'
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import IconButton from '@mui/material/IconButton'
+import SearchGuilds from './SearchGuilds';
+import InputBase from '@mui/material/InputBase'
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
-  justifyContent: "space-around",
+  justifyContent: "space-evenly",
   alignItems:"center",
   backgroundColor:"var(--body_color)"
 })
@@ -73,10 +75,20 @@ const toggleTheme = () => {
   const handleIconClick = () => {
     setMode(!mode)
   }
-  
 
   const [ lightDarkMode, setLightDarkMode ] = useState(true)
-  const [ open, setOpen ] = useState(false)
+
+  // search text input
+  const [ search, setSearch ] = useState("")
+
+  // added same drop down menu behavior as message card
+  const [ anchorElement, setAnchorElement ] = useState(null)
+  const handleMenuClick = e => {
+      setAnchorElement(e.currentTarget)
+  }
+  const handleCloseMenu = () => {
+      setAnchorElement(null)
+  }
 
   return (
     <>
@@ -92,7 +104,13 @@ const toggleTheme = () => {
           src={icon}
           sx={{display:{xs:"block", sm:"none"}}}
           />
-          <Search id='search-bar'><InputBase placeholder='Search Guilds'/></Search>
+          <Search onChange={e => {
+              e.preventDefault()
+              setSearch(e.target.value)
+            }} id='search-bar'>
+            <InputBase placeholder='Search Guilds'/>
+            <SearchGuilds search={search}/>
+            </Search>
           <Icons>
             <a
             onClick={handleClick}
@@ -106,7 +124,7 @@ const toggleTheme = () => {
               href='http://localhost:3000/Notifications'
               ><NotificationsIcon id='nav-icon'/></a>
             </Badge>
-            <IconButton id='nav-icon' onClick={handleIconClick}>
+            <IconButton sx={{ml: -1, mr: -1}} id='nav-icon' onClick={handleIconClick}>
               {mode ? <LightModeIcon 
               onClick={() => {setLightDarkMode(!lightDarkMode);
                 toggleTheme();}}
@@ -116,7 +134,7 @@ const toggleTheme = () => {
               />}
             </IconButton>
             <SettingsIcon
-            onClick={(e) => setOpen(true)}
+            onClick={handleMenuClick}
             id='nav-icon'
             />
           </Icons>
@@ -124,8 +142,9 @@ const toggleTheme = () => {
         <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose={(e) => setOpen(false)}
+        anchorEl={anchorElement}
+        open={Boolean(anchorElement)}
+        onClose={handleCloseMenu}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'right',

@@ -41,7 +41,7 @@ function Feed({ GuildName}) {
       />
       <CardContent sx={{bgcolor:"var(--body_color)"}}>
         <Typography variant="body2" color="var(--text_color)" bgcolor={"var(--body_color)"}>
-        We extend our warm welcome to you! For newcomers, you have the opportunity to connect your Steam account through the user profile section on the dashboard. Access settings by clicking on the cog icon above, where you can also unlink your Steam account or switch between light and dark modes. In the discover section, you can find and join various guilds, or take the initiative and create your own community using the dedicated button. Always remember to be kind and respectful, and most importantly, have a fantastic time!
+        We extend our warm welcome to you! For newcomers, you have the opportunity to connect your Steam account through the user profile section on the dashboard. Access settings by clicking on the cog icon above, where you can unlink your Steam account or switch between light and dark modes. In the discover section, you can find and join various guilds, or take the initiative and create your own community using the dedicated button. Always remember to be kind and respectful, and most importantly, have a fantastic time!
         </Typography>
       </CardContent>
       <CardActions disableSpacing sx={{bgcolor:"var(--body_color)"}}>
