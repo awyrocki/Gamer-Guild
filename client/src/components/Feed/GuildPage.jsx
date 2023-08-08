@@ -285,7 +285,7 @@ function GuildPage({ GuildName }) {
             </IconButton>}
             title={message.user}
             // Could add a user nickname
-            sx={{mb:"-2em", color:"var(--text_color)", bgcolor:"var(--body_color)", fontSize:"20px"}}
+            sx={{mb:"-1em", color:"var(--text_color)", bgcolor:"var(--body_color)", fontSize:"20px"}}
             />
             <Menu
         id="demo-positioned-menu"
