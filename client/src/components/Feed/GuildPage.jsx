@@ -272,7 +272,8 @@ function GuildPage({ GuildName }) {
             <CardHeader
             titleTypographyProps={{variant:'h7'}}
             avatar={renderAvatar(message, profilePic)}
-                // change the avatar to the avatar of the user?
+            subheader={message.createdAt.slice(0, 10)}
+            subheaderTypographyProps={{color:"var(--subtext_color)"}}
             action={<IconButton
             aria-label="settings"
             onClick={handleMenuClick}
@@ -284,7 +285,7 @@ function GuildPage({ GuildName }) {
             </IconButton>}
             title={message.user}
             // Could add a user nickname
-            sx={{color:"var(--text_color)", bgcolor:"var(--body_color)", fontSize:"20px"}}
+            sx={{mb:"-2em", color:"var(--text_color)", bgcolor:"var(--body_color)", fontSize:"20px"}}
             />
             <Menu
         id="demo-positioned-menu"
