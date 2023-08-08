@@ -34,7 +34,7 @@ function Guildlist() {
   return (
     <div id='guildlist-container'>
       <h3 id='discover-title'>Joined Guilds</h3>
-      <hr />
+      <hr id='henrys-line'/>
       {joinedGuilds.map((guild, i) => (
         <div key={i} className='joined-guild-list'>
           <h3 onClick={e => {
