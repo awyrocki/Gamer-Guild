@@ -19,6 +19,23 @@ const User = new mongoose.Schema(
             type: String,
             required: true
         },
+        userName: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        steamId: {
+            type: String,
+            required: false
+        },
+        bio: {
+            type: String,
+            required: false
+        },
+        profilePic: {
+            type: String,
+            required: false
+        },
         admin: {
             type: Boolean,
             required: false

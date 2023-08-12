@@ -1,0 +1,45 @@
+#guildlist-container {
+    background-color: var(--body_color);
+    padding-left: 0.5em;
+    width: 100%;
+    min-width: 8em;
+    max-width: 13em;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px 3px var(--boxshadow_color);
+    max-height: 30em;
+    overflow-y: auto;
+}
+
+#guild-title {
+    color: var(--text_color);
+    text-align: center;
+}
+
+#game-title {
+    color: var(--text_color);
+}
+
+#guild {
+    cursor: pointer;
+}
+
+#guild:hover {
+    color: var(--subtext_color);
+}
+
+.joined-guild-list {
+    margin-right: 0.5em;
+}
+
+@media screen and (max-width: 700px) {
+    #guildlist-container {
+        width: 90%;
+        max-width: none;
+        min-width: none;
+    }
+}
+
+#henrys-line {
+    width: 95%;
+    margin-right: 20px;
+}

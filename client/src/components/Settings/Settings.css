@@ -1,0 +1,49 @@
+#divider {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#bio-textarea {
+    background-color: var(--subtext_color);
+    height: 1em;
+    margin-bottom: 1em;
+}
+
+#add-bio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#bio-span {
+    color: var(--text_color);
+}
+
+#light-dark-mode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#change-password  {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+#disconnect-steam {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+#settings-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#settings-sub-container {
+    width: 800px;
+}

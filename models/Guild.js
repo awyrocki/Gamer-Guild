@@ -4,16 +4,21 @@ const Guild = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         description: {
             type: String,
             required: true
         },
-        addedUsers: {
-            type: Array,
-            required: true
-        },
+        addedUsers: [{
+            type: String,
+            required: false
+        }],
+        createdBy: {
+            type: String,
+            required: false
+        }
     }, 
     {timestamps: true}
 )

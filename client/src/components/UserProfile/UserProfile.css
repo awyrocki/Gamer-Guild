@@ -1,0 +1,146 @@
+/* UserProfile.css */
+
+/* Outer container */
+#outer-profile {
+    position: relative;
+    min-height: 88vh;
+    background-color: var(--body_background);
+  }
+  
+  /* Inner container */
+  #inner-profile {
+    max-width: 600px;
+    margin: 0 auto; /* Center the inner profile horizontally */
+    margin-top: 2em;
+    margin-bottom: 3em;
+    padding: 20px;
+    background-color: var(--body_color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--boxshadow_color);
+  }
+  
+  /* Profile name */
+  #profile-name-container {
+    text-align: center;
+    background-color: var(--button_background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text_color);
+    margin-bottom: -1em;
+
+  }
+  
+  #profile-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text_color);
+  }
+
+  #steam-name-container {
+    display: flex;
+    align-items: center;
+    margin-top: -3.25em;
+    margin-right: 1.25em;
+  }
+  
+  /* Profile picture and bio */
+
+  #user-profile-pic-container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  #user-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--subtext_color);
+    animation: glow 3s infinite alternate;
+  }
+  
+  #user-bio {
+    margin-top: 5em;
+    font-size: 16px;
+    color: var(--text_color);
+  }
+
+  #pic-bio {
+    display: flex;
+    gap: 1em;
+    
+  }
+  
+  /* Joined Guilds */
+  #profile-guild-title {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text_color);
+  }
+  
+  #profile-guilds {
+    max-height: 300px; /* Set a fixed height for the scrolling container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 2px solid var(--subtext_color);
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  #single-guild {
+    margin-bottom: 15px;
+  }
+  
+  #single-guild h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text_color); /* Neon accent color for guild names */
+  }
+  
+  #single-guild ul {
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    list-style-type: disc; /* Use bullet points for list items */
+  }
+  
+  #profile-guild-description {
+    font-size: 14px;
+    color: var(--text_color);
+  }
+  
+  #guild-linebreak {
+    margin-top: 10px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #999999;
+  }
+  
+/* Button for toggling guilds */
+.show {
+  display: block;
+  margin-left: auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: underline;
+  font-weight: bold;
+  color: var(--text_color);
+  background-color: var(--button_background);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.show:hover {
+  background-color: var(--button_hover_background);
+}

@@ -1,0 +1,73 @@
+#discover-container {
+    background-color: var(--body_color);
+    padding-left: 0.5em;
+    width: 100%;
+    min-width: 8em;
+    max-width: 13em;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px 3px var(--boxshadow_color);
+    max-height: 20em;
+    overflow-y: auto;
+}
+
+#discover-create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.guild, #guild {
+    cursor: pointer;
+    color: var(--text_color);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.guild:hover {
+    color: var(--subtext_color);
+}
+
+#guild-description {
+    color: var(--text_color);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#join-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#discover-title {
+    color: var(--text_color);
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#restricted {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 1em;
+    right: 0;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--body_color);
+    filter: blur(10);
+    opacity: .95;
+}
+
+@media screen and (max-width: 700px) {
+    #discover-container {
+        min-width: none;
+        max-width: none;
+        width: 90%;
+    }
+}

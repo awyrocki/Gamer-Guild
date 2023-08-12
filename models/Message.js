@@ -13,6 +13,14 @@ const Messages = new mongoose.Schema(
         body: {
             type: String,
             required: true
+        },
+        gifUrl: {
+            type: String,
+            required: false
+        },
+        pinned: {
+            type: Boolean,
+            required: false
         }
     },
     {timestamps: true}

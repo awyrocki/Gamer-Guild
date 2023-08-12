@@ -1,0 +1,30 @@
+footer {
+    background-color: var(--body_color);
+    box-shadow: 0px 3px 10px 3px var(--boxshadow_color);
+    text-align: center;
+    color: var(--text_color);
+    margin-top: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+#about-team {
+    color: var(--text_color);
+    text-decoration: none;
+}
+
+#about-team:hover {
+    color: var(--subtext_color);
+}
+
+#contact-us {
+    color: var(--text_color);
+    text-decoration: none;
+}
+
+#contact-us:hover {
+    color: var(--subtext_color);
+}
